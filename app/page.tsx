@@ -9,7 +9,7 @@ export default function Home() {
         <section className="bg-blue-200 dark:bg-gray-900 h-screen grid justify-center py-8 relative overflow-hidden">
           <div className="grid grid-rows-[15%_25%_10%] justify-center h-[80%] z-20">
             {/* Navbar */}
-            <nav className="bg-white dark:bg-gray-800 grid grid-cols-[40%_30%_30%] items-center gap-5 h-[55px] w-[1000px] rounded-full shadow-lg px-4">
+            <div className="bg-white rounded-2xl w-full flex flex-row gap-10 items-center justify-between h-16 shadow-lg dark:bg-gray-800 dark:shadow-gray-700">
               {/* Judul Navbar */}
               <h1 className="font-extrabold text-xl text-blue-900 dark:text-blue-200 flex justify-start items-center pl-8">
                 MITRA SERVICE
@@ -32,21 +32,24 @@ export default function Home() {
 
               {/* Login/Signup */}
               <div className="flex items-center justify-end gap-4 pr-4">
-                <div className="grid grid-cols-2 gap-2 bg-blue-800 dark:bg-blue-600 w-[140px] h-[40px] rounded-full items-center justify-center pl-1">
-                  <div className="bg-blue-300 dark:bg-white w-full h-[33px] rounded-full grid items-center justify-center">
-                    <Link href="#" className="text-blue-900 font-bold">
+                <div className="grid grid-cols-2 gap-2 bg-blue-800 dark:bg-blue-600 w-full h-[40px] rounded-full items-center justify-center px-2">
+                  <div className="bg-blue-300 dark:bg-white w-full h-8 rounded-full flex flex-row gap-2 items-center justify-center">
+                    <Link
+                      href="#"
+                      className="text-blue-900 text-base font-bold"
+                    >
                       LOGIN
                     </Link>
                   </div>
                   <Link
                     href="#"
-                    className="text-white dark:text-blue-100 font-bold"
+                    className="text-white dark:text-blue-100 text-base font-bold"
                   >
                     SIGN UP
                   </Link>
                 </div>
               </div>
-            </nav>
+            </div>
 
             {/* Hero Text */}
             <div className="flex flex-col items-center justify-evenly h-full z-20">
@@ -93,7 +96,7 @@ export default function Home() {
         </section>
 
         {/* Section bawah */}
-        <div className="bg-blue-500 dark:bg-blue-700 text-green-700 dark:text-green-300 py-4 px-8">
+        <div className="bg-blue-500 dark:bg-blue-700 text-white dark:text-green-300 py-4 px-8">
           <h1 className="text-xl font-semibold">bejo</h1>
         </div>
       </main>
