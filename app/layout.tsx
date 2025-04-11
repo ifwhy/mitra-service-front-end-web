@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
+import TopBar from "@/components/TopBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,8 +16,12 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "APLIKASI MITRA HABIBI",
-  description: "Mitra servis hp by habibi",
+  title: "Mitra Servis Elektronik",
+  description: "Mitra Servis Elektronik",
+  authors: {
+    name: "Fathoni Nur Habibi",
+    url: "https://github.com/fathoni1509",
+  },
 };
 
 export default function RootLayout({
@@ -35,6 +40,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <header>
+            <TopBar className="hidden md:flex" />
+          </header>
           {children}
         </ThemeProvider>
       </body>
