@@ -35,7 +35,7 @@ export function AppSidebar() {
       <SidebarContent className="overflow-x-clip overflow-y-scroll">
         <SidebarGroup>
           <SidebarHeader className="flex flex-row items-center justify-between px-2 gap-2">
-            <div className="flex flex-row gap-1 items-center">
+            <Link href={"/"} className="flex flex-row gap-1 items-center">
               <Image
                 src={images.mitraLogoCircle}
                 alt="Logo Mitra Servis"
@@ -46,7 +46,7 @@ export function AppSidebar() {
                 <p>Mitra Servis</p>
                 <p>Elektronik</p>
               </div>
-            </div>
+            </Link>
             <ModeToggle />
           </SidebarHeader>
 
@@ -61,7 +61,7 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              <SidebarMenuItem className="ml-2">
+              <SidebarMenuItem className="hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="flex items-center gap-2">
                     <Tv size={16} />
@@ -81,7 +81,7 @@ export function AppSidebar() {
                 </DropdownMenu>
               </SidebarMenuItem>
 
-              <SidebarMenuItem className="ml-2 mt-2">
+              <SidebarMenuItem className="hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="flex items-center gap-2">
                     <FaServicestack size={16} />
@@ -119,7 +119,7 @@ export function AppSidebar() {
               <Link
                 href={"#"}
                 target="_blank"
-                className="flex flex-row gap-2 items-center"
+                className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
               >
                 <FaInstagram size={20} />
                 <span>mitra.servis</span>
@@ -128,7 +128,7 @@ export function AppSidebar() {
               <Link
                 href={"#"}
                 target="_blank"
-                className="flex flex-row gap-2 items-center"
+                className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
               >
                 <FaTwitter size={20} />
                 <span>mitra.servis</span>
@@ -137,7 +137,7 @@ export function AppSidebar() {
               <Link
                 href={"#"}
                 target="_blank"
-                className="flex flex-row gap-2 items-center"
+                className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
               >
                 <FaFacebook size={20} />
                 <span>mitra servis</span>
@@ -145,7 +145,7 @@ export function AppSidebar() {
             </div>
           </SidebarGroupContent>
 
-          <SidebarGroupContent className="w-full flex flex-col justify-center gap-1 mt-10 px-3 text-justify font-base rounded-lg items- dark:bg-slate-800 bg-slate-200 p-3">
+          <SidebarGroupContent className="w-full flex flex-col justify-center gap-1 mt-5 px-3 text-justify font-base rounded-lg items- dark:bg-slate-800 bg-slate-200 p-3">
             <p>
               Website ini merupakan proyek besar pada mata kuliah Pemrograman
               Web
@@ -165,7 +165,7 @@ export function AppSidebar() {
             </ul>
           </SidebarGroupContent>
 
-          <SidebarGroupContent className="w-full flex flex-col gap-1 mt-10 items-center font-semibold">
+          <SidebarGroupContent className="w-full flex flex-col gap-1 mt-5 items-center font-semibold">
             <p>&copy; Copyright {new Date().getFullYear()}</p>
             <p>Mitra Servis Elektronik Solo</p>
             <p>All Rights Reserved</p>
