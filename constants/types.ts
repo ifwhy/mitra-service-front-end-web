@@ -14,3 +14,10 @@ export interface TopBarIconReactIcon {
   href: string;
   Icon: IconType;
 }
+
+export interface HeroUINavbarProps {
+  fill?: string;
+  size?: number;
+  height?: number;
+  width?: number;
+}

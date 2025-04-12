@@ -3,12 +3,16 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import TopBar from "@/components/TopBar";
+import Navbar from "@/components/Navbar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -40,10 +44,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header>
-            <TopBar className="hidden md:flex" />
-          </header>
-          {children}
+          <SidebarProvider className="flex flex-col">
+            <header>
+              <TopBar className="hidden md:flex" />
+              <Navbar />
+            </header>
+
+            <main>
+              <AppSidebar />
+              {children}
+            </main>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
