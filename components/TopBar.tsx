@@ -1,12 +1,32 @@
+"use client";
+
 import { topBarIcons } from "@/constants/constants";
 import { ClassName, TopBarIconType } from "@/constants/types";
 import Link from "next/link";
-import React from "react";
+import { Button } from "./ui/button";
+import { X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const TopBar = ({ className }: ClassName) => {
+  const [isRemoveTopBar, setIsRemoveTopBar] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const isRemoved = sessionStorage.getItem("topBarRemoved");
+    if (isRemoved === "true") {
+      setIsRemoveTopBar(true);
+    }
+  }, []);
+
+  const handleRemoveTopBar = () => {
+    sessionStorage.setItem("topBarRemoved", "true");
+    setIsRemoveTopBar(true);
+  };
+
   return (
     <section
-      className={`${className} w-full bg-black h-14 flex items-center justify-around`}
+      className={`w-full bg-black h-14 items-center justify-around ${
+        isRemoveTopBar ? "hidden" : "hidden md:flex"
+      } ${className}`}
     >
       <p className="font-bold ml-5 text-white">
         Selamat Datang di Mitra Servis Elektronik
@@ -22,6 +42,14 @@ const TopBar = ({ className }: ClassName) => {
             Icon={<topBarIcon.Icon className="text-black size-4" />}
           />
         ))}
+
+        <Button
+          variant={"ghost"}
+          className="w-min"
+          onClick={handleRemoveTopBar}
+        >
+          <X size={32} />
+        </Button>
       </div>
     </section>
   );

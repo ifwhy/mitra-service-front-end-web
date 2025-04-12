@@ -20,7 +20,7 @@ const Navbar = () => {
 const NavbarLarge = ({ className }: ClassName) => {
   return (
     <div
-      className={`w-full h-28 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black ${className}`}
+      className={`w-full h-28 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black sticky top-0 z-20 ${className}`}
     >
       {/* Logo Mitra Servis Elektronik */}
       <Link href={"/"} className="flex flex-row items-center gap-1">
@@ -44,7 +44,7 @@ const NavbarLarge = ({ className }: ClassName) => {
         <ModeToggle />
       </nav>
 
-      <Link href={"/login"} className="ml-2 md:hidden lg:flex">
+      <Link href={"/auth"} className="ml-2 md:hidden lg:flex">
         <RainbowButton className="font-bold">Pesan Layanan</RainbowButton>
       </Link>
     </div>
@@ -68,7 +68,7 @@ const NavbarMobile = ({ className }: ClassName) => {
       </Link>
 
       <div className="flex flex-row items-center gap-2">
-        <Link href={"/login"} className="ml-2 hidden xs:flex">
+        <Link href={"/auth"} className="ml-2 hidden xs:flex">
           <RainbowButton className="font-bold text-sm h-9 w-max">
             Pesan Layanan
           </RainbowButton>

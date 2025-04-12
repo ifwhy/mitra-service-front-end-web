@@ -1,3 +1,4 @@
+"use client";
 import { HomeIcon, Tv } from "lucide-react";
 
 import {
@@ -115,7 +116,7 @@ export function AppSidebar() {
           <SidebarGroupContent className="w-full flex flex-col items-center justify-center mt-5">
             <p className="font-semibold">Ikuti Kami di Media Sosial</p>
 
-            <div className="flex flex-col mt-3 gap-3 items-start w-full ml-12">
+            <div className="flex flex-col mt-3 gap-3 items-start w-full ml-9">
               <Link
                 href={"#"}
                 target="_blank"

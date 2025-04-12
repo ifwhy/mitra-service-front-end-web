@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased lg:min-h-screen`}
       >
         <SidebarProvider className="flex flex-col">
           <ThemeProvider
@@ -45,8 +45,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header>
-              <TopBar className="hidden md:flex" />
+            <header className="lg:sticky lg:top-0">
+              <TopBar />
               <Navbar />
             </header>
 
