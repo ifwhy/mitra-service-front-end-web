@@ -31,8 +31,8 @@ const NavbarLarge = ({ className }: ClassName) => {
         />
 
         <div>
-          <p className="font-bold text-lg lg:text-3xl">Mitra Servis</p>
-          <p className="font-bold text-lg lg:text-3xl">Elektronik</p>
+          <p className="font-bold text-lg lg:text-xl">Mitra Servis</p>
+          <p className="font-bold text-lg lg:text-xl">Elektronik</p>
         </div>
       </Link>
 

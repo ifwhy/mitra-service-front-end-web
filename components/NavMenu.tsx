@@ -54,17 +54,20 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function NavMenu() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList className="gap-5">
+    <NavigationMenu className="mx-2">
+      <NavigationMenuList className="gap-2 lg:gap-5">
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Beranda
+              <p className="text-base lg:text-lg">Beranda</p>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Mitra Servis</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            {" "}
+            <p className="text-base lg:text-lg">Mitra Servis</p>
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -110,7 +113,10 @@ export function NavMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Layanan</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            {" "}
+            <p className="text-base lg:text-lg">Layanan</p>
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
@@ -125,10 +131,11 @@ export function NavMenu() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
           <Link href="#testimoni" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Testimoni
+              <p className="text-base lg:text-lg">Testimoni</p>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
