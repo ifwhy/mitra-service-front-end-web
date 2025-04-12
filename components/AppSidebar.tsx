@@ -27,25 +27,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-
-const authors = [
-  {
-    name: "Dunhill William Putra",
-    nim: "L0123045",
-  },
-  {
-    name: "Fathoni Nur Habibi",
-    nim: "L0123054",
-  },
-  {
-    name: "Ivan Wahyu Nugroho",
-    nim: "L0123068",
-  },
-];
+import { authors } from "@/constants/constants";
 
 export function AppSidebar() {
   return (
-    <Sidebar className="lg:hidden">
+    <Sidebar className="md:hidden" variant="floating">
       <SidebarContent className="overflow-x-clip overflow-y-scroll">
         <SidebarGroup>
           <SidebarHeader className="flex flex-row items-center justify-between px-2 gap-2">
@@ -130,17 +116,29 @@ export function AppSidebar() {
             <p className="font-semibold">Ikuti Kami di Media Sosial</p>
 
             <div className="flex flex-col mt-3 gap-3 items-start w-full ml-12">
-              <Link href={"#"} className="flex flex-row gap-2 items-center">
+              <Link
+                href={"#"}
+                target="_blank"
+                className="flex flex-row gap-2 items-center"
+              >
                 <FaInstagram size={20} />
                 <span>mitra.servis</span>
               </Link>
 
-              <Link href={"#"} className="flex flex-row gap-2 items-center">
+              <Link
+                href={"#"}
+                target="_blank"
+                className="flex flex-row gap-2 items-center"
+              >
                 <FaTwitter size={20} />
                 <span>mitra.servis</span>
               </Link>
 
-              <Link href={"#"} className="flex flex-row gap-2 items-center">
+              <Link
+                href={"#"}
+                target="_blank"
+                className="flex flex-row gap-2 items-center"
+              >
                 <FaFacebook size={20} />
                 <span>mitra servis</span>
               </Link>
@@ -155,7 +153,7 @@ export function AppSidebar() {
             <p className="mt-1">Dikembangkan oleh:</p>
             <ul>
               {authors.map((author, index) => (
-                <li key={author.name} className="flex flex-row">
+                <li key={author.name} className="flex flex-row flex-wrap">
                   <p>
                     {index + 1}. {author.name}
                   </p>

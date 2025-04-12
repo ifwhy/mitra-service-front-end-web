@@ -11,8 +11,8 @@ import { SidebarTrigger } from "./ui/sidebar";
 const Navbar = () => {
   return (
     <>
-      <NavbarLarge className="lg:flex hidden" />
-      <NavbarMobile className="flex lg:hidden" />
+      <NavbarLarge className="md:flex hidden md:px-5" />
+      <NavbarMobile className="flex md:hidden" />
     </>
   );
 };
@@ -20,7 +20,7 @@ const Navbar = () => {
 const NavbarLarge = ({ className }: ClassName) => {
   return (
     <div
-      className={`w-full h-28  flex items-center justify-center gap-14 dark:bg-black dark:text-white bg-white text-black ${className}`}
+      className={`w-full h-28 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black ${className}`}
     >
       {/* Logo Mitra Servis Elektronik */}
       <Link href={"/"} className="flex flex-row items-center gap-1">
@@ -31,8 +31,8 @@ const NavbarLarge = ({ className }: ClassName) => {
         />
 
         <div>
-          <p className="font-bold text-3xl">Mitra Servis</p>
-          <p className="font-bold text-3xl">Elektronik</p>
+          <p className="font-bold text-lg lg:text-3xl">Mitra Servis</p>
+          <p className="font-bold text-lg lg:text-3xl">Elektronik</p>
         </div>
       </Link>
 
@@ -42,7 +42,7 @@ const NavbarLarge = ({ className }: ClassName) => {
         <ModeToggle />
       </nav>
 
-      <Link href={"/login"} className="ml-2">
+      <Link href={"/login"} className="ml-2 md:hidden lg:flex">
         <RainbowButton className="font-bold">Pesan Layanan</RainbowButton>
       </Link>
     </div>
@@ -51,7 +51,7 @@ const NavbarLarge = ({ className }: ClassName) => {
 
 const NavbarMobile = ({ className }: ClassName) => {
   return (
-    <div className={`w-full justify-around py-3 ${className}`}>
+    <div className={`w-full justify-around py-3 px-2 ${className}`}>
       <Link href={"/"} className="flex flex-row items-center gap-2">
         <Image
           src={images.mitraLogoCircle}
@@ -66,7 +66,7 @@ const NavbarMobile = ({ className }: ClassName) => {
       </Link>
 
       <div className="flex flex-row items-center gap-2">
-        <Link href={"/login"} className="ml-2">
+        <Link href={"/login"} className="ml-2 hidden xs:flex">
           <RainbowButton className="font-bold text-sm h-9 w-max">
             Pesan Layanan
           </RainbowButton>

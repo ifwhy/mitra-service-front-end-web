@@ -38,13 +38,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SidebarProvider className="flex flex-col">
+        <SidebarProvider className="flex flex-col">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <header>
               <TopBar className="hidden md:flex" />
               <Navbar />
@@ -54,8 +54,8 @@ export default function RootLayout({
               <AppSidebar />
               {children}
             </main>
-          </SidebarProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </SidebarProvider>
       </body>
     </html>
   );

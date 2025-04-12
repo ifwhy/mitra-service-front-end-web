@@ -18,3 +18,18 @@ export const topBarIcons: TopBarIconReactIcon[] = [
     Icon: FaFacebook,
   },
 ];
+
+export const authors = [
+  {
+    name: "Dunhill William Putra",
+    nim: "L0123045",
+  },
+  {
+    name: "Fathoni Nur Habibi",
+    nim: "L0123054",
+  },
+  {
+    name: "Ivan Wahyu Nugroho",
+    nim: "L0123068",
+  },
+];
