@@ -44,11 +44,10 @@ const TopBar = ({ className }: ClassName) => {
         ))}
 
         <Button
-          variant={"ghost"}
-          className="w-min"
+          className="w-min bg-transparent hover:bg-black hover:opacity-75 transition-all duration-200"
           onClick={handleRemoveTopBar}
         >
-          <X size={32} />
+          <X size={32} color="#FFFFFF" />
         </Button>
       </div>
     </section>

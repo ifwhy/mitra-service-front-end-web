@@ -32,7 +32,7 @@ import { authors } from "@/constants/constants";
 
 export function AppSidebar() {
   return (
-    <Sidebar className="md:hidden" variant="floating">
+    <Sidebar className="lg:hidden" variant="inset">
       <SidebarContent className="overflow-x-clip overflow-y-scroll">
         <SidebarGroup>
           <SidebarHeader className="flex flex-row items-center justify-between px-2 gap-2">

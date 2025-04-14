@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,13 +11,41 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import images from "@/constants/images";
+import Image from "next/image";
+import toast from "react-hot-toast";
 
 export function TabAuth() {
+  const handleSignUp = () => {
+    toast.success("Berhasil Daftar");
+  };
+
+  const handleSignIn = () => {
+    toast.success("Berhasil Masuk");
+  };
+
   return (
-    <Tabs defaultValue="daftar" className="w-[400px]">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="daftar">Daftar</TabsTrigger>
-        <TabsTrigger value="masuk">Masuk</TabsTrigger>
+    <Tabs defaultValue="masuk" className="w-full my-3">
+      <div className="w-full flex flex-row items-center gap-1 justify-center">
+        <Image
+          src={images.mitraLogoCircle}
+          alt="Logo Mitra Servis"
+          className="size-16"
+        />
+
+        <div className="font-semibold text-lg">
+          <p>Mitra Servis</p>
+          <p>Elektronik</p>
+        </div>
+      </div>
+
+      <TabsList className="flex flex-row w-full mt-2 gap-2 items-center py-2">
+        <TabsTrigger value="daftar" className="font-semibold text-base w-full">
+          Daftar
+        </TabsTrigger>
+        <TabsTrigger value="masuk" className="font-semibold text-base w-full">
+          Masuk
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="daftar">
         <Card>
@@ -38,10 +67,11 @@ export function TabAuth() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save changes</Button>
+            <Button onClick={handleSignUp}>Save changes</Button>
           </CardFooter>
         </Card>
       </TabsContent>
+
       <TabsContent value="masuk">
         <Card>
           <CardHeader>
@@ -51,6 +81,7 @@ export function TabAuth() {
               out.
             </CardDescription>
           </CardHeader>
+
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="current">Current password</Label>
@@ -61,8 +92,9 @@ export function TabAuth() {
               <Input id="new" type="password" />
             </div>
           </CardContent>
+
           <CardFooter>
-            <Button>Save password</Button>
+            <Button onClick={handleSignIn}>Save password</Button>
           </CardFooter>
         </Card>
       </TabsContent>

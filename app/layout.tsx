@@ -6,6 +6,7 @@ import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,6 +52,9 @@ export default function RootLayout({
             </header>
 
             <main>
+              <div>
+                <Toaster />
+              </div>
               <AppSidebar />
               {children}
             </main>

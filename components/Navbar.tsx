@@ -3,16 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ModeToggle from "./ToggleMode";
-import { RainbowButton } from "./magicui/rainbow-button";
 import { ClassName } from "@/constants/types";
 import { NavMenu } from "./NavMenu";
 import { SidebarTrigger } from "./ui/sidebar";
+import { AuthDialog } from "./AuthModal";
 
 const Navbar = () => {
   return (
     <>
-      <NavbarLarge className="md:flex hidden md:px-5" />
-      <NavbarMobile className="flex md:hidden" />
+      <NavbarLarge className="lg:flex hidden md:px-5" />
+      <NavbarMobile className="flex lg:hidden" />
     </>
   );
 };
@@ -44,9 +44,8 @@ const NavbarLarge = ({ className }: ClassName) => {
         <ModeToggle />
       </nav>
 
-      <Link href={"/auth"} className="ml-2 md:hidden lg:flex">
-        <RainbowButton className="font-bold">Pesan Layanan</RainbowButton>
-      </Link>
+      {/* Button Pesan Layanan */}
+      <AuthDialog />
     </div>
   );
 };
@@ -68,11 +67,10 @@ const NavbarMobile = ({ className }: ClassName) => {
       </Link>
 
       <div className="flex flex-row items-center gap-2">
-        <Link href={"/auth"} className="ml-2 hidden xs:flex">
-          <RainbowButton className="font-bold text-sm h-9 w-max">
-            Pesan Layanan
-          </RainbowButton>
-        </Link>
+        {/* Button Pesan Layanan */}
+        <AuthDialog />
+
+        {/* Off Canvas Trigger */}
         <SidebarTrigger />
       </div>
     </div>
