@@ -71,20 +71,6 @@ export default function Home() {
                   Learn More
                 </Link>
               </div>
-                <span className="absolute inset-0 bg-gradient-to-bl from-white/30 to-white/0 rotate-45 translate-x-full group-hover:translate-x-[-100%] transition-transform duration-700 ease-out before:content-[''] before:absolute before:inset-0">
-                </span>
-            </div>
-          </div>
-          {/* hellow */}
-          <div className='flex flex-col items-center justify-evenly h-full text-blue-950'>
-            <h1 className='font-bold text-lg '>HELLO WELCOME TO</h1>
-            <h1 className='font-extrabold text-5xl tracking-wider'>MITRA SERVICE</h1>
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-          </div>
-          {/* button learn more */}
-          <div className='flex justify-center'>
-            <div className="bg-blue-950 mt-3 h-[45px] w-[170px] rounded-full flex items-center justify-center">
-              <a href="#" className='font-bold text-lg z-20 text-white hover:text-cyan-400 transition duration-300'>Learn More</a>
             </div>
           </div>
 
