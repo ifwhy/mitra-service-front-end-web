@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   return (
     <div className="w-full h-screen flex flex-col gap-3 justify-center items-center bg-slate-100 dark:bg-black">
       <Link

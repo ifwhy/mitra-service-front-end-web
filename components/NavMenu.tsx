@@ -13,44 +13,10 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
+import {
+  mitraServisComponents,
+  serviceComponents,
+} from "@/constants/constants";
 
 export function NavMenu() {
   return (
@@ -86,46 +52,33 @@ export function NavMenu() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem
-                href="/docs"
-                title="Mengapa Memilih Kami?"
-                className="text-justify"
-              >
-                Kami hadir untuk memberikan solusi terbaik untuk kebutuhan
-                servis elektronik Anda.
-              </ListItem>
-              <ListItem
-                href="/docs/installation"
-                title="Tim Kami"
-                className="text-justify"
-              >
-                Kami memiliki tim teknisi profesional untuk menangani berbagai
-                perangkat elektronik.
-              </ListItem>
-              <ListItem
-                href="/docs/primitives/typography"
-                title="Apa Saja yang Dapat Kami Perbaiki?"
-                className="text-justify"
-              >
-                Lihat perangkat elektronik apa saja yang dapat kami perbaiki.
-              </ListItem>
+
+              {mitraServisComponents.map((mitraServisComponent) => (
+                <ListItem
+                  key={mitraServisComponent.title}
+                  href={mitraServisComponent.href}
+                  title={mitraServisComponent.title}
+                  className="text-justify"
+                >
+                  {mitraServisComponent.description}
+                </ListItem>
+              ))}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            {" "}
             <p className="text-base lg:text-lg">Layanan</p>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {components.map((component) => (
+              {serviceComponents.map((serviceComponent) => (
                 <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
+                  key={serviceComponent.title}
+                  title={serviceComponent.title}
+                  href={serviceComponent.href}
                 >
-                  {component.description}
+                  {serviceComponent.description}
                 </ListItem>
               ))}
             </ul>

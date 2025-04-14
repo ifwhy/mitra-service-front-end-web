@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Authentication | Mitra Servis Elektronik",
+  title: "Dashboard | Mitra Servis Elektronik",
   description: "Mitra Servis Elektronik",
   authors: {
     name: "Fathoni Nur Habibi",
@@ -14,5 +14,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <>{children}</>;
+  return (
+    <>
+      <main>{children}</main>
+    </>
+  );
 }

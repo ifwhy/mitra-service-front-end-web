@@ -13,13 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import ModeToggle from "./ToggleMode";
-import {
-  FaComment,
-  FaFacebook,
-  FaInstagram,
-  FaServicestack,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaComment, FaServicestack } from "react-icons/fa";
 import Image from "next/image";
 import images from "@/constants/images";
 import {
@@ -28,7 +22,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { authors } from "@/constants/constants";
+import {
+  authors,
+  mitraServisComponents,
+  serviceComponents,
+  socialMediaItems,
+} from "@/constants/constants";
 
 export function AppSidebar() {
   return (
@@ -69,15 +68,13 @@ export function AppSidebar() {
                     <span>Mitra Servis</span>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="ml-8">
-                    <DropdownMenuItem>
-                      <Link href={"/"}>Mengapa Memilih Kami?</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href={"/"}>Tim Kami</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href={"/"}>Apa Saja Yang Bisa Kami Perbaiki?</Link>
-                    </DropdownMenuItem>
+                    {mitraServisComponents.map((mitraServisComponent) => (
+                      <DropdownMenuItem key={mitraServisComponent.title}>
+                        <Link href={mitraServisComponent.href}>
+                          {mitraServisComponent.title}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </SidebarMenuItem>
@@ -89,15 +86,13 @@ export function AppSidebar() {
                     <span>Layanan</span>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="ml-8">
-                    <DropdownMenuItem>
-                      <Link href={"/"}>Solusi Kami</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href={"/"}>Antar Jemput Barang</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href={"/"}>FAQ</Link>
-                    </DropdownMenuItem>
+                    {serviceComponents.map((serviceComponent) => (
+                      <DropdownMenuItem key={serviceComponent.title}>
+                        <Link href={serviceComponent.href}>
+                          {serviceComponent.title}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </SidebarMenuItem>
@@ -117,32 +112,17 @@ export function AppSidebar() {
             <p className="font-semibold">Ikuti Kami di Media Sosial</p>
 
             <div className="flex flex-col mt-3 gap-3 items-start w-full ml-9">
-              <Link
-                href={"#"}
-                target="_blank"
-                className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
-              >
-                <FaInstagram size={20} />
-                <span>mitra.servis</span>
-              </Link>
-
-              <Link
-                href={"#"}
-                target="_blank"
-                className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
-              >
-                <FaTwitter size={20} />
-                <span>mitra.servis</span>
-              </Link>
-
-              <Link
-                href={"#"}
-                target="_blank"
-                className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
-              >
-                <FaFacebook size={20} />
-                <span>mitra servis</span>
-              </Link>
+              {socialMediaItems.map((socialMediaItem) => (
+                <Link
+                  key={socialMediaItem.username}
+                  href={socialMediaItem.href}
+                  target="_blank"
+                  className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"
+                >
+                  <socialMediaItem.icon size={20} />
+                  <span>{socialMediaItem.username}</span>
+                </Link>
+              ))}
             </div>
           </SidebarGroupContent>
 
@@ -156,10 +136,7 @@ export function AppSidebar() {
               {authors.map((author, index) => (
                 <li key={author.name} className="flex flex-row flex-wrap">
                   <p>
-                    {index + 1}. {author.name}
-                  </p>
-                  <p className={`${index == 1 ? "ml-7" : "ml-4"} ? `}>
-                    ({author.nim})
+                    {index + 1}. {author.name} ({author.nim})
                   </p>
                 </li>
               ))}

@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -46,18 +44,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header className="lg:sticky lg:top-0">
-              <TopBar />
-              <Navbar />
-            </header>
+            <div>
+              <Toaster />
+            </div>
 
-            <main>
-              <div>
-                <Toaster />
-              </div>
-              <AppSidebar />
-              {children}
-            </main>
+            <AppSidebar />
+
+            {children}
           </ThemeProvider>
         </SidebarProvider>
       </body>
