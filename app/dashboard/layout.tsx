@@ -1,0 +1,22 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | Mitra Servis Elektronik",
+  description: "Mitra Servis Elektronik",
+  authors: {
+    name: "Fathoni Nur Habibi",
+    url: "https://github.com/fathoni1509",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <>
+      <main>{children}</main>
+    </>
+  );
+}
