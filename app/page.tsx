@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <main>
         <section className="bg-blue-200 dark:bg-gray-900 h-screen grid justify-center py-8 relative overflow-hidden">
-          <div className="grid grid-rows-[15%_25%_10%] justify-center h-[80%] z-20">
+          <div className="grid grid-rows-[15%_25%_10%] justify-center h-[80%]">
             {/* Navbar */}
             <div className="bg-white rounded-2xl w-full flex flex-row gap-10 items-center justify-between h-16 shadow-lg dark:bg-gray-800 dark:shadow-gray-700">
               {/* Judul Navbar */}
