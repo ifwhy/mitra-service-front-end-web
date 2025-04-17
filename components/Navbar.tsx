@@ -20,21 +20,19 @@ const Navbar = () => {
 const NavbarLarge = ({ className }: ClassName) => {
   return (
     <div
-      className={`w-full h-28 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black sticky top-0 z-20 ${className}`}
+      className={`w-full h-24 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black sticky top-0 z-20 ${className}`}
     >
       {/* Logo Mitra Servis Elektronik */}
       <Link href={"/"} className="flex flex-row items-center gap-1">
         <Image
           src={images.mitraLogoCircle}
           alt="Logo Mitra Sevis Elektronik"
-          className="size-24"
+          className="size-20"
         />
 
         <div>
-          <p className="font-bold text-lg lg:text-xl xl:text-2xl">
-            Mitra Servis
-          </p>
-          <p className="font-bold text-lg lg:text-xl xl:text-2xl">Elektronik</p>
+          <p className="font-bold text-lg lg:text-xl">Mitra Servis</p>
+          <p className="font-bold text-lg lg:text-xl">Elektronik</p>
         </div>
       </Link>
 

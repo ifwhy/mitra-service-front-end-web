@@ -14,24 +14,27 @@ const Loading = () => {
       {/* Logo */}
       <Link
         href="/"
-        className="flex items-center gap-3 group transition-all duration-300"
+        className="flex items-center gap-1 group transition-all duration-300"
       >
         <Image
           src={images.mitraLogoCircle}
           alt="Logo Mitra Servis Elektronik"
           className="size-24 group-hover:scale-105 transition-transform"
         />
-        <div className="text-center">
-          <h1 className="font-extrabold text-xl lg:text-2xl xl:text-3xl text-gray-900 dark:text-white leading-snug">
-            Mitra Servis <br /> Elektronik
-          </h1>
+        <div className="flex flex-col">
+          <p className="font-extrabold text-xl lg:text-2xl xl:text-3xl text-gray-900 dark:text-white leading-snug">
+            Mitra Servis
+          </p>
+          <p className="font-extrabold text-xl lg:text-2xl xl:text-3xl text-gray-900 dark:text-white leading-snug">
+            Elektronik
+          </p>
         </div>
       </Link>
 
       {/* Loading Info */}
-      <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
-        <LucideClipboardSignature className="size-6 animate-bounce" />
-        <p className="text-lg lg:text-xl font-semibold">
+      <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 animate-pulse duration-1000">
+        <LucideClipboardSignature className="size-6" />
+        <p className="text-base lg:text-lg font-semibold">
           Halaman sedang dimuat...
         </p>
       </div>
