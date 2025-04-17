@@ -101,7 +101,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <Link href={"#"}>
                     <FaComment />
-                    <span>Testimoni</span>
+                    <span>Ulasan</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
