@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <header className="lg:sticky lg:top-0">
+      <header className="lg:sticky lg:top-0 z-[9999]">
         <TopBar />
         <Navbar />
       </header>

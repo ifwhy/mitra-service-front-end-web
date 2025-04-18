@@ -6,7 +6,7 @@ export function AuthDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <RainbowButton className="font-bold w-20 xs:w-24 sm:w-44 md:w-max text-sm xs:text-base md:text-lg">
+        <RainbowButton className="font-bold w-20 xs:w-24 sm:w-44 md:w-max text-sm xs:text-base md:text-lg bg-blue-500">
           Servis
         </RainbowButton>
       </DialogTrigger>

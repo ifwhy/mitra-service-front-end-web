@@ -88,7 +88,7 @@ export function NavMenu() {
         <NavigationMenuItem>
           <Link href="#testimoni" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <p className="text-base lg:text-lg">Testimoni</p>
+              <p className="text-base lg:text-lg">Ulasan</p>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

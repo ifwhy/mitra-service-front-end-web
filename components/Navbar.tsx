@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <>
       <NavbarLarge className="lg:flex hidden md:px-5" />
-      <NavbarMobile className="flex lg:hidden" />
+      <NavbarMobile className="flex lg:hidden z-50" />
     </>
   );
 };
@@ -20,7 +20,7 @@ const Navbar = () => {
 const NavbarLarge = ({ className }: ClassName) => {
   return (
     <div
-      className={`w-full h-24 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black sticky top-0 z-20 ${className}`}
+      className={`w-full h-24 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black ${className}`}
     >
       {/* Logo Mitra Servis Elektronik */}
       <Link href={"/"} className="flex flex-row items-center gap-1">

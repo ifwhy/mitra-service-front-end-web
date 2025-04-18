@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { IconType } from "react-icons";
 
 export interface ClassName {
@@ -21,3 +22,13 @@ export interface HeroUINavbarProps {
   height?: number;
   width?: number;
 }
+
+export interface SuperiorityItem {
+  icon: ReactElement;
+  text: string;
+}
+
+export type RepairItemProps = {
+  icon: React.ReactNode;
+  label: string;
+};

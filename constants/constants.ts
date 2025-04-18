@@ -1,6 +1,16 @@
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-import { TopBarIconReactIcon } from "./types";
+import { FaBlender, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { RepairItemProps, SuperiorityItem, TopBarIconReactIcon } from "./types";
 import { IconType } from "react-icons";
+import { Star, Fan } from "lucide-react";
+import React from "react";
+import { PiTelevisionBold } from "react-icons/pi";
+import { ShieldCheck } from "lucide-react";
+import { CgSmartHomeRefrigerator } from "react-icons/cg";
+import { UserRoundCheck } from "lucide-react";
+import { GiWashingMachine } from "react-icons/gi";
+import { FaRadio } from "react-icons/fa6";
+import { PiPrinterFill } from "react-icons/pi";
+import { TbAirConditioningDisabled } from "react-icons/tb";
 
 export const topBarIcons: TopBarIconReactIcon[] = [
   {
@@ -122,5 +132,78 @@ export const socialMediaItems: {
     href: "#",
     username: "mitra.servis",
     icon: FaFacebook,
+  },
+];
+
+export const superiorities: SuperiorityItem[] = [
+  {
+    icon: React.createElement(Star, {
+      color: "currentColor",
+      className: "size-12",
+      size: 60,
+    }),
+    text: "4.8 Kepuasan Pelanggan",
+  },
+  {
+    icon: React.createElement(
+      "h1",
+      { className: "font-medium text-6xl" },
+      "5k+"
+    ),
+    text: "Perbaikan Perangkat",
+  },
+  {
+    icon: React.createElement(UserRoundCheck, {
+      color: "currentColor",
+      size: 60,
+    }),
+    text: "Teknisi Kompeten",
+  },
+  {
+    icon: React.createElement(
+      "h1",
+      { className: "font-medium text-6xl" },
+      "15+"
+    ),
+    text: "Jenis Perbaikan",
+  },
+  {
+    icon: React.createElement(ShieldCheck, { color: "currentColor", size: 60 }),
+    text: "Garansi Perbaikan",
+  },
+];
+
+export const repairItems: RepairItemProps[] = [
+  {
+    icon: React.createElement(PiTelevisionBold, { size: 72 }),
+    label: "Television",
+  },
+  {
+    icon: React.createElement(FaRadio, { size: 72 }),
+    label: "Radio",
+  },
+  {
+    icon: React.createElement(CgSmartHomeRefrigerator, { size: 72 }),
+    label: "Kulkas",
+  },
+  {
+    icon: React.createElement(GiWashingMachine, { size: 72 }),
+    label: "Mesin Cuci",
+  },
+  {
+    icon: React.createElement(Fan, { size: 72 }),
+    label: "Kipas Angin",
+  },
+  {
+    icon: React.createElement(FaBlender, { size: 72 }),
+    label: "Blender",
+  },
+  {
+    icon: React.createElement(PiPrinterFill, { size: 72 }),
+    label: "Printer",
+  },
+  {
+    icon: React.createElement(TbAirConditioningDisabled, { size: 72 }),
+    label: "AC",
   },
 ];

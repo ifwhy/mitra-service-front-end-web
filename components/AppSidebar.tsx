@@ -101,7 +101,7 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <Link href={"#"}>
                     <FaComment />
-                    <span>Testimoni</span>
+                    <span>Ulasan</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -112,9 +112,9 @@ export function AppSidebar() {
             <p className="font-semibold">Ikuti Kami di Media Sosial</p>
 
             <div className="flex flex-col mt-3 gap-3 items-start w-full ml-9">
-              {socialMediaItems.map((socialMediaItem) => (
+              {socialMediaItems.map((socialMediaItem, idx) => (
                 <Link
-                  key={socialMediaItem.username}
+                  key={idx}
                   href={socialMediaItem.href}
                   target="_blank"
                   className="flex flex-row gap-2 items-center hover:bg-sidebar-accent p-1.5 rounded-lg hover:text-sidebar-accent-foreground w-full"

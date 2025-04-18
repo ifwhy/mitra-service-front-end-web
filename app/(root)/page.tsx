@@ -1,23 +1,20 @@
-import Link from "next/link";
+import MitraService from "../../components/MitraServis";
+import KamiPerbaiki from "@/components/YangDapatKamiPerbaiki";
+import HomeSection from "@/components/HomeSection";
 
 export default async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
 
   return (
-    <div className="w-full h-screen flex flex-row gap-3 justify-center items-center bg-slate-100 dark:bg-black">
-      <Link
-        href={"/hajs"}
-        className="font-semibold py-1 px-3 rounded-lg dark:bg-slate-900 bg-slate-400 text-primary"
-      >
-        Go to 404 Not Found
-      </Link>
+    <div className="w-full h-full flex flex-col gap-3 bg-slate-100 dark:bg-black">
+      {/* Bagian Beranda */}
+      <HomeSection />
 
-      <Link
-        href={"/dashboard"}
-        className="font-semibold py-1 px-3 rounded-lg dark:bg-slate-900 bg-slate-400 text-primary"
-      >
-        Go to Dashboard
-      </Link>
+      {/* Mitra Servis */}
+      <MitraService />
+
+      {/* Apa Saja yang Bisa Kami Perbaiki? */}
+      <KamiPerbaiki />
     </div>
   );
 }
