@@ -8,7 +8,7 @@ import Link from "next/link";
 const Loading = () => {
   return (
     <main
-      className="w-full h-screen dark:bg-black bg-white flex items-center justify-center flex-col gap-6 p-6"
+      className="w-full h-screen dark:bg-black bg-white flex items-center justify-center flex-col gap-6 p-6 animate-pulse duration-1000"
       aria-busy="true"
     >
       {/* Logo */}
@@ -32,7 +32,7 @@ const Loading = () => {
       </Link>
 
       {/* Loading Info */}
-      <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300 animate-pulse duration-1000">
+      <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
         <LucideClipboardSignature className="size-6" />
         <p className="text-base lg:text-lg font-semibold">
           Halaman sedang dimuat...

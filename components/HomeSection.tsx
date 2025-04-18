@@ -27,7 +27,7 @@ const HomeSection = () => {
           ))}
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-6 px-6 py-10">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-6 px-6 py-10 mx-1.5 w-full">
           <div className="text-blue-900 text-center lg:text-left">
             <h1 className="font-medium text-lg">
               Perangkat Elektronik Anda Rusak? Bawa Aja Ke Mitra Servis

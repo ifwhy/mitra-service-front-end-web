@@ -25,7 +25,7 @@ const MitraService = () => {
         </div>
 
         {/* card */}
-        <div className="flex flex-wrap justify-center gap-8 w-full max-w-6xl py-8">
+        <div className="flex flex-wrap justify-center gap-8 w-full max-w-6xl py-8 px-3">
           {/* Mengapa memilih kami? */}
           <CardItem
             icon={<CircleHelp color="currentColor" size={64} />}
@@ -54,7 +54,7 @@ const CardItem = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-slate-700/50 w-[450px] h-[150px] grid grid-cols-[100px_1fr] justify-center items-center rounded-lg hover:-translate-y-2 transform duration-700 relative overflow-hidden group text-white">
+  <div className="bg-amber-500 dark:bg-slate-700/50 w-[450px] h-[150px] grid grid-cols-[100px_1fr] justify-center items-center rounded-lg hover:-translate-y-2 transform duration-700 relative overflow-hidden group text-white">
     <div className="absolute inset-0 bg-sky-500 origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 ease-in-out z-0" />
     <div className="flex justify-center items-center z-10">{icon}</div>
     <div className="flex flex-col gap-1 p-3 z-10">

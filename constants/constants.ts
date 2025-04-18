@@ -82,7 +82,7 @@ export const serviceComponents: {
   },
   {
     title: "FAQ - Pertanyaan Umum",
-    href: "/layanan/faq",
+    href: "#FAQs",
     description:
       "Temukan jawaban atas pertanyaan yang sering ditanyakan seputar layanan kami dan proses servis.",
   },
@@ -205,5 +205,43 @@ export const repairItems: RepairItemProps[] = [
   {
     icon: React.createElement(TbAirConditioningDisabled, { size: 72 }),
     label: "AC",
+  },
+];
+
+export const FAQsItems = [
+  {
+    id: 1,
+    value: "item-1",
+    question: "Q. How this theme is different from others in the market?",
+    answer:
+      "We provide unique, customizable components designed to simplify the development process and enhance user experience.",
+  },
+  {
+    id: 2,
+    value: "item-2",
+    question: "Q. Does this theme support plugins?",
+    answer:
+      "We supports various plugins to extend the functionality of your projects, making development faster and easier.",
+  },
+  {
+    id: 3,
+    value: "item-3",
+    question: "Q. Do you provide any moneyback guarantee for this product?",
+    answer:
+      "Yes, we offer a 30-day money-back guarantee if you are not satisfied with us.",
+  },
+  {
+    id: 4,
+    value: "item-4",
+    question: "Q. What payment method do you support?",
+    answer:
+      "We support various payment methods including credit cards, PayPal, and cryptocurrencies.",
+  },
+  {
+    id: 5,
+    value: "item-5",
+    question: "Q. How do you provide support?",
+    answer:
+      "Our team provides extensive documentation and 24/7 support for all products and plugins included.",
   },
 ];
