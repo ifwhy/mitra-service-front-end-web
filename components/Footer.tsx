@@ -6,13 +6,13 @@ import images from "@/constants/images";
 
 const Footer = () => {
   const iconStyles =
-    "flex items-center justify-center text-white transition-all duration-200 bg-transparent border border-gray-700 rounded-full w-7 h-7 focus:bg-blue-600 hover:bg-blue-600 hover:border-blue-600 focus:border-blue-600";
+    "flex items-center justify-center text-black dark:text-white transition-all duration-200 bg-transparent border border-gray-700 rounded-full w-7 h-7 focus:bg-blue-600 hover:bg-blue-600 hover:border-blue-600 focus:border-blue-600";
 
   const linkClasses =
-    "text-base text-white transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80 cursor-pointer";
+    "text-base text-black dark:text-white transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80 cursor-pointer";
 
   return (
-    <section className="py-10 bg-gray-900 sm:pt-16 lg:pt-24">
+    <section className="py-10 bg-slate-100 dark:bg-neutral-950 text-black sm:pt-16 lg:pt-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-12">
           {/* Company */}
@@ -94,10 +94,10 @@ const Footer = () => {
 
         <hr className="mt-16 mb-10 border-gray-800" />
 
-        <div className="flex flex-wrap items-center justify-between">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-between sm:flex-nowrap">
           <Link
             href={"/"}
-            className="flex text-white flex-row items-center gap-1"
+            className="flex text-black dark:text-white flex-row items-center gap-1"
           >
             <Image
               src={images.mitraLogoCircle}
@@ -138,7 +138,7 @@ const Footer = () => {
             ))}
           </ul>
 
-          <p className="w-full mt-8 text-base font-semibold text-center text-gray-100 md:mt-0 md:w-auto md:order-2">
+          <p className="w-full mt-8 text-base font-semibold text-center text-black dark:text-white md:mt-0 md:w-auto md:order-2">
             © Copyright {new Date().getFullYear()}, All Rights Reserved by Mitra
             Servis Elektronik
           </p>

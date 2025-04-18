@@ -18,12 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <header className="lg:sticky lg:top-0 z-[9999]">
+      <header className="lg:sticky lg:top-0 lg:z-[9999] bg-slate-100 dark:bg-neutral-950">
         <TopBar />
         <Navbar />
       </header>
 
-      <main>{children}</main>
+      <main className="bg-slate-100 dark:bg-neutral-900">{children}</main>
     </>
   );
 }

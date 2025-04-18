@@ -24,13 +24,18 @@ export function NavMenu() {
       <NavigationMenuList className="gap-2 lg:gap-5">
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink
+              className={
+                navigationMenuTriggerStyle() +
+                " bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent"
+              }
+            >
               <p className="text-base lg:text-lg">Beranda</p>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent hover:dark:bg-transparent">
             {" "}
             <p className="text-base lg:text-lg">Mitra Servis</p>
           </NavigationMenuTrigger>
@@ -67,7 +72,7 @@ export function NavMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent hover:dark:bg-transparent">
             <p className="text-base lg:text-lg">Layanan</p>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -87,7 +92,12 @@ export function NavMenu() {
 
         <NavigationMenuItem>
           <Link href="#testimoni" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink
+              className={
+                navigationMenuTriggerStyle() +
+                " bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent"
+              }
+            >
               <p className="text-base lg:text-lg">Ulasan</p>
             </NavigationMenuLink>
           </Link>

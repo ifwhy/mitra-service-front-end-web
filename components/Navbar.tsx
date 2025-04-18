@@ -20,7 +20,7 @@ const Navbar = () => {
 const NavbarLarge = ({ className }: ClassName) => {
   return (
     <div
-      className={`w-full h-24 flex items-center justify-center lg:gap-10 dark:bg-black dark:text-white bg-white text-black ${className}`}
+      className={`w-full h-24 flex items-center justify-center lg:gap-10 bg-slate-100 dark:bg-neutral-950 dark:text-white text-black ${className}`}
     >
       {/* Logo Mitra Servis Elektronik */}
       <Link href={"/"} className="flex flex-row items-center gap-1">

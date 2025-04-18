@@ -11,7 +11,7 @@ import {
 const FAQs = () => {
   return (
     <section
-      className="py-12 bg-gray-200 dark:bg-slate-950 dark:text-white sm:py-16 lg:py-20 xl:py-24"
+      className="py-12 bg-slate-100 dark:bg-neutral-950 dark:text-white sm:py-16 lg:py-20 xl:py-24"
       id="FAQs"
     >
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
