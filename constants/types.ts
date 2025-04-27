@@ -7,7 +7,7 @@ export interface ClassName {
 
 export interface TopBarIconType {
   href: string;
-  Icon: React.ReactElement;
+  Icon: React.ReactElement<any>;
 }
 
 export interface TopBarIconReactIcon {
@@ -24,7 +24,7 @@ export interface HeroUINavbarProps {
 }
 
 export interface SuperiorityItem {
-  icon: ReactElement;
+  icon: ReactElement<any>;
   text: string;
 }
 

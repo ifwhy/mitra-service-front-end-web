@@ -23,7 +23,7 @@ export function NavMenu() {
     <NavigationMenu className="mx-2">
       <NavigationMenuList className="gap-2 lg:gap-5">
         <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
+          <Link href="/" passHref>
             <NavigationMenuLink
               className={
                 navigationMenuTriggerStyle() +
@@ -91,7 +91,7 @@ export function NavMenu() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="#testimoni" legacyBehavior passHref>
+          <Link href="#testimoni" passHref>
             <NavigationMenuLink
               className={
                 navigationMenuTriggerStyle() +
@@ -108,7 +108,7 @@ export function NavMenu() {
 }
 
 const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
+  React.ComponentRef<"a">,
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
