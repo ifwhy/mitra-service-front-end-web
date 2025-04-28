@@ -1,7 +1,7 @@
 import { superiorities } from "@/constants/constants";
 import images from "@/constants/images";
-import Link from "next/link";
 import React from "react";
+import { AuthDialog } from "./AuthModal";
 
 const HomeSection = () => {
   return (
@@ -41,12 +41,7 @@ const HomeSection = () => {
             </h1>
           </div>
           <div className="w-full sm:w-auto flex justify-center">
-            <Link
-              href={"/"}
-              className="bg-amber-500 text-white h-12 font-semibold rounded-lg px-6 flex justify-center items-center hover:bg-amber-600 duration-300"
-            >
-              Perbaiki Sekarang
-            </Link>
+            <AuthDialog title="Pesan Layanan" />
           </div>
         </div>
       </div>

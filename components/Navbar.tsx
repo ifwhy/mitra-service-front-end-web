@@ -1,3 +1,5 @@
+"use client";
+
 import images from "@/constants/images";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,7 +45,7 @@ const NavbarLarge = ({ className }: ClassName) => {
       </nav>
 
       {/* Button Pesan Layanan */}
-      <AuthDialog />
+      <AuthDialog title="Servis" />
     </div>
   );
 };
@@ -66,7 +68,7 @@ const NavbarMobile = ({ className }: ClassName) => {
 
       <div className="flex flex-row items-center gap-2">
         {/* Button Pesan Layanan */}
-        <AuthDialog />
+        <AuthDialog title="Servis" />
 
         {/* Off Canvas Trigger */}
         <SidebarTrigger />

@@ -86,8 +86,7 @@ export function TabAuth() {
               colorPrimary: "#1D4ED8", // biru
             },
           }}
-          afterSignUpUrl="/dashboard"
-          signInUrl="/sign-in"
+          afterSignOutUrl="/"
         />
       </TabsContent>
     </Tabs>

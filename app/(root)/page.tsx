@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import FAQs from "@/components/FAQs";
 
 export default async function Home() {
+  // uncomment this line to simulate loading state
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   return (
