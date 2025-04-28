@@ -23,16 +23,17 @@ export function NavMenu() {
     <NavigationMenu className="mx-2">
       <NavigationMenuList className="gap-2 lg:gap-5">
         <NavigationMenuItem>
-          <Link href="/" passHref>
-            <NavigationMenuLink
+          <NavigationMenuLink asChild>
+            <Link
+              href="/"
               className={
                 navigationMenuTriggerStyle() +
                 " bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent"
               }
             >
               <p className="text-base lg:text-lg">Beranda</p>
-            </NavigationMenuLink>
-          </Link>
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent hover:dark:bg-transparent">
@@ -43,7 +44,7 @@ export function NavMenu() {
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
+                  <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
@@ -54,7 +55,7 @@ export function NavMenu() {
                       Kami adalah penyedia layanan servis elektronik terbaik di
                       Kota Solo.
                     </p>
-                  </a>
+                  </Link>
                 </NavigationMenuLink>
               </li>
 
@@ -90,17 +91,19 @@ export function NavMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
+        {/* FIXED: Changed order to match other navigation items */}
         <NavigationMenuItem>
-          <Link href="#testimoni" passHref>
-            <NavigationMenuLink
+          <NavigationMenuLink asChild>
+            <Link
+              href="#testimoni"
               className={
                 navigationMenuTriggerStyle() +
                 " bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent"
               }
             >
               <p className="text-base lg:text-lg">Ulasan</p>
-            </NavigationMenuLink>
-          </Link>
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

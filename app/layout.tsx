@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <html lang="id" className="scroll-smooth" suppressHydrationWarning>
         <body
           className={`${geistSans.className} ${geistMono.className} antialiased lg:min-h-screen`}
         >
@@ -36,7 +36,7 @@ export default function RootLayout({
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
-              >
+            >
               <div>
                 <Toaster />
               </div>
