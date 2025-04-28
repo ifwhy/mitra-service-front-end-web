@@ -5,10 +5,10 @@ const MitraService = () => {
   return (
     <section
       id="mitra-servis"
-      className="w-full mt-14 h-full bg-slate-100 dark:bg-neutral-950 py-4"
+      className="w-full mt-14 h-full bg-slate-100 dark:bg-neutral-900 py-4"
     >
       {/* Mitra Servis */}
-      <div className="bg-slate-100 dark:bg-neutral-950 flex flex-col items-center">
+      <div className="bg-slate-100 dark:bg-neutral-900 flex flex-col items-center">
         {/* judul */}
         <div className="w-full flex flex-col items-center p-2">
           <div className="flex items-center justify-center gap-4 my-4">

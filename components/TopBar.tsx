@@ -24,7 +24,7 @@ const TopBar = ({ className }: ClassName) => {
 
   return (
     <section
-      className={`w-full bg-neutral-950 h-14 items-center justify-around ${
+      className={`w-full bg-neutral-900 h-14 items-center justify-around ${
         isRemoveTopBar ? "hidden" : "hidden md:flex"
       } ${className}`}
     >

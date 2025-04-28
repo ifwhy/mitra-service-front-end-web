@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -40,8 +39,6 @@ export default function RootLayout({
               <div>
                 <Toaster />
               </div>
-
-              <AppSidebar />
 
               {children}
             </ThemeProvider>
