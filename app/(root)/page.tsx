@@ -3,6 +3,7 @@ import KamiPerbaiki from "@/components/YangDapatKamiPerbaiki";
 import HomeSection from "@/components/HomeSection";
 import Footer from "@/components/Footer";
 import FAQs from "@/components/FAQs";
+import Layanan from "@/components/Layanan";
 
 export default async function Home() {
   // uncomment this line to simulate loading state
@@ -18,6 +19,9 @@ export default async function Home() {
 
       {/* Apa Saja yang Bisa Kami Perbaiki? */}
       <KamiPerbaiki />
+
+      {/* Layanan */}
+      <Layanan />
 
       {/* FAQs */}
       <FAQs />
