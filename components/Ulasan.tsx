@@ -82,22 +82,22 @@ const Ulasan = () => {
   const disableRight = translateX >= maxTranslate - 1; // toleransi pixel
 
   return (
-    <section id="Ulasan" className="bg-slate-300 py-8">
+    <section id="Ulasan" className="bg-slate-300 py-[5rem]">
       <div className="grid grid-cols-2 px-12 mb-4">
         <div className="flex flex-col">
           <div className="flex items-center gap-2 mb-1">
-            <div className="h-[2px] w-10 bg-blue-700 dark:bg-cyan-400" />
-            <h2 className="text-blue-700 dark:text-cyan-400 text-lg font-bold tracking-widest text-center">
+            <div className="h-[2px] w-10 bg-blue-700" />
+            <h2 className="text-blue-700 text-lg font-bold tracking-widest text-center">
               ULASAN
             </h2>
           </div>
-          <h2 className="text-4xl font-bold tracking-wider">Apa Kata Mereka?</h2>
+          <h2 className="text-4xl font-bold tracking-wider text-black">Apa Kata Mereka?</h2>
         </div>
         <div className="flex gap-2 justify-end items-center">
           <button
             onClick={handlePrev}
             disabled={disableLeft}
-            className={`bg-slate-200 rounded-full h-[2rem] w-[2rem] flex justify-center items-center ${
+            className={`bg-yellow-400 text-blue-600 rounded-full h-[2rem] w-[2rem] flex justify-center items-center hover:bg-yellow-500 transition duration-300 ${
               disableLeft ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
@@ -106,7 +106,7 @@ const Ulasan = () => {
           <button
             onClick={handleNext}
             disabled={disableRight}
-            className={`bg-slate-200 rounded-full h-[2rem] w-[2rem] flex justify-center items-center ${
+            className={`bg-yellow-400 rounded-full h-[2rem] w-[2rem] flex justify-center items-center text-blue-600 hover:bg-yellow-500 transition duration-300 ${
               disableRight ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
@@ -147,15 +147,15 @@ const CardReview = ({
   review: string;
   user: string;
 }) => (
-  <div className="bg-white dark:bg-slate-700/50 h-[230px] w-full flex flex-col gap-4 justify-start items-start transform duration-700 p-4 shadow-md shadow-slate-400 hover:border-blue-500 border hover:-translate-y-2 mx-auto rounded-md overflow-hidden">
+  <div className="bg-white h-[230px] w-full flex flex-col gap-4 justify-start items-start transform duration-700 p-4 shadow-md shadow-slate-400 hover:border-blue-500 border border-white hover:-translate-y-2 mx-auto rounded-md overflow-hidden">
     <div className="flex justify-center items-center z-10 text-amber-500 px-3">
       {icon}
     </div>
     <div className="flex flex-col gap-2 px-3 py-2 z-1">
-      <h2 className="font-light tracking-wide overflow-y-auto h-[100px]">
+      <h2 className="font-light tracking-wide overflow-y-auto h-[100px] text-black">
         {review}
       </h2>
-      <p className="font-bold tracking-wide text-sm">{user}</p>
+      <p className="font-bold tracking-wide text-sm text-black">{user}</p>
     </div>
   </div>
 );
