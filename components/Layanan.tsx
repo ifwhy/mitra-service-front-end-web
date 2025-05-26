@@ -1,13 +1,12 @@
 import images from "@/constants/images";
 import Image from "next/image";
-import { Search, Truck, PackageCheckIcon, HandHeart, Hammer, PackageCheck } from "lucide-react";
-import Link from "next/link";
+import { Search, Truck, HandHeart, Hammer, PackageCheck } from "lucide-react";
 
 const Layanan = () => {
     return (
         <section 
         id="Layanan"
-        className="grid grid-cols-[525px_1fr] p-8 mt-[4rem] gap-16 bg-slate-200"
+        className="h-[60rem] grid grid-cols-[525px_1fr] px-8 pb-8 pt-16 mt-[4rem] gap-16 bg-slate-200"
         >
             <div className="flex justify-center items-start">
                 <Image
@@ -17,7 +16,7 @@ const Layanan = () => {
                 />
             </div>
 
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2 mb-1">
                     <div className="h-[2px] w-12 bg-blue-700 dark:bg-cyan-400" />
                     <h2 className="text-blue-700 dark:text-cyan-400 text-lg font-bold tracking-widest text-center">
@@ -67,13 +66,13 @@ const CardItem = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-amber-500 dark:bg-slate-700/50 w-full h-[110px] grid grid-cols-[100px_1fr] justify-center items-center rounded-l-full transform duration-700 relative overflow-hidden group text-white p-2 shadow-md shadow-slate-400 hover:shadow-none">
-    <div className="absolute inset-0 bg-orange-500 dark:bg-sky-500 origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0" />
-    <div className="flex justify-center items-center z-10">{icon}</div>
+  <div className="bg-white dark:bg-slate-700/50 w-full h-[110px] grid grid-cols-[100px_1fr] justify-center items-center rounded-l-full transform duration-700 relative overflow-hidden group p-2 shadow-md shadow-slate-400 hover:shadow-none hover:text-white">
+    <div className="absolute inset-0 bg-amber-500 dark:bg-sky-500 origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0 rounded-l-full" />
+    <div className="flex justify-center items-center z-10 text-amber-500 group-hover:text-white transition duration-700 scale-100 group-hover:scale-90 transform">{icon}</div>
     <div className="flex flex-col gap-1 px-3 z-10">
-      <Link href={""} className="font-extrabold tracking-wider">
+      <h2 className="font-extrabold tracking-wider">
         {title}
-      </Link>
+      </h2>
       <p className="tracking-wide text-sm font-light">{description}</p>
     </div>
   </div>

@@ -4,6 +4,7 @@ import HomeSection from "@/components/HomeSection";
 import Footer from "@/components/Footer";
 import FAQs from "@/components/FAQs";
 import Layanan from "@/components/Layanan";
+import Ulasan from "@/components/Ulasan";
 
 export default async function Home() {
   // uncomment this line to simulate loading state
@@ -25,6 +26,9 @@ export default async function Home() {
 
       {/* FAQs */}
       <FAQs />
+
+      {/* Ulasan */}
+      <Ulasan />
 
       {/* Footer */}
       <Footer />
