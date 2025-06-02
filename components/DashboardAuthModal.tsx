@@ -60,7 +60,7 @@ export function DashboardAuthModal() {
           Login Required
         </DialogTitle>
         <div className="text-center mb-4 text-sm text-gray-600 dark:text-gray-400">
-          Anda harus login terlebih dahulu.
+          Anda harus login terlebih dahulu
         </div>
         <TabAuth />
       </DialogContent>

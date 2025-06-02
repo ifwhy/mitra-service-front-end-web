@@ -5,9 +5,25 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 import { useAuth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { useEffect, useRef } from "react";
+import toast from "react-hot-toast";
 
 export function AuthDialog({ title }: { title: string }) {
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
+  const previousSignedInRef = useRef<boolean | null>(null);
+
+  // Track perubahan status login untuk menampilkan toast
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    // Jika user baru saja login (dari false ke true)
+    if (previousSignedInRef.current === false && isSignedIn === true) {
+      toast.success("Berhasil login! Selamat datang");
+    }
+
+    // Update ref dengan status saat ini
+    previousSignedInRef.current = isSignedIn;
+  }, [isSignedIn, isLoaded]);
 
   const handleAuth = () => {
     if (isSignedIn) {
