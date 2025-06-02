@@ -1,7 +1,9 @@
 import { superiorities } from "@/constants/constants";
 import images from "@/constants/images";
+import Image from "next/image";
 import React from "react";
 import { AuthDialog } from "./AuthModal";
+import TypingText from "./Typewriter";
 
 const HomeSection = () => {
   return (
@@ -13,7 +15,7 @@ const HomeSection = () => {
       <HeroSection />
 
       {/* kartu mengambang */}
-      <div className="w-[90%] md:w-[80%] mx-auto -mt-[5.5rem] rounded-3xl shadow-gray-300 bg-cyan-50 overflow-hidden flex flex-col shadow-lg dark:shadow-md">
+      {/* <div className="w-[90%] md:w-[80%] mx-auto -mt-[5.5rem] rounded-3xl shadow-gray-300 bg-cyan-50 overflow-hidden flex flex-col shadow-lg dark:shadow-md">
         <div className="flex flex-wrap justify-center md:justify-between text-blue-700 bg-sky-400/50 p-4">
           {superiorities.map((item, idx) => (
             <div
@@ -44,7 +46,7 @@ const HomeSection = () => {
             <AuthDialog title="Pesan Layanan" />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
@@ -54,18 +56,26 @@ export default HomeSection;
 function HeroSection() {
   return (
     <div
-      className="w-full h-[32rem] text-white flex flex-col justify-start px-6 md:px-12 pt-8 bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${images.home_bg.src})`,
-      }}
+      className="w-full h-[32rem] text-white justify-center items-center px-6 md:px-12 pt-6 bg-cover bg-center bg-blue-700 grid grid-cols-[1fr_400px]"
     >
-      <div className="h-[80%] max-w-xl">
+      <div className="h-[80%] max-w-5xl flex flex-col gap-7">
         <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold tracking-wider">
           MITRA SERVIS ELEKTRONIK
         </h1>
-        <p className="text-base md:text-lg lg:text-2xl font-medium mt-2">
+        <p className="text-base md:text-lg lg:text-2xl font-medium">
           Mitra Terpercaya Menangani Kerusakan Elektronik
         </p>
+        <TypingText/>
+        <div className="w-full sm:w-auto mt-6">
+            <AuthDialog title="Pesan Layanan" />
+        </div>
+      </div>
+      <div className="flex items-center justify-center">
+        <Image
+          src={images.landing_mitra}
+          alt="Service Picture"
+          className="w-[65%] md:w-[30%] lg:w-full object-cover"
+        />
       </div>
     </div>
   );

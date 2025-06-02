@@ -45,7 +45,7 @@ const RepairItem = ({ icon, label }: RepairItemProps) => {
       <Link
         href=""
         className={cn(
-          "absolute bottom-0 w-full h-8 text-sm text-center font-medium",
+          "absolute bottom-0 w-full h-8 text-sm text-center font-medium flex items-center justify-center",
           "bg-sky-500 text-white transition-transform duration-500",
           "translate-y-full group-hover:translate-y-0"
         )}

@@ -43,7 +43,7 @@ export function TabAuth() {
               formFieldInput:
                 "border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 rounded-md",
               socialButtonsBlockButton:
-                "border border-white bg-orange-500 hover:bg-orange-600 transition-all duration-200 ease-in-out -my-5 dark:text-white text-black rounded-md flex items-center justify-center",
+                "border border-white bg-slate-300 hover:bg-slate-400 transition-all duration-200 ease-in-out -my-5 dark:text-white text-black rounded-md flex items-center justify-center",
               formFieldLabel: "text-black dark:text-white",
               dividerLine: "hidden",
               dividerText: "hidden",
@@ -74,7 +74,7 @@ export function TabAuth() {
               formFieldInput:
                 "border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 rounded-md",
               socialButtonsBlockButton:
-                "border border-white bg-orange-500 hover:bg-orange-600 transition-all duration-200 ease-in-out -my-5 dark:text-white text-black rounded-md flex items-center justify-center",
+                "border border-white bg-slate-300 hover:bg-slate-400 transition-all duration-200 ease-in-out -my-5 dark:text-white text-black rounded-md flex items-center justify-center",
               formFieldLabel: "text-black dark:text-white",
               dividerLine: "hidden",
               dividerText: "hidden",
