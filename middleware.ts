@@ -1,6 +1,22 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+
+export default clerkMiddleware(async (auth, req) => {
+  const authObject = await auth();
+
+  // Untuk protected routes, kita akan membiarkan halaman dimuat
+  // dan handle authentication di client side dengan modal
+  // Ini memungkinkan modal login muncul di halaman dashboard
+
+  // Jika user sudah login dan mengakses protected route, izinkan akses
+  if (isProtectedRoute(req) && authObject.userId) {
+    return;
+  }
+
+  // Untuk route lainnya, biarkan akses normal
+  // Modal akan handle authentication check di client side
+});
 
 export const config = {
   matcher: [

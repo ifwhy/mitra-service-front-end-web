@@ -1,3 +1,4 @@
+import { auth } from "@clerk/nextjs/server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,11 +10,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId } = await auth();
+
+  if (!userId) auth.protect({ feature: "clerk" });
+
   return (
     <>
       <main>{children}</main>
