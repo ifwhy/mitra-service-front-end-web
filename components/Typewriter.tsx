@@ -33,7 +33,7 @@ const Typewriter: React.FC = () => {
   }, [subIndex, deleting, index])
 
   return (
-    <div className="text-2xl font-semibold">
+    <div className="text-lg lg:text-2xl font-semibold">
       {texts[index].substring(0, subIndex)}
       <span className="animate-pulse">|</span>
     </div>

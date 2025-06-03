@@ -12,13 +12,13 @@ const MitraService = () => {
         {/* judul */}
         <div className="w-full flex flex-col items-center p-2">
           <div className="flex items-center justify-center gap-4 my-4">
-            <div className="h-[2px] w-16 bg-blue-700 dark:bg-cyan-400" />
-            <h2 className="text-blue-700 dark:text-cyan-400 text-lg font-bold tracking-widest text-center">
+            <div className="h-[2px] w-6 lg:w-16 bg-blue-700 dark:bg-cyan-400" />
+            <h2 className="text-blue-700 dark:text-cyan-400 text-base lg:text-lg font-bold tracking-widest text-center">
               MITRA SERVIS ELEKTRONIIK
             </h2>
-            <div className="h-[2px] w-16 bg-blue-700 dark:bg-cyan-400" />
+            <div className="h-[2px] w-6 lg:w-16 bg-blue-700 dark:bg-cyan-400" />
           </div>
-          <h1 className="font-semibold text-2xl max-w-3xl text-center tracking-wider text-black dark:text-white">
+          <h1 className="font-semibold text-xl lg:text-2xl max-w-3xl text-center tracking-wider text-black dark:text-white">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
             rerum totam
           </h1>
@@ -54,14 +54,14 @@ const CardItem = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-amber-500 dark:bg-slate-700/50 w-[450px] h-[150px] grid grid-cols-[100px_1fr] justify-center items-center rounded-lg hover:-translate-y-2 transform duration-700 relative overflow-hidden group text-white">
+  <div className="bg-amber-500 dark:bg-slate-700/50 w-[450px] h-[100px] lg:h-[150px] grid-cols-[40px_1fr] grid lg:grid-cols-[100px_1fr] justify-center items-center rounded-lg hover:-translate-y-2 transform duration-700 relative overflow-hidden group text-white px-3 lg:px-0">
     <div className="absolute inset-0 bg-orange-500 dark:bg-sky-500 origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 ease-in-out z-0" />
     <div className="flex justify-center items-center z-10">{icon}</div>
     <div className="flex flex-col gap-1 p-3 z-10">
-      <Link href={""} className="font-bold text-lg tracking-wider">
-        {title} hello
+      <Link href={""} className="font-bold text-sm lg:text-lg tracking-wider">
+        {title}
       </Link>
-      <p className="tracking-wide">{description}</p>
+      <p className="tracking-wide text-xs lg:text-base">{description}</p>
     </div>
   </div>
 );
