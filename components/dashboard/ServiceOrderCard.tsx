@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, ClockIcon, UserIcon, StarIcon } from "lucide-react";
 import { StatusBadge } from "./StatusBadge";
+import { useRouter } from "next/navigation";
 
 interface ServiceOrder {
   id: string;
@@ -21,6 +22,12 @@ interface ServiceOrderCardProps {
 }
 
 export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
+  const router = useRouter();
+
+  const handleDetailClick = () => {
+    router.push(`/dashboard/orders/${order.id}`);
+  };
+
   return (
     <Card className="relative overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-white to-amber-50/20 dark:from-slate-900 dark:to-amber-900/10">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-amber-600"></div>
@@ -79,8 +86,11 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
           <div className="lg:text-right lg:min-w-[180px]">
             <div className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent mb-3">
               Rp {order.price.toLocaleString("id-ID")}
-            </div>
-            <Button className="w-full lg:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+            </div>{" "}
+            <Button
+              onClick={handleDetailClick}
+              className="w-full lg:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+            >
               Detail Pesanan
             </Button>
           </div>

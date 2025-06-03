@@ -2,7 +2,14 @@
 
 import { useAuth, useUser } from "@clerk/nextjs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SettingsIcon, WrenchIcon, DollarSignIcon, StarIcon, PlusIcon, UserIcon } from "lucide-react";
+import {
+  SettingsIcon,
+  WrenchIcon,
+  DollarSignIcon,
+  StarIcon,
+  PlusIcon,
+  UserIcon,
+} from "lucide-react";
 import { DashboardAuthModal } from "@/components/DashboardAuthModal";
 import {
   DashboardHeader,
@@ -11,47 +18,47 @@ import {
   OrdersTab,
   NewOrderTab,
   ProfileTab,
-  LoadingState
+  LoadingState,
 } from "@/components/dashboard";
 
 const DashboardPage = () => {
   const { isSignedIn } = useAuth();
   const { user } = useUser();
-
   // Sample data for dashboard
   const serviceOrders = [
     {
       id: "SRV-001",
-      device: "Laptop ASUS ROG",
-      issue: "Layar berkedip dan tidak stabil",
+      device: "Laptop ASUS ROG Strix G15",
+      issue: "Layar berkedip dan tidak stabil, kadang blank screen",
       status: "in-progress",
       date: "2024-12-10",
       estimatedCompletion: "2024-12-12",
       technician: "Ahmad Fauzi",
-      price: 350000,
+      price: 450000,
       rating: 4.8,
     },
     {
       id: "SRV-002",
-      device: "iPhone 13 Pro",
-      issue: "Baterai cepat habis dan panas berlebihan",
-      status: "pending",
-      date: "2024-12-11",
-      estimatedCompletion: "2024-12-13",
-      technician: "Siti Nurhaliza",
-      price: 250000,
+      device: "iPhone 13 Pro Max",
+      issue: "Kamera belakang tidak berfungsi, hasil foto blur dan tidak fokus",
+      status: "completed",
+      date: "2024-12-08",
+      estimatedCompletion: "2024-12-10",
+      technician: "Sari Dewi",
+      price: 875000,
       rating: 4.9,
     },
     {
       id: "SRV-003",
-      device: 'Smart TV Samsung 55"',
-      issue: "Tidak bisa menyala, LED indikator mati",
-      status: "completed",
-      date: "2024-12-05",
-      estimatedCompletion: "2024-12-08",
+      device: "Samsung Galaxy Tab S8",
+      issue:
+        "Baterai cepat habis dan tablet sering hang, performa menurun drastis",
+      status: "pending",
+      date: "2024-12-12",
+      estimatedCompletion: "2024-12-15",
       technician: "Budi Santoso",
-      price: 400000,
-      rating: 5.0,
+      price: 440000,
+      rating: 4.7,
     },
   ];
 
