@@ -1,21 +1,94 @@
 "use client";
 
-import { SignOutButton, useAuth } from "@clerk/nextjs";
-import Link from "next/link";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ActivityIcon } from "lucide-react";
-import toast from "react-hot-toast";
+import { useAuth, useUser } from "@clerk/nextjs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SettingsIcon, WrenchIcon, DollarSignIcon, StarIcon, PlusIcon, UserIcon } from "lucide-react";
 import { DashboardAuthModal } from "@/components/DashboardAuthModal";
+import {
+  DashboardHeader,
+  DashboardWelcome,
+  DashboardStats,
+  OrdersTab,
+  NewOrderTab,
+  ProfileTab,
+  LoadingState
+} from "@/components/dashboard";
 
 const DashboardPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
 
-  const handleSignOut = () => {
-    setIsLoading(true);
-    toast.success("Berhasil keluar dari akun");
-  };
+  // Sample data for dashboard
+  const serviceOrders = [
+    {
+      id: "SRV-001",
+      device: "Laptop ASUS ROG",
+      issue: "Layar berkedip dan tidak stabil",
+      status: "in-progress",
+      date: "2024-12-10",
+      estimatedCompletion: "2024-12-12",
+      technician: "Ahmad Fauzi",
+      price: 350000,
+      rating: 4.8,
+    },
+    {
+      id: "SRV-002",
+      device: "iPhone 13 Pro",
+      issue: "Baterai cepat habis dan panas berlebihan",
+      status: "pending",
+      date: "2024-12-11",
+      estimatedCompletion: "2024-12-13",
+      technician: "Siti Nurhaliza",
+      price: 250000,
+      rating: 4.9,
+    },
+    {
+      id: "SRV-003",
+      device: 'Smart TV Samsung 55"',
+      issue: "Tidak bisa menyala, LED indikator mati",
+      status: "completed",
+      date: "2024-12-05",
+      estimatedCompletion: "2024-12-08",
+      technician: "Budi Santoso",
+      price: 400000,
+      rating: 5.0,
+    },
+  ];
+
+  const stats = [
+    {
+      title: "Total Pesanan",
+      value: "12",
+      description: "3 selesai bulan ini",
+      icon: SettingsIcon,
+      trend: "+20.1%",
+      color: "text-blue-600",
+    },
+    {
+      title: "Sedang Dikerjakan",
+      value: "3",
+      description: "2 akan selesai minggu ini",
+      icon: WrenchIcon,
+      trend: "+15.2%",
+      color: "text-orange-600",
+    },
+    {
+      title: "Total Pembayaran",
+      value: "Rp 2.450.000",
+      description: "Bulan ini",
+      icon: DollarSignIcon,
+      trend: "+12.5%",
+      color: "text-green-600",
+    },
+    {
+      title: "Rating Layanan",
+      value: "4.8/5.0",
+      description: "Dari 15 ulasan",
+      icon: StarIcon,
+      trend: "+0.2",
+      color: "text-yellow-600",
+    },
+  ];
 
   return (
     <>
@@ -24,38 +97,65 @@ const DashboardPage = () => {
 
       {/* Konten Dashboard - hanya tampil jika user sudah login */}
       {isSignedIn && (
-        <div className="h-screen w-full flex flex-col gap-2 items-center justify-center">
-          <p>INI HALAMAN DASHBOARD</p>
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50/30 to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+          {/* Header */}
+          <DashboardHeader user={user} />
 
-          <Link href={"/"}>Kembali Ke Landing Page</Link>
+          {/* Main Content */}
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Welcome Section */}
+            <DashboardWelcome />
 
-          <div className="flex flex-col gap-2 items-center justify-center bg-blue-500 px-4 py-2 rounded-lg shadow-md">
-            {/* Tombol SignOut dengan Loading State */}
-            <SignOutButton redirectUrl="/">
-              <Button
-                className="border-none bg-transparent"
-                onClick={handleSignOut}
-              >
-                {isLoading ? (
-                  <ActivityIcon className="bg-white animate-spin" />
-                ) : (
-                  "Keluar"
-                )}
-              </Button>
-            </SignOutButton>
-          </div>
+            {/* Stats Grid */}
+            <DashboardStats stats={stats} />
+
+            {/* Main Dashboard Content */}
+            <Tabs defaultValue="orders" className="space-y-6">
+              <TabsList className="grid w-full grid-cols-3 lg:w-[400px] bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-amber-200/50 dark:border-slate-700">
+                <TabsTrigger
+                  value="orders"
+                  className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-amber-600 data-[state=active]:text-white transition-all"
+                >
+                  <SettingsIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">Pesanan</span>
+                </TabsTrigger>
+                <TabsTrigger
+                  value="new-order"
+                  className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-amber-600 data-[state=active]:text-white transition-all"
+                >
+                  <PlusIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">Buat Baru</span>
+                </TabsTrigger>
+                <TabsTrigger
+                  value="profile"
+                  className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-amber-600 data-[state=active]:text-white transition-all"
+                >
+                  <UserIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">Profil</span>
+                </TabsTrigger>
+              </TabsList>
+
+              {/* Orders Tab */}
+              <TabsContent value="orders" className="space-y-6">
+                <OrdersTab serviceOrders={serviceOrders} />
+              </TabsContent>
+
+              {/* New Order Tab */}
+              <TabsContent value="new-order" className="space-y-6">
+                <NewOrderTab user={user} />
+              </TabsContent>
+
+              {/* Profile Tab */}
+              <TabsContent value="profile" className="space-y-6">
+                <ProfileTab user={user} />
+              </TabsContent>
+            </Tabs>
+          </main>
         </div>
       )}
 
       {/* Loading placeholder saat belum login */}
-      {!isSignedIn && (
-        <div className="h-screen w-full flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading...</p>
-          </div>
-        </div>
-      )}
+      {!isSignedIn && <LoadingState />}
     </>
   );
 };
