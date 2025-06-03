@@ -1,4 +1,3 @@
-import { superiorities } from "@/constants/constants";
 import images from "@/constants/images";
 import Image from "next/image";
 import React from "react";
@@ -55,19 +54,17 @@ export default HomeSection;
 
 function HeroSection() {
   return (
-    <div
-      className="w-full h-[36rem] lg:h-[32rem] text-white justify-center items-center px-6 md:px-12 pt-6 bg-cover bg-center bg-blue-700 grid grid-cols-1 lg:grid-cols-[1fr_400px]"
-    >
-      <div className="h-[80%] w-full lg:max-w-5xl flex flex-col gap-4 lg:gap-7">
-        <h1 className="text-xl md:text-4xl lg:text-6xl font-extrabold tracking-wider">
+    <div className="w-full h-[32rem] text-white justify-center items-center px-6 md:px-12 pt-6 bg-cover bg-center bg-blue-700 grid grid-cols-[1fr_400px]">
+      <div className="h-[80%] max-w-5xl flex flex-col gap-7">
+        <h1 className="text-3xl md:text-4xl lg:text-6xl font-extrabold tracking-wider">
           MITRA SERVIS ELEKTRONIK
         </h1>
         <p className="text-base md:text-lg lg:text-2xl font-medium">
           Mitra Terpercaya Menangani Kerusakan Elektronik
         </p>
-        <TypingText/>
+        <TypingText />
         <div className="w-full sm:w-auto mt-6">
-            <AuthDialog title="Servis" />
+          <AuthDialog title="Pesan Layanan" />
         </div>
       </div>
       <div className="flex items-center justify-center">
