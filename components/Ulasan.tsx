@@ -152,8 +152,8 @@ const Ulasan = () => {
         <CarouselContent>
           {reviewData.map((reviewData, i) => (
             <CarouselItem key={reviewData.id} className="basis-full lg:basis-1/4">
-              <div className="p-6 bg-gray-100 rounded-xl shadow space-y-2 flex flex-col justify-between h-[250px] hover:shadow-md hover:shadow-amber-500/50 hover:-translate-y-2 transition duration-500 my-[16px]">
-                <p className="text-sm text-gray-600">{reviewData.review}</p>
+              <div className="p-6 bg-gray-100 rounded-xl shadow space-y-2 flex flex-col justify-between h-[200px] hover:shadow-md hover:shadow-amber-500/50 hover:-translate-y-2 transition duration-500 my-[16px]">
+                <p className="text-sm text-gray-600 h-[150px] overflow-auto">{reviewData.review}</p>
                 <h2 className="text-base font-semibold">{reviewData.user}</h2>
               </div>
             </CarouselItem>
