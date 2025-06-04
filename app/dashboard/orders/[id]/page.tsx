@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,6 +42,9 @@ import { StatusBadge } from "@/components/dashboard/StatusBadge";
 import { DashboardAuthModal } from "@/components/DashboardAuthModal";
 import { LoadingState } from "@/components/dashboard/LoadingState";
 import Image from "next/image";
+import { SanityClient } from "next-sanity";
+import { client, urlFor } from "@/sanity/client";
+import { getRepairOrderById } from "@/lib/queries";
 
 // Complete detailed order data for all orders
 const getOrderDetails = (id: string) => {
@@ -398,9 +401,21 @@ const OrderDetailPage = () => {
   const { isSignedIn } = useAuth();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
+  const [orderDetails, setRepairOrder] = useState<any>(null);
 
   const orderId = params.id as string;
-  const orderDetails = getOrderDetails(orderId);
+  useEffect(() => {
+    client.fetch(getRepairOrderById(orderId))
+      .then((data) => {
+        setRepairOrder(data);
+        console.log("Repair Order Data:", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching repair order:", error);
+      });
+  }, [orderId])
+  
+  // const orderDetails = getOrderDetails(orderId);
 
   if (!orderDetails) {
     return (
@@ -418,7 +433,7 @@ const OrderDetailPage = () => {
                   Pesanan dengan ID {orderId} tidak ditemukan.
                 </p>
                 <Button
-                  onClick={() => router.back()}
+                  onClick={() => router.push("/dashboard")}
                   className="bg-amber-600 hover:bg-amber-700"
                 >
                   <ArrowLeftIcon className="w-4 h-4 mr-2" />
@@ -916,11 +931,11 @@ const OrderDetailPage = () => {
                         <div
                           key={image.id}
                           className="group relative bg-white dark:bg-slate-800 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-slate-200/50 dark:border-slate-700/50"
-                          onClick={() => setSelectedImage(image.url)}
+                          onClick={() => setSelectedImage(urlFor(image.url).url())}
                         >
                           <div className="aspect-square relative overflow-hidden">
                             <Image
-                              src={image.url}
+                              src={urlFor(image.url).url()}
                               alt={image.caption}
                               fill
                               className="object-cover group-hover:scale-110 transition-transform duration-300"
