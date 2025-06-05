@@ -2,26 +2,38 @@
 
 import { useRef, useState, useLayoutEffect } from "react";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const reviewData = [
   {
+    id: 1,
     review:
       "Teknisinya sangat sat set, hasil penegerjaan juga rapi, perangkat kembali dalam keadaan bersih. Good banget lah pelayanan perbaikannya. Kalian harus servis disini",
     user: "Widodo Etan Tanggul",
   },
   {
+    id: 2,
     review: "Perangkat kembali normal, tampilan bersih seperti baru. Bintang 5.",
     user: "Prabowo Lor Kali",
   },
   {
+    id: 3,
     review: "Pelayanan cepat, CS ramah, dan prosesnya transparan. Mantap!",
     user: "Ganjar Ngarep Sungai",
   },
   {
+    id: 4,
     review: "Tempat terpercaya buat perbaikan perangkat elektronik.",
     user: "Megawati Tengah Kota",
   },
   {
+    id: 5,
     review: "Mantap pelayanannya. Cepat dan terpercaya!",
     user: "Jokowi Tengah Laut",
   },
@@ -82,18 +94,18 @@ const Ulasan = () => {
   const disableRight = translateX >= maxTranslate - 1; // toleransi pixel
 
   return (
-    <section id="Ulasan" className="bg-slate-300 py-[5rem]">
-      <div className="grid grid-cols-2 px-12 mb-4">
+    <section id="Ulasan" className="bg-slate-300 py-[3rem] lg:py-[5rem]">
+      <div className="px-12 mb-4">
         <div className="flex flex-col">
           <div className="flex items-center gap-2 mb-1">
-            <div className="h-[2px] w-10 bg-blue-700" />
-            <h2 className="text-blue-700 text-lg font-bold tracking-widest text-center">
+            <div className="h-[2px] w-6 lg:w-10 bg-blue-700" />
+            <h2 className="text-blue-700 text-base lg:text-lg font-bold tracking-widest text-center">
               ULASAN
             </h2>
           </div>
-          <h2 className="text-4xl font-bold tracking-wider text-black">Apa Kata Mereka?</h2>
+          <h2 className="text-2xl lg:text-4xl font-bold tracking-wider text-black w-full">Apa Kata Mereka?</h2>
         </div>
-        <div className="flex gap-2 justify-end items-center">
+        {/* <div className="flex gap-2 justify-end items-center">
           <button
             onClick={handlePrev}
             disabled={disableLeft}
@@ -112,10 +124,10 @@ const Ulasan = () => {
           >
             <ArrowRight size={16} />
           </button>
-        </div>
+        </div> */}
       </div>
 
-      <div ref={wrapperRef} className="overflow-hidden px-8 py-4">
+      {/* <div ref={wrapperRef} className="overflow-hidden px-8 py-4">
         <div
           ref={carouselRef}
           className="flex gap-4 transition-transform duration-500 ease-in-out"
@@ -133,7 +145,22 @@ const Ulasan = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
+
+      <Carousel className="flex justify-center items-center w-[65%] lg:w-[90%] mx-auto mt-[18px] lg:mt-[24px]">
+        <CarouselPrevious />
+        <CarouselContent>
+          {reviewData.map((reviewData, i) => (
+            <CarouselItem key={reviewData.id} className="basis-full lg:basis-1/4">
+              <div className="p-6 bg-gray-100 rounded-xl shadow space-y-2 flex flex-col justify-between h-[200px] hover:shadow-md hover:shadow-amber-500/50 hover:-translate-y-2 transition duration-500 my-[16px]">
+                <p className="text-sm text-gray-600 h-[150px] overflow-auto">{reviewData.review}</p>
+                <h2 className="text-base font-semibold">{reviewData.user}</h2>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselNext />
+      </Carousel>
     </section>
   );
 };
