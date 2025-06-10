@@ -5,7 +5,7 @@ export const getCustomerIdByClerkId = (clerkId: string) => `
 `;
 
 export const getRepairOrdersByCustomer = (customerId: string) => `
-  *[_type == "repair" && customer._ref == "${customerId}"] | order(dateCreated desc) {
+  *[_type == "repair" && customer == "${customerId}"] | order(dateCreated desc) {
     _id,
     orderId,
     device,
@@ -17,8 +17,6 @@ export const getRepairOrdersByCustomer = (customerId: string) => `
     dateCreated,
     technician->{
       name,
-      email,
-      phone
     },
     rating,
     pricing {
@@ -49,13 +47,6 @@ export const getRepairOrderById = (orderId: string) => `
     notes[],
     timeline[],
     services[],
-    customer->{
-      _id,
-      name,
-      email,
-      phone,
-      address,
-    },
     technician->{
       _id,
       name,

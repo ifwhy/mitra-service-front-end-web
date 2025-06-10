@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -42,358 +42,357 @@ import { StatusBadge } from "@/components/dashboard/StatusBadge";
 import { DashboardAuthModal } from "@/components/DashboardAuthModal";
 import { LoadingState } from "@/components/dashboard/LoadingState";
 import Image from "next/image";
-import { SanityClient } from "next-sanity";
 import { client, urlFor } from "@/sanity/client";
 import { getRepairOrderById } from "@/lib/queries";
 
 // Complete detailed order data for all orders
-const getOrderDetails = (id: string) => {
-  const orderData = {
-    "SRV-001": {
-      id: "SRV-001",
-      device: "Laptop ASUS ROG Strix G15",
-      brand: "ASUS",
-      model: "ROG Strix G15 (2021)",
-      issue: "Layar berkedip dan tidak stabil, kadang blank screen",
-      status: "in-progress",
-      priority: "normal",
-      dateCreated: "2024-12-10T08:30:00Z",
-      dateUpdated: "2024-12-11T14:20:00Z",
-      estimatedCompletion: "2024-12-12T17:00:00Z",
-      actualCompletion: null,
-      technician: {
-        name: "Ahmad Fauzi",
-        id: "TECH-001",
-        phone: "+62 812-1234-5678",
-        specialization: "Laptop & PC Hardware",
-      },
-      customer: {
-        name: "John Doe",
-        email: "john.doe@email.com",
-        phone: "+62 812-9876-5432",
-        address: "Jl. Sudirman No. 123, Jakarta Selatan, DKI Jakarta 12190",
-      },
-      pricing: {
-        diagnosticFee: 50000,
-        repairFee: 250000,
-        partsCost: 150000,
-        total: 450000,
-        paid: 100000,
-        remaining: 350000,
-      },
-      warranty: {
-        duration: "3 bulan",
-        expiryDate: "2025-03-12",
-        coverage: "Komponen yang diganti dan perbaikan yang dilakukan",
-      },
-      images: [
-        {
-          id: "IMG-001",
-          url: "/images/laptop-damage-1.jpg",
-          caption: "Kondisi awal - layar berkedip",
-          type: "before",
-          uploadedAt: "2024-12-10T08:35:00Z",
-        },
-        {
-          id: "IMG-002",
-          url: "/images/laptop-damage-2.jpg",
-          caption: "Detail kerusakan di panel LCD",
-          type: "diagnostic",
-          uploadedAt: "2024-12-10T10:15:00Z",
-        },
-        {
-          id: "IMG-003",
-          url: "/images/laptop-repair-progress.jpg",
-          caption: "Proses pembongkaran dan diagnosis",
-          type: "progress",
-          uploadedAt: "2024-12-11T09:30:00Z",
-        },
-      ],
-      timeline: [
-        {
-          date: "2024-12-10T08:30:00Z",
-          status: "received",
-          title: "Pesanan Diterima",
-          description: "Perangkat diterima dan dicatat dalam sistem",
-          by: "Staff Penerima",
-        },
-        {
-          date: "2024-12-10T10:00:00Z",
-          status: "diagnosed",
-          title: "Diagnosis Awal",
-          description:
-            "Teknisi melakukan pemeriksaan awal dan identifikasi masalah",
-          by: "Ahmad Fauzi",
-        },
-        {
-          date: "2024-12-11T09:00:00Z",
-          status: "in-progress",
-          title: "Proses Perbaikan Dimulai",
-          description: "Pembongkaran perangkat dan penggantian komponen LCD",
-          by: "Ahmad Fauzi",
-        },
-      ],
-      notes: [
-        {
-          date: "2024-12-10T10:30:00Z",
-          author: "Ahmad Fauzi",
-          type: "diagnostic",
-          content:
-            "Panel LCD mengalami kerusakan pada backlight inverter. Perlu penggantian komponen.",
-        },
-        {
-          date: "2024-12-11T14:20:00Z",
-          author: "Ahmad Fauzi",
-          type: "progress",
-          content:
-            "Komponen pengganti sudah dipesan. Estimasi tiba besok pagi. Perbaikan akan dilanjutkan setelah komponen tiba.",
-        },
-      ],
-      services: [
-        {
-          name: "Diagnosis Kerusakan",
-          description: "Pemeriksaan menyeluruh untuk identifikasi masalah",
-          status: "completed",
-          fee: 50000,
-        },
-        {
-          name: "Penggantian Panel LCD",
-          description: "Penggantian panel LCD yang rusak dengan yang baru",
-          status: "in-progress",
-          fee: 250000,
-        },
-        {
-          name: "Testing & Kalibrasi",
-          description: "Pengujian fungsi dan kalibrasi setelah perbaikan",
-          status: "pending",
-          fee: 0,
-        },
-      ],
-    },
-    "SRV-002": {
-      id: "SRV-002",
-      device: "iPhone 13 Pro Max",
-      brand: "Apple",
-      model: "iPhone 13 Pro Max (128GB)",
-      issue: "Kamera belakang tidak berfungsi, hasil foto blur dan tidak fokus",
-      status: "completed",
-      priority: "high",
-      dateCreated: "2024-12-08T09:15:00Z",
-      dateUpdated: "2024-12-10T16:45:00Z",
-      estimatedCompletion: "2024-12-10T17:00:00Z",
-      actualCompletion: "2024-12-10T15:30:00Z",
-      technician: {
-        name: "Sari Dewi",
-        id: "TECH-002",
-        phone: "+62 813-2345-6789",
-        specialization: "Mobile Device & Camera Systems",
-      },
-      customer: {
-        name: "Sarah Wilson",
-        email: "sarah.wilson@email.com",
-        phone: "+62 821-1234-5678",
-        address: "Jl. Kemang Raya No. 88, Jakarta Selatan, DKI Jakarta 12560",
-      },
-      pricing: {
-        diagnosticFee: 75000,
-        repairFee: 350000,
-        partsCost: 450000,
-        total: 875000,
-        paid: 875000,
-        remaining: 0,
-      },
-      warranty: {
-        duration: "6 bulan",
-        expiryDate: "2025-06-10",
-        coverage: "Modul kamera dan perbaikan yang dilakukan",
-      },
-      images: [
-        {
-          id: "IMG-004",
-          url: "/images/iphone-camera-issue-1.jpg",
-          caption: "Kondisi awal - hasil foto blur",
-          type: "before",
-          uploadedAt: "2024-12-08T09:20:00Z",
-        },
-        {
-          id: "IMG-005",
-          url: "/images/iphone-camera-issue-2.jpg",
-          caption: "Pemeriksaan modul kamera",
-          type: "diagnostic",
-          uploadedAt: "2024-12-08T11:30:00Z",
-        },
-        {
-          id: "IMG-006",
-          url: "/images/iphone-repair-completed.jpg",
-          caption: "Hasil setelah penggantian modul kamera",
-          type: "after",
-          uploadedAt: "2024-12-10T15:30:00Z",
-        },
-      ],
-      timeline: [
-        {
-          date: "2024-12-08T09:15:00Z",
-          status: "received",
-          title: "Pesanan Diterima",
-          description: "Perangkat diterima dan dicatat dalam sistem",
-          by: "Staff Penerima",
-        },
-        {
-          date: "2024-12-08T11:00:00Z",
-          status: "diagnosed",
-          title: "Diagnosis Selesai",
-          description: "Identifikasi kerusakan pada modul kamera utama",
-          by: "Sari Dewi",
-        },
-        {
-          date: "2024-12-09T10:00:00Z",
-          status: "in-progress",
-          title: "Proses Perbaikan",
-          description: "Penggantian modul kamera dengan komponen original",
-          by: "Sari Dewi",
-        },
-        {
-          date: "2024-12-10T15:30:00Z",
-          status: "completed",
-          title: "Perbaikan Selesai",
-          description: "Testing berhasil, kamera berfungsi normal",
-          by: "Sari Dewi",
-        },
-      ],
-      notes: [
-        {
-          date: "2024-12-08T11:30:00Z",
-          author: "Sari Dewi",
-          type: "diagnostic",
-          content:
-            "Modul kamera utama mengalami kerusakan pada sensor. Perlu diganti dengan komponen original Apple.",
-        },
-        {
-          date: "2024-12-09T16:20:00Z",
-          author: "Sari Dewi",
-          type: "progress",
-          content:
-            "Komponen original sudah terpasang. Melakukan kalibrasi dan testing kualitas foto.",
-        },
-        {
-          date: "2024-12-10T15:30:00Z",
-          author: "Sari Dewi",
-          type: "completed",
-          content:
-            "Perbaikan selesai. Kamera berfungsi normal dengan kualitas foto kembali optimal.",
-        },
-      ],
-      services: [
-        {
-          name: "Diagnosis Kamera",
-          description: "Pemeriksaan sistem kamera dan sensor",
-          status: "completed",
-          fee: 75000,
-        },
-        {
-          name: "Penggantian Modul Kamera",
-          description: "Penggantian modul kamera dengan komponen original",
-          status: "completed",
-          fee: 350000,
-        },
-        {
-          name: "Kalibrasi & Testing",
-          description: "Kalibrasi sistem kamera dan testing kualitas",
-          status: "completed",
-          fee: 0,
-        },
-      ],
-    },
-    "SRV-003": {
-      id: "SRV-003",
-      device: "Samsung Galaxy Tab S8",
-      brand: "Samsung",
-      model: "Galaxy Tab S8 (Wi-Fi, 128GB)",
-      issue:
-        "Baterai cepat habis dan tablet sering hang, performa menurun drastis",
-      status: "pending",
-      priority: "normal",
-      dateCreated: "2024-12-12T14:20:00Z",
-      dateUpdated: "2024-12-12T14:20:00Z",
-      estimatedCompletion: "2024-12-15T17:00:00Z",
-      actualCompletion: null,
-      technician: {
-        name: "Budi Santoso",
-        id: "TECH-003",
-        phone: "+62 814-3456-7890",
-        specialization: "Tablet & Mobile Hardware",
-      },
-      customer: {
-        name: "Michael Chen",
-        email: "michael.chen@email.com",
-        phone: "+62 822-2345-6789",
-        address: "Jl. Thamrin No. 45, Jakarta Pusat, DKI Jakarta 10350",
-      },
-      pricing: {
-        diagnosticFee: 60000,
-        repairFee: 200000,
-        partsCost: 180000,
-        total: 440000,
-        paid: 0,
-        remaining: 440000,
-      },
-      warranty: {
-        duration: "3 bulan",
-        expiryDate: "2025-03-15",
-        coverage: "Baterai dan komponen yang diganti",
-      },
-      images: [
-        {
-          id: "IMG-007",
-          url: "/images/tablet-battery-issue.jpg",
-          caption: "Kondisi awal - indikator baterai tidak normal",
-          type: "before",
-          uploadedAt: "2024-12-12T14:25:00Z",
-        },
-      ],
-      timeline: [
-        {
-          date: "2024-12-12T14:20:00Z",
-          status: "received",
-          title: "Pesanan Diterima",
-          description: "Perangkat diterima dan menunggu proses diagnosis",
-          by: "Staff Penerima",
-        },
-      ],
-      notes: [
-        {
-          date: "2024-12-12T14:30:00Z",
-          author: "Staff Penerima",
-          type: "progress",
-          content:
-            "Perangkat telah diterima dan akan segera diperiksa oleh teknisi. Estimasi diagnosis selesai dalam 1-2 hari kerja.",
-        },
-      ],
-      services: [
-        {
-          name: "Diagnosis Sistem",
-          description: "Pemeriksaan menyeluruh sistem dan baterai",
-          status: "pending",
-          fee: 60000,
-        },
-        {
-          name: "Penggantian Baterai",
-          description: "Penggantian baterai jika diperlukan",
-          status: "pending",
-          fee: 200000,
-        },
-        {
-          name: "Optimasi Sistem",
-          description: "Pembersihan sistem dan optimasi performa",
-          status: "pending",
-          fee: 0,
-        },
-      ],
-    },
-  };
+// const getOrderDetails = (id: string) => {
+//   const orderData = {
+//     "SRV-001": {
+//       id: "SRV-001",
+//       device: "Laptop ASUS ROG Strix G15",
+//       brand: "ASUS",
+//       model: "ROG Strix G15 (2021)",
+//       issue: "Layar berkedip dan tidak stabil, kadang blank screen",
+//       status: "in-progress",
+//       priority: "normal",
+//       dateCreated: "2024-12-10T08:30:00Z",
+//       dateUpdated: "2024-12-11T14:20:00Z",
+//       estimatedCompletion: "2024-12-12T17:00:00Z",
+//       actualCompletion: null,
+//       technician: {
+//         name: "Ahmad Fauzi",
+//         id: "TECH-001",
+//         phone: "+62 812-1234-5678",
+//         specialization: "Laptop & PC Hardware",
+//       },
+//       customer: {
+//         name: "John Doe",
+//         email: "john.doe@email.com",
+//         phone: "+62 812-9876-5432",
+//         address: "Jl. Sudirman No. 123, Jakarta Selatan, DKI Jakarta 12190",
+//       },
+//       pricing: {
+//         diagnosticFee: 50000,
+//         repairFee: 250000,
+//         partsCost: 150000,
+//         total: 450000,
+//         paid: 100000,
+//         remaining: 350000,
+//       },
+//       warranty: {
+//         duration: "3 bulan",
+//         expiryDate: "2025-03-12",
+//         coverage: "Komponen yang diganti dan perbaikan yang dilakukan",
+//       },
+//       images: [
+//         {
+//           id: "IMG-001",
+//           url: "/images/laptop-damage-1.jpg",
+//           caption: "Kondisi awal - layar berkedip",
+//           type: "before",
+//           uploadedAt: "2024-12-10T08:35:00Z",
+//         },
+//         {
+//           id: "IMG-002",
+//           url: "/images/laptop-damage-2.jpg",
+//           caption: "Detail kerusakan di panel LCD",
+//           type: "diagnostic",
+//           uploadedAt: "2024-12-10T10:15:00Z",
+//         },
+//         {
+//           id: "IMG-003",
+//           url: "/images/laptop-repair-progress.jpg",
+//           caption: "Proses pembongkaran dan diagnosis",
+//           type: "progress",
+//           uploadedAt: "2024-12-11T09:30:00Z",
+//         },
+//       ],
+//       timeline: [
+//         {
+//           date: "2024-12-10T08:30:00Z",
+//           status: "received",
+//           title: "Pesanan Diterima",
+//           description: "Perangkat diterima dan dicatat dalam sistem",
+//           by: "Staff Penerima",
+//         },
+//         {
+//           date: "2024-12-10T10:00:00Z",
+//           status: "diagnosed",
+//           title: "Diagnosis Awal",
+//           description:
+//             "Teknisi melakukan pemeriksaan awal dan identifikasi masalah",
+//           by: "Ahmad Fauzi",
+//         },
+//         {
+//           date: "2024-12-11T09:00:00Z",
+//           status: "in-progress",
+//           title: "Proses Perbaikan Dimulai",
+//           description: "Pembongkaran perangkat dan penggantian komponen LCD",
+//           by: "Ahmad Fauzi",
+//         },
+//       ],
+//       notes: [
+//         {
+//           date: "2024-12-10T10:30:00Z",
+//           author: "Ahmad Fauzi",
+//           type: "diagnostic",
+//           content:
+//             "Panel LCD mengalami kerusakan pada backlight inverter. Perlu penggantian komponen.",
+//         },
+//         {
+//           date: "2024-12-11T14:20:00Z",
+//           author: "Ahmad Fauzi",
+//           type: "progress",
+//           content:
+//             "Komponen pengganti sudah dipesan. Estimasi tiba besok pagi. Perbaikan akan dilanjutkan setelah komponen tiba.",
+//         },
+//       ],
+//       services: [
+//         {
+//           name: "Diagnosis Kerusakan",
+//           description: "Pemeriksaan menyeluruh untuk identifikasi masalah",
+//           status: "completed",
+//           fee: 50000,
+//         },
+//         {
+//           name: "Penggantian Panel LCD",
+//           description: "Penggantian panel LCD yang rusak dengan yang baru",
+//           status: "in-progress",
+//           fee: 250000,
+//         },
+//         {
+//           name: "Testing & Kalibrasi",
+//           description: "Pengujian fungsi dan kalibrasi setelah perbaikan",
+//           status: "pending",
+//           fee: 0,
+//         },
+//       ],
+//     },
+//     "SRV-002": {
+//       id: "SRV-002",
+//       device: "iPhone 13 Pro Max",
+//       brand: "Apple",
+//       model: "iPhone 13 Pro Max (128GB)",
+//       issue: "Kamera belakang tidak berfungsi, hasil foto blur dan tidak fokus",
+//       status: "completed",
+//       priority: "high",
+//       dateCreated: "2024-12-08T09:15:00Z",
+//       dateUpdated: "2024-12-10T16:45:00Z",
+//       estimatedCompletion: "2024-12-10T17:00:00Z",
+//       actualCompletion: "2024-12-10T15:30:00Z",
+//       technician: {
+//         name: "Sari Dewi",
+//         id: "TECH-002",
+//         phone: "+62 813-2345-6789",
+//         specialization: "Mobile Device & Camera Systems",
+//       },
+//       customer: {
+//         name: "Sarah Wilson",
+//         email: "sarah.wilson@email.com",
+//         phone: "+62 821-1234-5678",
+//         address: "Jl. Kemang Raya No. 88, Jakarta Selatan, DKI Jakarta 12560",
+//       },
+//       pricing: {
+//         diagnosticFee: 75000,
+//         repairFee: 350000,
+//         partsCost: 450000,
+//         total: 875000,
+//         paid: 875000,
+//         remaining: 0,
+//       },
+//       warranty: {
+//         duration: "6 bulan",
+//         expiryDate: "2025-06-10",
+//         coverage: "Modul kamera dan perbaikan yang dilakukan",
+//       },
+//       images: [
+//         {
+//           id: "IMG-004",
+//           url: "/images/iphone-camera-issue-1.jpg",
+//           caption: "Kondisi awal - hasil foto blur",
+//           type: "before",
+//           uploadedAt: "2024-12-08T09:20:00Z",
+//         },
+//         {
+//           id: "IMG-005",
+//           url: "/images/iphone-camera-issue-2.jpg",
+//           caption: "Pemeriksaan modul kamera",
+//           type: "diagnostic",
+//           uploadedAt: "2024-12-08T11:30:00Z",
+//         },
+//         {
+//           id: "IMG-006",
+//           url: "/images/iphone-repair-completed.jpg",
+//           caption: "Hasil setelah penggantian modul kamera",
+//           type: "after",
+//           uploadedAt: "2024-12-10T15:30:00Z",
+//         },
+//       ],
+//       timeline: [
+//         {
+//           date: "2024-12-08T09:15:00Z",
+//           status: "received",
+//           title: "Pesanan Diterima",
+//           description: "Perangkat diterima dan dicatat dalam sistem",
+//           by: "Staff Penerima",
+//         },
+//         {
+//           date: "2024-12-08T11:00:00Z",
+//           status: "diagnosed",
+//           title: "Diagnosis Selesai",
+//           description: "Identifikasi kerusakan pada modul kamera utama",
+//           by: "Sari Dewi",
+//         },
+//         {
+//           date: "2024-12-09T10:00:00Z",
+//           status: "in-progress",
+//           title: "Proses Perbaikan",
+//           description: "Penggantian modul kamera dengan komponen original",
+//           by: "Sari Dewi",
+//         },
+//         {
+//           date: "2024-12-10T15:30:00Z",
+//           status: "completed",
+//           title: "Perbaikan Selesai",
+//           description: "Testing berhasil, kamera berfungsi normal",
+//           by: "Sari Dewi",
+//         },
+//       ],
+//       notes: [
+//         {
+//           date: "2024-12-08T11:30:00Z",
+//           author: "Sari Dewi",
+//           type: "diagnostic",
+//           content:
+//             "Modul kamera utama mengalami kerusakan pada sensor. Perlu diganti dengan komponen original Apple.",
+//         },
+//         {
+//           date: "2024-12-09T16:20:00Z",
+//           author: "Sari Dewi",
+//           type: "progress",
+//           content:
+//             "Komponen original sudah terpasang. Melakukan kalibrasi dan testing kualitas foto.",
+//         },
+//         {
+//           date: "2024-12-10T15:30:00Z",
+//           author: "Sari Dewi",
+//           type: "completed",
+//           content:
+//             "Perbaikan selesai. Kamera berfungsi normal dengan kualitas foto kembali optimal.",
+//         },
+//       ],
+//       services: [
+//         {
+//           name: "Diagnosis Kamera",
+//           description: "Pemeriksaan sistem kamera dan sensor",
+//           status: "completed",
+//           fee: 75000,
+//         },
+//         {
+//           name: "Penggantian Modul Kamera",
+//           description: "Penggantian modul kamera dengan komponen original",
+//           status: "completed",
+//           fee: 350000,
+//         },
+//         {
+//           name: "Kalibrasi & Testing",
+//           description: "Kalibrasi sistem kamera dan testing kualitas",
+//           status: "completed",
+//           fee: 0,
+//         },
+//       ],
+//     },
+//     "SRV-003": {
+//       id: "SRV-003",
+//       device: "Samsung Galaxy Tab S8",
+//       brand: "Samsung",
+//       model: "Galaxy Tab S8 (Wi-Fi, 128GB)",
+//       issue:
+//         "Baterai cepat habis dan tablet sering hang, performa menurun drastis",
+//       status: "pending",
+//       priority: "normal",
+//       dateCreated: "2024-12-12T14:20:00Z",
+//       dateUpdated: "2024-12-12T14:20:00Z",
+//       estimatedCompletion: "2024-12-15T17:00:00Z",
+//       actualCompletion: null,
+//       technician: {
+//         name: "Budi Santoso",
+//         id: "TECH-003",
+//         phone: "+62 814-3456-7890",
+//         specialization: "Tablet & Mobile Hardware",
+//       },
+//       customer: {
+//         name: "Michael Chen",
+//         email: "michael.chen@email.com",
+//         phone: "+62 822-2345-6789",
+//         address: "Jl. Thamrin No. 45, Jakarta Pusat, DKI Jakarta 10350",
+//       },
+//       pricing: {
+//         diagnosticFee: 60000,
+//         repairFee: 200000,
+//         partsCost: 180000,
+//         total: 440000,
+//         paid: 0,
+//         remaining: 440000,
+//       },
+//       warranty: {
+//         duration: "3 bulan",
+//         expiryDate: "2025-03-15",
+//         coverage: "Baterai dan komponen yang diganti",
+//       },
+//       images: [
+//         {
+//           id: "IMG-007",
+//           url: "/images/tablet-battery-issue.jpg",
+//           caption: "Kondisi awal - indikator baterai tidak normal",
+//           type: "before",
+//           uploadedAt: "2024-12-12T14:25:00Z",
+//         },
+//       ],
+//       timeline: [
+//         {
+//           date: "2024-12-12T14:20:00Z",
+//           status: "received",
+//           title: "Pesanan Diterima",
+//           description: "Perangkat diterima dan menunggu proses diagnosis",
+//           by: "Staff Penerima",
+//         },
+//       ],
+//       notes: [
+//         {
+//           date: "2024-12-12T14:30:00Z",
+//           author: "Staff Penerima",
+//           type: "progress",
+//           content:
+//             "Perangkat telah diterima dan akan segera diperiksa oleh teknisi. Estimasi diagnosis selesai dalam 1-2 hari kerja.",
+//         },
+//       ],
+//       services: [
+//         {
+//           name: "Diagnosis Sistem",
+//           description: "Pemeriksaan menyeluruh sistem dan baterai",
+//           status: "pending",
+//           fee: 60000,
+//         },
+//         {
+//           name: "Penggantian Baterai",
+//           description: "Penggantian baterai jika diperlukan",
+//           status: "pending",
+//           fee: 200000,
+//         },
+//         {
+//           name: "Optimasi Sistem",
+//           description: "Pembersihan sistem dan optimasi performa",
+//           status: "pending",
+//           fee: 0,
+//         },
+//       ],
+//     },
+//   };
 
-  return orderData[id as keyof typeof orderData] || null;
-};
+//   return orderData[id as keyof typeof orderData] || null;
+// };
 
 const OrderDetailPage = () => {
   const params = useParams();
@@ -402,21 +401,25 @@ const OrderDetailPage = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [orderDetails, setRepairOrder] = useState<any>(null);
+  const [customer, setCustomer] = useState<any>(null);
 
+  const { user } = useUser();
+  
   const orderId = params.id as string;
+
   useEffect(() => {
+    const meta = user?.publicMetadata
     client.fetch(getRepairOrderById(orderId))
-      .then((data) => {
-        setRepairOrder(data);
+    .then((data) => {
+      setRepairOrder(data);
+      setCustomer(meta)
         console.log("Repair Order Data:", data);
       })
       .catch((error) => {
         console.error("Error fetching repair order:", error);
       });
-  }, [orderId])
+  }, [orderId, user?.publicMetadata])
   
-  // const orderDetails = getOrderDetails(orderId);
-
   if (!orderDetails) {
     return (
       <>
@@ -836,10 +839,10 @@ const OrderDetailPage = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="font-medium text-slate-900 dark:text-white">
-                              {orderDetails.customer.name}
+                              {customer.name}
                             </p>
                             <p className="text-sm text-slate-600 dark:text-slate-400 truncate">
-                              {orderDetails.customer.email}
+                              {customer.email}
                             </p>
                           </div>
                         </div>
@@ -848,7 +851,7 @@ const OrderDetailPage = () => {
                             <PhoneIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
                           </div>
                           <p className="text-slate-700 dark:text-slate-300">
-                            {orderDetails.customer.phone}
+                            {customer.phone}
                           </p>
                         </div>
                         <div className="flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-800/60">
@@ -856,7 +859,7 @@ const OrderDetailPage = () => {
                             <MapPinIcon className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                           </div>
                           <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                            {orderDetails.customer.address}
+                            {customer.address}
                           </p>
                         </div>
                       </CardContent>
