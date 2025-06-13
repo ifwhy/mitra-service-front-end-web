@@ -41,7 +41,7 @@ const reviewData = [
 
 const Ulasan = () => {
   return (
-    <section id="Ulasan" className="bg-slate-300 dark:bg-neutral-900 py-[3rem] lg:py-[5rem]">
+    <section id="ulasan" className="bg-slate-300 dark:bg-neutral-900 py-[3rem] lg:py-[5rem] lg:scroll-mt-[10rem]">
       <div className="px-12 mb-4">
         <div className="flex flex-col">
           <div className="flex items-center gap-2 mb-1">

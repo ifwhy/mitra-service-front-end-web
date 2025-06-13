@@ -5,8 +5,8 @@ import { Search, Truck, HandHeart, Hammer, PackageCheck } from "lucide-react";
 const Layanan = () => {
     return (
         <section 
-        id="Layanan"
-        className="h-[75rem] lg:h-[60rem] grid grid-cols-1 lg:grid-cols-[525px_1fr] px-8 pb-8 pt-16 mt-[4rem] gap-8 lg:gap-16"
+        id="layanan"
+        className="h-[75rem] lg:h-[60rem] grid grid-cols-1 lg:grid-cols-[525px_1fr] px-8 pb-8 pt-16 mt-[4rem] gap-8 lg:gap-16 lg:scroll-mt-[10rem]"
         >
             <div className="flex justify-center items-start">
                 <Image
@@ -29,27 +29,27 @@ const Layanan = () => {
                     <CardItem
                         icon={<HandHeart color="currentColor" size={48} />}
                         title="Solusi Kami"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+                        description="Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda, dari rumah ke rumah."
                     />
                     <CardItem
                         icon={<Search color="currentColor" size={48} />}
                         title="Pemeriksaan dan Diagnosis"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+                        description="Teknisi kami akan menganalisis kondisi perangkat untuk mengidentifikasi kerusakan dan memberikan estimasi biaya."
                     />
                     <CardItem
                         icon={<Hammer color="currentColor" size={48} />}
                         title="Servis dan Perbaikan"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+                        description="Perangkat Anda akan diperbaiki oleh teknisi berpengalaman menggunakan suku cadang terbaik dan bergaransi."
                     />
                     <CardItem
                         icon={<Truck color="currentColor" size={48} />}
                         title="Pengambilan Perangkat"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+                        description="Layanan penjadwalan pengambilan perangkat elektronik yang rusak langsung dari lokasi pelanggan."
                     />
                     <CardItem
                         icon={<PackageCheck color="currentColor" size={48} />}
                         title="Pengembalian Perangkat"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+                        description="Setelah proses servis selesai, perangkat akan dikirim kembali ke alamat Anda dengan aman dan cepat."
                     />
                 </div>
             </div>

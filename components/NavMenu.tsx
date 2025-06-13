@@ -25,7 +25,7 @@ export function NavMenu() {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link
-              href="/"
+              href="#beranda"
               className={
                 navigationMenuTriggerStyle() +
                 " bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent"
@@ -46,7 +46,7 @@ export function NavMenu() {
                 <NavigationMenuLink asChild>
                   <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
+                    href="#mitra-servis"
                   >
                     <div className="mb-2 mt-4 text-lg font-medium">
                       Mitra Servis Elektronik
@@ -95,7 +95,7 @@ export function NavMenu() {
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link
-              href="#testimoni"
+              href="#ulasan"
               className={
                 navigationMenuTriggerStyle() +
                 " bg-transparent border-b-2 rounded-none border-transparent hover:border-black transition-all duration-300 hover:dark:border-slate-100 dark:bg-transparent"

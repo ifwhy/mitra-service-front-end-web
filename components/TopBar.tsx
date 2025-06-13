@@ -57,7 +57,7 @@ const TopBar = ({ className }: ClassName) => {
 const TopBarIcon = ({ href, Icon }: TopBarIconType) => {
   return (
     <Link href={href} target="_blank">
-      <div className="rounded-full bg-white p-2 hover:opacity-65 transition-all duration-300">
+      <div className="rounded-full bg-white p-2 hover:bg-amber-400 transition-all duration-300">
         {Icon}
       </div>
     </Link>

@@ -54,7 +54,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href={"#"}>
+                  <Link href={"#beranda"}>
                     <HomeIcon />
                     <span>Beranda</span>
                   </Link>
@@ -99,7 +99,7 @@ export function AppSidebar() {
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href={"#"}>
+                  <Link href={"#ulasan"}>
                     <FaComment />
                     <span>Ulasan</span>
                   </Link>

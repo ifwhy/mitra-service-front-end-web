@@ -5,7 +5,7 @@ const MitraService = () => {
   return (
     <section
       id="mitra-servis"
-      className="w-full h-full dark:bg-neutral-900 py-4"
+      className="w-full h-full dark:bg-neutral-900 py-4 lg:scroll-mt-[10rem]"
     >
       {/* Mitra Servis */}
       <div className="dark:bg-neutral-900 flex flex-col items-center">
@@ -19,8 +19,7 @@ const MitraService = () => {
             <div className="h-[2px] w-6 lg:w-16 bg-blue-700 dark:bg-cyan-400" />
           </div>
           <h1 className="font-semibold text-xl lg:text-2xl max-w-3xl text-center tracking-wider text-black dark:text-white">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-            rerum totam
+            Kami adalah penyedia layanan servis elektronik terbaik di Kota Solo.
           </h1>
         </div>
 
@@ -30,14 +29,14 @@ const MitraService = () => {
           <CardItem
             icon={<CircleHelp color="currentColor" size={64} />}
             title="Mengapa Memilih Kami?"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+            description="Kami hadir untuk memberikan solusi terbaik untuk kebutuhan servis elektronik Anda."
           />
 
           {/* TimKami */}
           <CardItem
             icon={<Wrench color="currentColor" size={64} />}
             title="Tim Kami"
-            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam, itaque."
+            description="Kami memiliki tim teknisi profesional untuk menangani berbagai perangkat elektronik."
           />
         </div>
       </div>
