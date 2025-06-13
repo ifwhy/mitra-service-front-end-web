@@ -11,7 +11,7 @@ export default async function Home() {
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   return (
-    <div className="w-full h-full flex flex-col gap-3 bg-slate-100 dark:bg-neutral-900">
+    <div className="w-full h-full flex flex-col bg-amber-100/20 dark:bg-neutral-900">
       {/* Bagian Beranda */}
       <HomeSection />
 

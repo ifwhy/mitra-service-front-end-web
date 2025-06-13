@@ -8,7 +8,7 @@ const HomeSection = () => {
   return (
     <section
       id="beranda"
-      className="w-full bg-slate-100 dark:bg-neutral-900 min-h-[85vh] flex flex-col"
+      className="w-full dark:bg-neutral-900 min-h-[85vh] flex flex-col"
     >
       {/* hero */}
       <HeroSection />

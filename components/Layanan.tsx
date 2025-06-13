@@ -6,7 +6,7 @@ const Layanan = () => {
     return (
         <section 
         id="Layanan"
-        className="h-[75rem] lg:h-[60rem] grid grid-cols-1 lg:grid-cols-[525px_1fr] px-8 pb-8 pt-16 mt-[4rem] gap-8 lg:gap-16 bg-slate-200"
+        className="h-[75rem] lg:h-[60rem] grid grid-cols-1 lg:grid-cols-[525px_1fr] px-8 pb-8 pt-16 mt-[4rem] gap-8 lg:gap-16"
         >
             <div className="flex justify-center items-start">
                 <Image
@@ -66,7 +66,7 @@ const CardItem = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-white dark:bg-slate-700/50 w-full h-[88px] lg:h-[110px] grid grid-cols-[70px_1fr] lg:grid-cols-[100px_1fr] justify-center items-center rounded-l-full transform duration-700 relative overflow-hidden group p-2 shadow-md shadow-slate-400 hover:shadow-none hover:text-white">
+  <div className="bg-white dark:bg-slate-700/50 w-full h-[88px] lg:h-[110px] grid grid-cols-[70px_1fr] lg:grid-cols-[100px_1fr] justify-center items-center rounded-l-full transform duration-700 relative overflow-hidden group p-2 shadow-md shadow-slate-400/20 hover:shadow-none hover:text-white">
     <div className="absolute inset-0 bg-amber-500 dark:bg-sky-500 origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0 rounded-l-full" />
     <div className="flex justify-center items-center z-10 text-amber-500 group-hover:text-white transition duration-700 scale-75 group-hover:scale-[.70] lg:scale-100 lg:group-hover:scale-90 transform">{icon}</div>
     <div className="flex flex-col gap-1 px-1 lg:px-3 z-10">
