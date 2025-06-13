@@ -307,11 +307,10 @@ export const NewOrderTab = ({ user }: NewOrderTabProps) => {
                   </p>
                   <ul className="text-xs text-blue-600 dark:text-blue-400 space-y-1">
                     <li>
-                      • Layanan pickup gratis untuk area Jakarta, Bogor, Depok,
-                      Tangerang, Bekasi
+                      • Layanan pickup gratis untuk area Solo dan sekitarnya
                     </li>
                     <li>
-                      • Biaya tambahan Rp 25.000 untuk area luar Jabodetabek
+                      • Biaya tambahan Rp 25.000 untuk area luar Solo dan sekitarnya
                     </li>
                     <li>
                       • Perangkat akan dikemas dengan aman dan diasuransikan
