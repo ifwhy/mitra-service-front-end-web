@@ -48,8 +48,8 @@ export function TabAuth() {
               dividerLine: "hidden",
               dividerText: "hidden",
               footer: "hidden",
-              input: "text-white",
-              inputText: "text-white",
+              input: "text-black",
+              inputText: "text-black",
             },
             variables: {
               colorPrimary: "#1D4ED8", // biru
@@ -79,8 +79,8 @@ export function TabAuth() {
               dividerLine: "hidden",
               dividerText: "hidden",
               footer: "hidden",
-              input: "text-white",
-              inputText: "text-white",
+              input: "text-black",
+              inputText: "text-black",
             },
             variables: {
               colorPrimary: "#1D4ED8", // biru
