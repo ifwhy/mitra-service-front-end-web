@@ -54,7 +54,7 @@ const CardItem = ({
   title: string;
   description: string;
 }) => (
-  <div className="bg-gradient-to-r from-amber-300/20 to-transparent dark:bg-slate-700/50 w-[450px] h-[100px] lg:h-[150px] grid-cols-[40px_1fr] grid lg:grid-cols-[100px_1fr] justify-center items-center rounded-lg hover:-translate-y-2 transform duration-700 relative overflow-hidden group text-slate-900 hover:text-white dark:text-white px-3 lg:px-0 border-amber-200 border-2">
+  <div className="bg-gradient-to-r from-amber-300/20 dark:from-sky-400/20 to-transparent dark:bg-slate-700/50 w-[450px] h-[100px] lg:h-[150px] grid-cols-[40px_1fr] grid lg:grid-cols-[100px_1fr] justify-center items-center rounded-lg hover:-translate-y-2 transform duration-700 relative overflow-hidden group text-slate-900 hover:text-white dark:text-white px-3 lg:px-0 border-amber-200 dark:border-sky-500 border-2">
     <div className="absolute inset-0 bg-amber-500 dark:bg-sky-500 origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 ease-in-out z-0" />
     <div className="flex justify-center items-center z-10">{icon}</div>
     <div className="flex flex-col gap-1 p-3 z-10">
