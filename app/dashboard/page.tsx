@@ -9,6 +9,7 @@ import {
   StarIcon,
   PlusIcon,
   UserIcon,
+  BellIcon,
 } from "lucide-react";
 import { DashboardAuthModal } from "@/components/DashboardAuthModal";
 import {
@@ -17,6 +18,7 @@ import {
   DashboardStats,
   OrdersTab,
   NewOrderTab,
+  NotificationsTab,
   ProfileTab,
   LoadingState,
 } from "@/components/dashboard";
@@ -59,6 +61,27 @@ const DashboardPage = () => {
       technician: "Budi Santoso",
       price: 440000,
       rating: 4.7,
+    },
+  ];
+
+  const notifications = [
+    {
+      id: "NOT-001",
+      title: "🚚 Jadwal Penjemputan",
+      description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
+      date: "2025-06-13",
+    },
+    {
+      id: "NOT-002",
+      title: "✅ Pemesanan Berhasil",
+      description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
+      date: "2025-06-12",
+    },
+    {
+      id: "NOT-003",
+      title: "💳 Pembayaran",
+      description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
+      date: "2025-06-12",
     },
   ];
 
@@ -118,7 +141,7 @@ const DashboardPage = () => {
 
             {/* Main Dashboard Content */}
             <Tabs defaultValue="orders" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-3 lg:w-[400px] bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-amber-200/50 dark:border-slate-700">
+              <TabsList className="grid w-full grid-cols-4 lg:w-[550px] bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-amber-200/50 dark:border-slate-700">
                 <TabsTrigger
                   value="orders"
                   className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-amber-600 data-[state=active]:text-white transition-all"
@@ -132,6 +155,13 @@ const DashboardPage = () => {
                 >
                   <PlusIcon className="w-4 h-4" />
                   <span className="hidden sm:inline">Buat Baru</span>
+                </TabsTrigger>
+                <TabsTrigger
+                  value="notification"
+                  className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-amber-600 data-[state=active]:text-white transition-all"
+                >
+                  <BellIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">Notifikasi</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="profile"
@@ -150,6 +180,11 @@ const DashboardPage = () => {
               {/* New Order Tab */}
               <TabsContent value="new-order" className="space-y-6">
                 <NewOrderTab user={user} />
+              </TabsContent>
+
+              {/* Notification Tab */}
+              <TabsContent value="notification" className="space-y-6">
+                <NotificationsTab notifications={notifications} />
               </TabsContent>
 
               {/* Profile Tab */}

@@ -26,7 +26,7 @@ export const DashboardHeader = ({ user }: DashboardHeaderProps) => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">
+              <h1 className="text-lg lg:text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">
                 Mitra Servis Elektronik
               </h1>
             </div>
