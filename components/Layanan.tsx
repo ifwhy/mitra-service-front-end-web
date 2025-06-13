@@ -29,17 +29,17 @@ const Layanan = () => {
                     <CardItem
                         icon={<HandHeart color="currentColor" size={48} />}
                         title="Solusi Kami"
-                        description="Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda, dari rumah ke rumah."
+                        description="Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda."
                     />
                     <CardItem
                         icon={<Search color="currentColor" size={48} />}
                         title="Pemeriksaan dan Diagnosis"
-                        description="Teknisi kami akan menganalisis kondisi perangkat untuk mengidentifikasi kerusakan dan memberikan estimasi biaya."
+                        description="Teknisi akan menganalisis kerusakan perangkat dan memberikan estimasi biaya."
                     />
                     <CardItem
                         icon={<Hammer color="currentColor" size={48} />}
                         title="Servis dan Perbaikan"
-                        description="Perangkat Anda akan diperbaiki oleh teknisi berpengalaman menggunakan suku cadang terbaik dan bergaransi."
+                        description="Perangkat Anda akan diperbaiki oleh teknisi berpengalaman."
                     />
                     <CardItem
                         icon={<Truck color="currentColor" size={48} />}
@@ -49,7 +49,7 @@ const Layanan = () => {
                     <CardItem
                         icon={<PackageCheck color="currentColor" size={48} />}
                         title="Pengembalian Perangkat"
-                        description="Setelah proses servis selesai, perangkat akan dikirim kembali ke alamat Anda dengan aman dan cepat."
+                        description="Setelah proses servis selesai, perangkat akan dikembalikan ke Anda dengan aman dan cepat."
                     />
                 </div>
             </div>

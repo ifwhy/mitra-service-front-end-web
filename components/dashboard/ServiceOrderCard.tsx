@@ -43,12 +43,12 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
                 {order.id}
               </Badge>
               <StatusBadge status={order.status} />
-              <div className="flex items-center gap-1">
+              {/* <div className="flex items-center gap-1">
                 <StarIcon className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                 <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
                   {order.rating}
                 </span>
-              </div>
+              </div> */}
             </div>
             <h3 className="font-semibold text-xl text-slate-900 dark:text-white">
               {order.device}
@@ -97,12 +97,12 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
           </div>
         </div>
         {order.status==='completed' && (
-          <div className="grid grid-cols-[1fr_10%] items-center gap-2 mt-4">
+          <div className="grid grid-cols-[1fr_30%] lg:grid-cols-[1fr_10%] items-center gap-3 lg:gap-2 mt-5 lg:mt-4">
             <RatingStar></RatingStar>
             <Button>Kirim</Button>
             <textarea
               rows={2}
-              className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-slate-800 dark:text-white resize-none transition-colors col-span-2"
+              className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-slate-800 dark:text-white resize-none transition-colors col-span-2 text-sm lg:text-base"
               placeholder="Berikan ulasan Anda untuk pelayanan kami"
             />
           </div>

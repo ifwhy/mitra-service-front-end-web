@@ -54,7 +54,7 @@ export const serviceComponents: {
     title: "Solusi Kami",
     href: "#layanan",
     description:
-      "Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda, dari rumah ke rumah.",
+      "Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda.",
   },
   {
     title: "Pengambilan Perangkat",
@@ -66,19 +66,19 @@ export const serviceComponents: {
     title: "Pemeriksaan dan Diagnosis",
     href: "#layanan",
     description:
-      "Teknisi kami akan menganalisis kondisi perangkat untuk mengidentifikasi kerusakan dan memberikan estimasi biaya.",
+      "Teknisi akan menganalisis kerusakan perangkat dan memberikan estimasi biaya.",
   },
   {
     title: "Servis dan Perbaikan",
     href: "#layanan",
     description:
-      "Perangkat Anda akan diperbaiki oleh teknisi berpengalaman menggunakan suku cadang terbaik dan bergaransi.",
+      "Perangkat Anda akan diperbaiki oleh teknisi berpengalaman.",
   },
   {
     title: "Pengembalian Perangkat",
     href: "#layanan",
     description:
-      "Setelah proses servis selesai, perangkat akan dikirim kembali ke alamat Anda dengan aman dan cepat.",
+      "Setelah proses servis selesai, perangkat akan dikembalikan ke Anda dengan aman dan cepat.",
   },
   {
     title: "FAQ - Pertanyaan Umum",

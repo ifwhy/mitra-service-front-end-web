@@ -51,10 +51,10 @@ export const ProfileTab = ({ user }: ProfileTabProps) => {
             </div>
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+            <h3 className="text-lg lg:text-xl font-semibold text-slate-900 dark:text-white">
               {user?.fullName || "Nama Pengguna"}
             </h3>
-            <p className="text-slate-600 dark:text-slate-300">
+            <p className="text-slate-600 dark:text-slate-300 text-xs lg:text-base">
               {user?.primaryEmailAddress?.emailAddress || "email@example.com"}
             </p>
             <Badge className="mt-2 bg-gradient-to-r from-green-100 to-green-200 text-green-800 dark:from-green-900/50 dark:to-green-800/50 dark:text-green-200 border-green-300 dark:border-green-700">
