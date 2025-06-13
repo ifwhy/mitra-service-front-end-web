@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CalendarIcon, ClockIcon, UserIcon, StarIcon } from "lucide-react";
+import RatingStar from "@/components/ui/RatingStar";
+import { CalendarIcon, ClockIcon, UserIcon, StarIcon, Star } from "lucide-react";
 import { StatusBadge } from "./StatusBadge";
 import { useRouter } from "next/navigation";
 
@@ -95,6 +96,17 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
             </Button>
           </div>
         </div>
+        {order.status==='completed' && (
+          <div className="grid grid-cols-[1fr_10%] items-center gap-2 mt-4">
+            <RatingStar></RatingStar>
+            <Button>Kirim</Button>
+            <textarea
+              rows={2}
+              className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-slate-800 dark:text-white resize-none transition-colors col-span-2"
+              placeholder="Berikan ulasan Anda untuk pelayanan kami"
+            />
+          </div>
+          )}
       </CardContent>
     </Card>
   );
