@@ -52,33 +52,33 @@ export const serviceComponents: {
 }[] = [
   {
     title: "Solusi Kami",
-    href: "/layanan/solusi-kami",
+    href: "#layanan",
     description:
-      "Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda, dari rumah ke rumah.",
+      "Kami menyediakan solusi layanan terpadu untuk berbagai kebutuhan servis elektronik Anda.",
   },
   {
     title: "Pengambilan Perangkat",
-    href: "/layanan/pengambilan-perangkat",
+    href: "#layanan",
     description:
       "Layanan penjadwalan pengambilan perangkat elektronik yang rusak langsung dari lokasi pelanggan.",
   },
   {
     title: "Pemeriksaan dan Diagnosis",
-    href: "/layanan/pemeriksaan",
+    href: "#layanan",
     description:
-      "Teknisi kami akan menganalisis kondisi perangkat untuk mengidentifikasi kerusakan dan memberikan estimasi biaya.",
+      "Teknisi akan menganalisis kerusakan perangkat dan memberikan estimasi biaya.",
   },
   {
     title: "Servis dan Perbaikan",
-    href: "/layanan/servis-perbaikan",
+    href: "#layanan",
     description:
-      "Perangkat Anda akan diperbaiki oleh teknisi berpengalaman menggunakan suku cadang terbaik dan bergaransi.",
+      "Perangkat Anda akan diperbaiki oleh teknisi berpengalaman.",
   },
   {
     title: "Pengembalian Perangkat",
-    href: "/layanan/pengembalian-perangkat",
+    href: "#layanan",
     description:
-      "Setelah proses servis selesai, perangkat akan dikirim kembali ke alamat Anda dengan aman dan cepat.",
+      "Setelah proses servis selesai, perangkat akan dikembalikan ke Anda dengan aman dan cepat.",
   },
   {
     title: "FAQ - Pertanyaan Umum",
@@ -95,19 +95,19 @@ export const mitraServisComponents: {
 }[] = [
   {
     title: "Mengapa Memilih Kami?",
-    href: "#why-choose-us",
+    href: "#mitra-servis",
     description:
       "Kami hadir untuk memberikan solusi terbaik untuk kebutuhan servis elektronik Anda.",
   },
   {
     title: "Tim Kami",
-    href: "tim-kami",
+    href: "#mitra-servis",
     description:
       "Kami memiliki tim teknisi profesional untuk menangani berbagai perangkat elektronik.",
   },
   {
     title: "Apa Saja yang Dapat Kami Perbaiki?",
-    href: "#what-we-can-repair",
+    href: "#perbaiki",
     description:
       "Lihat perangkat elektronik apa saja yang dapat kami perbaiki.",
   },
@@ -212,36 +212,36 @@ export const FAQsItems = [
   {
     id: 1,
     value: "item-1",
-    question: "Q. How this theme is different from others in the market?",
+    question: "Q. Apa saja perangkat elektronik yang bisa diperbaiki di layanan servis kami?",
     answer:
-      "We provide unique, customizable components designed to simplify the development process and enhance user experience.",
+      "Kami melayani jasa servis berbagai alat elektronik rumah tangga, seperti televisi, blender, kipas angin, setrika, dispenser, mesin cuci, rice cooker, dan peralatan elektronik lainnya. Jika ada perangkat selain itu, silakan hubungi kami untuk konsultasi gratis.",
   },
   {
     id: 2,
     value: "item-2",
-    question: "Q. Does this theme support plugins?",
+    question: "Q. Bagaimana cara pengambilan barang servis di tempat?",
     answer:
-      "We supports various plugins to extend the functionality of your projects, making development faster and easier.",
+      "Kami menyediakan layanan antar jemput perangkat elektronik langsung ke lokasi Anda. Setelah Anda melakukan pemesanan layanan servis dan membayar uang muka (DP), tim kami akan datang ke alamat yang Anda tentukan untuk mengambil perangkat yang rusak.",
   },
   {
     id: 3,
     value: "item-3",
-    question: "Q. Do you provide any moneyback guarantee for this product?",
+    question: "Q. Apakah ada jaminan atau garansi setelah servis selesai?",
     answer:
-      "Yes, we offer a 30-day money-back guarantee if you are not satisfied with us.",
+      "Setiap hasil servis dari kami dilengkapi dengan garansi resmi sesuai jenis kerusakan dan suku cadang yang digunakan. Garansi ini memastikan Anda mendapatkan hasil servis yang berkualitas. Jika dalam masa garansi terjadi kerusakan yang sama, Anda bisa mengajukan klaim tanpa biaya tambahan.",
   },
   {
     id: 4,
     value: "item-4",
-    question: "Q. What payment method do you support?",
+    question: "Q. Bagaimana sistem pembayaran servis elektronik di tempat kami?",
     answer:
-      "We support various payment methods including credit cards, PayPal, and cryptocurrencies.",
+      "Sistem pembayaran kami fleksibel dan aman. Anda hanya perlu membayar DP (uang muka) saat awal pemesanan layanan. Setelah servis selesai dan perangkat siap digunakan kembali, sisa pembayaran bisa dilunasi.",
   },
   {
     id: 5,
     value: "item-5",
-    question: "Q. How do you provide support?",
+    question: "Q. Bagaimana cara memesan jasa servis elektronik?",
     answer:
-      "Our team provides extensive documentation and 24/7 support for all products and plugins included.",
+      "Cukup mudah! Anda bisa memesan melalui website kami, mengisi formulir layanan servis, atau menghubungi kami langsung lewat WhatsApp maupun telepon. Tim admin kami akan membantu mengatur jadwal pengambilan perangkat dan memberikan estimasi biaya servis secara transparan.",
   },
 ];

@@ -3,7 +3,7 @@ import MarqueeElektronik from "./MarqueeElektronik";
 
 const KamiPerbaiki = () => {
   return (
-    <section className="p-8">
+    <section className="p-8 lg:scroll-mt-[10rem]" id="perbaiki">
       {/* Apa yg dapat diperbaiki */}
       <div className="flex flex-col items-center">
         {/* judul */}

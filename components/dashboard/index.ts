@@ -4,6 +4,7 @@ export { DashboardStats } from "./DashboardStats";
 export { ServiceOrderCard } from "./ServiceOrderCard";
 export { OrdersTab } from "./OrdersTab";
 export { NewOrderTab } from "./NewOrderTab";
+export { NotificationsTab } from "./NotificationsTab";
 export { ProfileTab } from "./ProfileTab";
 export { StatusBadge } from "./StatusBadge";
 export { LoadingState } from "./LoadingState";

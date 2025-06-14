@@ -39,7 +39,7 @@ export function AuthDialog({ title }: { title: string }) {
           className="font-bold w-20 xs:w-24 sm:w-44 md:w-max text-sm xs:text-base md:text-lg bg-amber-500 hover:bg-amber-600 transition-all duration-500 ease-in-out text-white dark:bg-amber-500 dark:hover:bg-amber-600"
           onClick={handleAuth}
         >
-          {title}
+          {isLoaded ? (isSignedIn ? "Dashboard" : title) : "Loading"}
         </Button>
       </DialogTrigger>
 

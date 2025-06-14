@@ -11,16 +11,16 @@ import {
 const FAQs = () => {
   return (
     <section
-      className="py-12 bg-slate-100 dark:bg-neutral-900 dark:text-white sm:py-16 lg:py-20 xl:py-24"
+      className="py-12 bg-slate-100 dark:bg-neutral-900 dark:text-white sm:py-16 lg:py-20 xl:py-24 lg:scroll-mt-[5rem]"
       id="FAQs"
     >
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-3xl lg:text-4xl">
-            Frequently asked questions
+            FAQ - Pertanyaan Umum
           </h2>
           <p className="mt-4 text-base font-normal leading-7 text-gray-600 dark:text-white lg:text-lg lg:mt-6 lg:leading-8">
-            Ask everything you need to know about our products and services.
+            Temukan jawaban atas pertanyaan yang sering ditanyakan seputar layanan kami dan proses servis.
           </p>
         </div>
 

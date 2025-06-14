@@ -29,13 +29,13 @@ const RepairItem = ({ icon, label }: RepairItemProps) => {
   return (
     <div
       className={cn(
-        "relative w-44 h-44 rounded-2xl bg-slate-800 dark:bg-gradient-to-br dark:from-slate-700/50 dark:to-slate-800/60",
+        "relative w-40 h-40 lg:w-44 lg:h-44 rounded-2xl bg-slate-800 dark:bg-gradient-to-br dark:from-slate-700/50 dark:to-slate-800/60",
         "flex flex-col items-center justify-center gap-2",
         "text-cyan-400 shadow-lg transition-all duration-300 ease-in-out",
         "group overflow-hidden"
       )}
     >
-      <div className="text-cyan-300">{icon}</div>
+      <div className="text-cyan-300 scale-95 lg:scale-100">{icon}</div>
       <div className="w-16 h-[2px] bg-cyan-400" />
       <h1 className="font-semibold tracking-wide text-sm text-center">
         {label}
