@@ -125,6 +125,27 @@ useEffect(() => {
     },
   ];
 
+  const notifications = [
+    {
+      id: "NOT-001",
+      title: "🚚 Jadwal Penjemputan",
+      description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
+      date: "2025-06-13",
+    },
+    {
+      id: "NOT-002",
+      title: "✅ Pemesanan Berhasil",
+      description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
+      date: "2025-06-12",
+    },
+    {
+      id: "NOT-003",
+      title: "💳 Pembayaran",
+      description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
+      date: "2025-06-12",
+    },
+  ];
+
   const stats = [
     {
       title: "Total Pesanan",
