@@ -43,7 +43,7 @@ import { DashboardAuthModal } from "@/components/DashboardAuthModal";
 import { LoadingState } from "@/components/dashboard/LoadingState";
 import Image from "next/image";
 import { client, urlFor } from "@/sanity/client";
-import { getRepairOrderById } from "@/lib/queries";
+import { getCustomerByClerkId, getRepairOrderById } from "@/lib/queries";
 
 // Complete detailed order data for all orders
 // const getOrderDetails = (id: string) => {
@@ -403,22 +403,23 @@ const OrderDetailPage = () => {
   const [orderDetails, setRepairOrder] = useState<any>(null);
   const [customer, setCustomer] = useState<any>(null);
 
-  const { user } = useUser();
-  
   const orderId = params.id as string;
+  
+  const { user } = useUser();
 
   useEffect(() => {
-    const meta = user?.publicMetadata
+    client.fetch(getCustomerByClerkId(user.id))
+    .then((data) => {
+      setCustomer(data);
+    })
     client.fetch(getRepairOrderById(orderId))
     .then((data) => {
       setRepairOrder(data);
-      setCustomer(meta)
-        console.log("Repair Order Data:", data);
       })
       .catch((error) => {
         console.error("Error fetching repair order:", error);
       });
-  }, [orderId, user?.publicMetadata])
+  }, [orderId])
   
   if (!orderDetails) {
     return (

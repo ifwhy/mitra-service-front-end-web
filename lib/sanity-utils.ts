@@ -99,6 +99,25 @@ export const createOrGetCustomer = async (userData: {
 };
 
 // Function to create repair order
+// ...existing code...
+import addMonths from "date-fns/addMonths"; // Add this import at the top if using date-fns
+import { getAllTechnicians } from "./queries";
+
+// ...existing code...
+
+const TECHNICIAN_IDS = [
+  "TECH-001",
+  "TECH-002",
+  "TECH-003",
+];
+
+// Helper to pick a random technician id
+const getRandomTechnicianId = () => {
+  const idx = Math.floor(Math.random() * TECHNICIAN_IDS.length);
+  return TECHNICIAN_IDS[idx];
+};
+
+
 export const createRepairOrder = async (orderData: {
   customerId: string;
   device: string;
@@ -108,11 +127,17 @@ export const createRepairOrder = async (orderData: {
   images: string[];
   deliveryOption: "pickup" | "delivery";
   address?: string;
+  warranty?: {
+    duration?: string; // e.g., "1 month"
+    coverage?: string;
+    expiryDate?: string;
+  } | null;
+  technicianId?: string | null;
 }) => {
   try {
-    const orderId = generateOrderId(); // Process images - sesuai dengan skema repairImage
+    const orderId = generateOrderId();
     const processedImages = orderData.images.map((imageId, index) => ({
-      _key: generateUniqueKey("image"), // Use utility function
+      _key: generateUniqueKey("image"),
       _type: "repairImage",
       url: {
         _type: "image",
@@ -126,10 +151,9 @@ export const createRepairOrder = async (orderData: {
       uploadedAt: new Date().toISOString(),
     }));
 
-    // Create timeline event - sesuai dengan skema timelineEvent
     const initialTimeline = [
       {
-        _key: generateUniqueKey("timeline"), // Use utility function
+        _key: generateUniqueKey("timeline"),
         _type: "timelineEvent",
         date: new Date().toISOString(),
         status: "received",
@@ -140,7 +164,6 @@ export const createRepairOrder = async (orderData: {
       },
     ];
 
-    // Create pricing object - sesuai dengan skema pricing
     const initialPricing = {
       _type: "pricing",
       diagnosticFee: 0,
@@ -151,11 +174,51 @@ export const createRepairOrder = async (orderData: {
       remaining: 0,
     };
 
-    // Create repair order
-    console.log(
-      "Creating repair order with token:",
-      process.env.SANITY_API_TOKEN ? "Token present" : "No token"
-    );
+    // Warranty logic
+    let warranty;
+    if (orderData.warranty) {
+      const duration = orderData.warranty.duration || "1 month";
+      const coverage = orderData.warranty.coverage || "Garansi servis 1 bulan";
+      let expiryDate = orderData.warranty.expiryDate;
+      if (!expiryDate) {
+        // Calculate expiryDate based on duration
+        // Only supports "1 month" for now, extend as needed
+        expiryDate = addMonths(new Date(), 1).toISOString().slice(0, 10);
+      }
+      warranty = {
+        duration,
+        coverage,
+        expiryDate,
+      };
+    } else {
+      warranty = {
+        duration: "1 Bulan",
+        coverage: "Garansi servis 1 bulan",
+        expiryDate: addMonths(new Date(), 1).toISOString().slice(0, 10),
+      };
+    }
+
+    // Technician as reference or null
+    let technicianRef;
+    if (orderData.technicianId) {
+      technicianRef = {
+        _type: "reference",
+        _ref: orderData.technicianId,
+      };
+    } else {
+      // Fetch all technicians and pick a random one
+      const technicians = await writeClient.fetch(getAllTechnicians());
+      if (technicians && technicians.length > 0) {
+        const randomTech = technicians[Math.floor(Math.random() * technicians.length)];
+        technicianRef = {
+          _type: "reference",
+          _ref: randomTech._id,
+        };
+      } else {
+        technicianRef = null; // fallback if no technician found
+      }
+    }
+
     const repairOrder = await writeClient.create({
       _type: "repair",
       orderId: orderId,
@@ -171,18 +234,14 @@ export const createRepairOrder = async (orderData: {
       deliveryOption: orderData.deliveryOption,
       images: processedImages,
       timeline: initialTimeline,
-      notes: [], // array kosong untuk notes
-      services: [], // array kosong untuk services
+      notes: [],
+      services: [],
       pricing: initialPricing,
-      // warranty akan diset oleh admin nanti
+      warranty: warranty,
+      technician: technicianRef,
     });
 
-    // If pickup is needed, create pickup order
     if (orderData.deliveryOption === "pickup" && orderData.address) {
-      console.log(
-        "Creating pickup order with token:",
-        process.env.SANITY_API_TOKEN ? "Token present" : "No token"
-      );
       await writeClient.create({
         _type: "pickup",
         customer: orderData.customerId,
@@ -202,3 +261,4 @@ export const createRepairOrder = async (orderData: {
     throw new Error("Failed to create repair order");
   }
 };
+// ...existing code...

@@ -130,7 +130,7 @@ export const NewOrderTab = ({ user }: NewOrderTabProps) => {
 
       // Create repair order
       const repairOrder = await createRepairOrder({
-        customerId: customer._id,
+        customerId: customer.clerkId,
         device: formData.device,
         brand: formData.brand,
         model: formData.model,

@@ -28,6 +28,7 @@ import { getRepairOrdersByCustomer } from "@/lib/queries";
 
 const DashboardPage = () => {
   const [orders, setOrders] = useState<any[]>([]);
+const [activeTab, setActiveTab] = useState("orders");
 
   const { isSignedIn } = useAuth();
   const { user } = useUser();
@@ -35,36 +36,36 @@ const DashboardPage = () => {
 
   console.log(userId);
 
+  const fetchOrders = () => {
+    if (!user?.id) return;
+    const customerId = user.id;
+    client
+      .fetch(getRepairOrdersByCustomer(customerId))
+      .then((data) => {
+        const mappedOrders = (data || []).map((order: any) => ({
+          id: order.orderId || order._id,
+          device: [order.brand, order.model].filter(Boolean).join(" ") || order.device,
+          issue: order.issue,
+          status: order.status,
+          date: order.dateCreated,
+          estimatedCompletion: order.estimatedCompletion,
+          technician: order.technician?.name || "",
+          price: order.pricing?.total || 0,
+          rating: order.rating || 0,
+        }));
+        setOrders(mappedOrders);
+      })
+      .catch((error) => {
+        console.error("Error fetching repair order:", error);
+      });
+  };
+
+
 useEffect(() => {
-  if (!user?.id) return;
-
-  const customerId = user.id;
-  console.log("Fetching repair orders for:", customerId);
-
-  client
-    .fetch(getRepairOrdersByCustomer(customerId))
-    .then((data) => {
-      console.log("Raw repair data:", data);
-
-      const mappedOrders = (data || []).map((order: any) => ({
-        id: order.orderId || order._id,
-        device: [order.brand, order.model].filter(Boolean).join(" ") || order.device,
-        issue: order.issue,
-        status: order.status,
-        date: order.dateCreated,
-        estimatedCompletion: order.estimatedCompletion,
-        technician: order.technician?.name || "",
-        price: order.pricing?.total || 0,
-        rating: order.rating || 0,
-      }));
-
-      console.log("Mapped orders:", mappedOrders);
-      setOrders(mappedOrders);
-    })
-    .catch((error) => {
-      console.error("Error fetching repair order:", error);
-    });
-}, [user?.id]);
+    if (activeTab === "orders") {
+      fetchOrders();
+    }
+}, [user?.id, activeTab]);
 
   // Sample data for dashboard
   // const serviceOrders = [
@@ -180,7 +181,7 @@ useEffect(() => {
             <DashboardStats stats={stats} />
 
             {/* Main Dashboard Content */}
-            <Tabs defaultValue="orders" className="space-y-6">
+            <Tabs defaultValue="orders" value={activeTab} onValueChange={setActiveTab} className="space-y-6">
               <TabsList className="grid w-full grid-cols-4 lg:w-[550px] bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-amber-200/50 dark:border-slate-700">
                 <TabsTrigger
                   value="orders"
@@ -213,7 +214,7 @@ useEffect(() => {
               </TabsList>
 
               {/* Orders Tab */}
-              <TabsContent value="orders" className="space-y-6">
+              <TabsContent value="orders" className="space-y-6" >
                 <OrdersTab serviceOrders={orders} />
               </TabsContent>
 

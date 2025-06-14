@@ -1,6 +1,12 @@
 export const getCustomerIdByClerkId = (clerkId: string) => `
   *[_type == "customer" && clerkId == "${clerkId}"][0] {
-    _id
+    _id,
+    clerkId,
+    name,
+    email,
+    phone,
+    address,
+    registeredAt
   }
 `;
 
