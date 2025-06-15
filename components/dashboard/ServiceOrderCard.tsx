@@ -88,12 +88,18 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
             <div className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent mb-3">
               Rp {order.price.toLocaleString("id-ID")}
             </div>{" "}
-            <Button
-              onClick={handleDetailClick}
-              className="w-full lg:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Detail Pesanan
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button
+                onClick={handleDetailClick}
+                className="w-full lg:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Detail Pesanan
+              </Button>
+              {(order.status!=='completed' && order.status!=='in-progress' && order.status!=='pending') && (
+                <Button className="w-full lg:w-auto bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300">Batalkan Pesanan</Button>
+              )
+              }
+            </div>
           </div>
         </div>
         {order.status==='completed' && (

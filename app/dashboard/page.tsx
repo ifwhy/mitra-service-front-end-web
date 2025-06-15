@@ -52,6 +52,7 @@ const [activeTab, setActiveTab] = useState("orders");
           technician: order.technician?.name || "",
           price: order.pricing?.total || 0,
           rating: order.rating || 0,
+          timeline: order.timeline || [],
         }));
         setOrders(mappedOrders);
       })
@@ -225,7 +226,7 @@ useEffect(() => {
 
               {/* Notification Tab */}
               <TabsContent value="notification" className="space-y-6">
-                <NotificationsTab notifications={notifications} />
+                <NotificationsTab orders={orders} />
               </TabsContent>
 
               {/* Profile Tab */}

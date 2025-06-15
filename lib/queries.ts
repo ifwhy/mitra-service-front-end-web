@@ -29,7 +29,8 @@ export const getRepairOrdersByCustomer = (customerId: string) => `
       total,
       paid,
       remaining
-    }
+    },
+    timeline[]
   }
 `;
 

@@ -562,7 +562,7 @@ const OrderDetailPage = () => {
                             variant="outline"
                             className="font-mono text-xs sm:text-sm"
                           >
-                            {orderDetails.id}
+                            {params.id}
                           </Badge>
                           <Badge
                             variant={
@@ -617,8 +617,8 @@ const OrderDetailPage = () => {
                           </p>
                           <p className="text-slate-600 dark:text-slate-400 truncate">
                             {new Date(
-                              orderDetails.estimatedCompletion
-                            ).toLocaleDateString("id-ID")}
+                              orderDetails?.estimatedCompletion
+                            ).toLocaleDateString("id-ID")?? 'None'}
                           </p>
                         </div>
                       </div>
@@ -852,7 +852,7 @@ const OrderDetailPage = () => {
                             <PhoneIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
                           </div>
                           <p className="text-slate-700 dark:text-slate-300">
-                            {customer.phone}
+                            {customer?.phone ?? 'None'}
                           </p>
                         </div>
                         <div className="flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-800/60">
