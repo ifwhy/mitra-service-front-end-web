@@ -44,7 +44,8 @@ const [activeTab, setActiveTab] = useState("orders");
       .then((data) => {
         const mappedOrders = (data || []).map((order: any) => ({
           id: order.orderId || order._id,
-          device: [order.brand, order.model].filter(Boolean).join(" ") || order.device,
+          sanityId: order._id, //id dari sanity
+          device: [order.device, order.brand].filter(Boolean).join(" - ") || [order.brand, order.model].filter(Boolean).join(" "),
           issue: order.issue,
           status: order.status,
           date: order.dateCreated,
