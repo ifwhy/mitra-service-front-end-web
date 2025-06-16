@@ -10,6 +10,7 @@ import { ServiceOrderCard } from "./ServiceOrderCard";
 
 interface ServiceOrder {
   id: string;
+  sanityId: string;
   device: string;
   issue: string;
   status: string;
