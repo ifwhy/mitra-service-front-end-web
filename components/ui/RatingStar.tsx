@@ -6,6 +6,7 @@ interface RatingStarProps {
   onRatingChange?: (rating: number) => void;
   size?: number; // size in pixels
   className?: string;
+  readOnly?: boolean;
 }
 
 const Star = ({
@@ -48,11 +49,13 @@ const RatingStar: React.FC<RatingStarProps> = ({
   onRatingChange,
   size = 24,
   className = '',
+  readOnly = false,
 }) => {
   const [rating, setRating] = useState(initialRating);
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleClick = (index: number) => {
+    if (readOnly) return;  // tambah ini
     setRating(index);
     if (onRatingChange) {
       onRatingChange(index);

@@ -262,3 +262,20 @@ export const createRepairOrder = async (orderData: {
   }
 };
 // ...existing code...
+
+// Fungsi untuk create review ke Sanity
+export const createReview = async (orderId: string, score: number, reviewText: string) => {
+  const newReview = {
+    _type: "review",
+    order: {
+      _type: "reference",
+      _ref: orderId
+    },
+    score,
+    review: reviewText,
+    createdAt: new Date().toISOString(),
+  };
+
+  const result = await writeClient.create(newReview);
+  return result._id;
+};

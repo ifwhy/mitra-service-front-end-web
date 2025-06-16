@@ -5,9 +5,15 @@ import RatingStar from "@/components/ui/RatingStar";
 import { CalendarIcon, ClockIcon, UserIcon, StarIcon, Star } from "lucide-react";
 import { StatusBadge } from "./StatusBadge";
 import { useRouter } from "next/navigation";
+import { useEffect,useState } from "react";
+import { client } from "@/sanity/client";
+import { createReview } from "@/lib/sanity-utils";
+import  ReviewSection  from "./ReviewSection"
+import { getOrderWithReviewById } from '@/lib/queries';
 
 interface ServiceOrder {
   id: string;
+  sanityId: string;
   device: string;
   issue: string;
   status: string;
@@ -16,6 +22,12 @@ interface ServiceOrder {
   technician: string;
   price: number;
   rating: number;
+  review?: ReviewData;
+}
+
+interface ReviewData {
+  score: number;
+  review: string;
 }
 
 interface ServiceOrderCardProps {
@@ -28,6 +40,29 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
   const handleDetailClick = () => {
     router.push(`/dashboard/orders/${order.id}`);
   };
+
+  const [reviewData, setReviewData] = useState<ReviewData | undefined>(order.review);
+  const [loadingReview, setLoadingReview] = useState(false);
+
+  useEffect(() => {
+    const fetchReview = async () => {
+      setLoadingReview(true);
+      try {
+        const data = await getOrderWithReviewById(order.id);
+        setReviewData(data?.review ?? undefined);
+      } catch (err) {
+        console.error("Gagal mengambil review:", err);
+      } finally {
+        setLoadingReview(false);
+      }
+    };
+
+    // jika belum ada review di prop, baru fetch
+    if (!order.review) {
+      fetchReview();
+    }
+  }, [order.sanityId, order.review]);
+
 
   return (
     <Card className="relative overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-white to-amber-50/20 dark:from-slate-900 dark:to-amber-900/10">
@@ -102,7 +137,7 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
             </div>
           </div>
         </div>
-        {order.status==='completed' && (
+        {/* {order.status==='completed' && (
           <div className="grid grid-cols-[1fr_30%] lg:grid-cols-[1fr_10%] items-center gap-3 lg:gap-2 mt-5 lg:mt-4">
             <RatingStar></RatingStar>
             <Button>Kirim</Button>
@@ -112,7 +147,18 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
               placeholder="Berikan ulasan Anda untuk pelayanan kami"
             />
           </div>
-          )}
+          )} */}
+
+        {order.status === 'completed' && (
+          <div className="mt-5">
+            {loadingReview ? (
+              <p>Memuat review...</p>
+            ) : (
+              <ReviewSection orderId={order.sanityId} existingReview={reviewData} />
+            )}
+          </div>
+        )}
+
       </CardContent>
     </Card>
   );

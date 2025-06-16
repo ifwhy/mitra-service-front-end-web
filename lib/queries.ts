@@ -1,3 +1,4 @@
+import { client } from "@/sanity/client";
 export const getCustomerIdByClerkId = (clerkId: string) => `
   *[_type == "customer" && clerkId == "${clerkId}"][0] {
     _id,
@@ -142,3 +143,26 @@ export const createPickupOrderMutation = (pickupData: any) => ({
   status: "scheduled",
   createdAt: new Date().toISOString(),
 });
+
+export const getOrderWithReviewById = async (orderId: string) => {
+  const query = `
+    *[_type == "repair" && orderId == $orderId][0]{
+      _id,
+      orderId,
+      device,
+      issue,
+      status,
+      date,
+      estimatedCompletion,
+      technician,
+      price,
+      "review": *[_type == "review" && order._ref == ^._id][0]{
+        score,
+        review
+      }
+    }
+  `;
+
+  return await client.fetch(query, { orderId });
+};
+
