@@ -24,11 +24,11 @@ import {
 } from "@/components/dashboard";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/client";
-import { getRepairOrdersByCustomer } from "@/lib/queries";
+import { getRepairOrdersByCustomer, getOrderWithReviewById } from "@/lib/queries";
 
 const DashboardPage = () => {
   const [orders, setOrders] = useState<any[]>([]);
-const [activeTab, setActiveTab] = useState("orders");
+  const [activeTab, setActiveTab] = useState("orders");
 
   const { isSignedIn } = useAuth();
   const { user } = useUser();
@@ -52,6 +52,8 @@ const [activeTab, setActiveTab] = useState("orders");
           estimatedCompletion: order.estimatedCompletion,
           technician: order.technician?.name || "",
           price: order.pricing?.total || 0,
+          paid: order.pricing?.paid || 0,
+          remaining: order.pricing?.remaining || 0,
           rating: order.rating || 0,
           timeline: order.timeline || [],
         }));
@@ -107,58 +109,89 @@ useEffect(() => {
   //   },
   // ];
 
-  const notifications = [
-    {
-      id: "NOT-001",
-      title: "🚚 Jadwal Penjemputan",
-      description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
-      date: "2025-06-13",
-    },
-    {
-      id: "NOT-002",
-      title: "✅ Pemesanan Berhasil",
-      description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
-      date: "2025-06-12",
-    },
-    {
-      id: "NOT-003",
-      title: "💳 Pembayaran",
-      description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
-      date: "2025-06-12",
-    },
-  ];
+  // const notifications = [
+  //   {
+  //     id: "NOT-001",
+  //     title: "🚚 Jadwal Penjemputan",
+  //     description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
+  //     date: "2025-06-13",
+  //   },
+  //   {
+  //     id: "NOT-002",
+  //     title: "✅ Pemesanan Berhasil",
+  //     description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
+  //     date: "2025-06-12",
+  //   },
+  //   {
+  //     id: "NOT-003",
+  //     title: "💳 Pembayaran",
+  //     description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
+  //     date: "2025-06-12",
+  //   },
+  // ];
+
+  const [reviewData, setReviewData] = useState(null);
+  // const fetchReviews = async () => {
+  //     if (!orderId) return;
+
+  //     try {
+  //       const order = await getOrderWithReviewById(orderId);
+
+  //       if (!order) {
+  //         setReviewData(null);
+  //         return;
+  //       }
+
+  //       const mappedReview = {
+  //         id: order.orderId || order._id,
+  //         sanityId: order._id,
+  //         rating: order.review?.score || 0,
+  //         reviewText: order.review?.review || "",
+  //       };
+
+  //       setReviewData(mappedReview);
+  //     } catch (error) {
+  //       console.error("Error fetching review order:", error);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     fetchReviews();
+  //   }, [orderId]);
+  
+
 
   const stats = [
     {
       title: "Total Pesanan",
-      value: "12",
-      description: "3 selesai bulan ini",
+      value: `${orders.length}`,
+      description: `${(orders || []).filter(order=>order.status==='completed').length} pesanan selesai`,
       icon: SettingsIcon,
-      trend: "+20.1%",
+      // trend: "+20.1%",
       color: "text-blue-600",
     },
     {
       title: "Sedang Dikerjakan",
-      value: "3",
-      description: "2 akan selesai minggu ini",
+      value: `${(orders || []).filter(order=>order.status!=='completed').length}`,
+      description: `dari ${orders.length} pesanan`,
       icon: WrenchIcon,
-      trend: "+15.2%",
+      // trend: "+15.2%",
       color: "text-orange-600",
     },
     {
       title: "Total Pembayaran",
-      value: "Rp 2.450.000",
-      description: "Bulan ini",
+      value: `${orders.reduce((acc, order) => acc + (order.paid || 0), 0)}`,
+      description: `${orders.reduce((acc, order) => acc + (order.remaining || 0), 0)} belum terbayar`,
       icon: DollarSignIcon,
-      trend: "+12.5%",
-      color: "text-green-600",
+      // trend: "+12.5%",
+      color: "text-red-600",
     },
     {
       title: "Rating Layanan",
       value: "4.8/5.0",
       description: "Dari 15 ulasan",
       icon: StarIcon,
-      trend: "+0.2",
+      // trend: "+0.2",
       color: "text-yellow-600",
     },
   ];
