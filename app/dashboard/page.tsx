@@ -210,7 +210,7 @@ useEffect(() => {
           {/* Main Content */}
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Welcome Section */}
-            <DashboardWelcome />
+            <DashboardWelcome user={user} />
 
             {/* Stats Grid */}
             <DashboardStats stats={stats} />
@@ -265,7 +265,7 @@ useEffect(() => {
 
               {/* Profile Tab */}
               <TabsContent value="profile" className="space-y-6">
-                <ProfileTab user={user} />
+                <ProfileTab user={user} orders={orders} />
               </TabsContent>
             </Tabs>
           </main>
