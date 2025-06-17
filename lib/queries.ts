@@ -175,3 +175,15 @@ export const getReviewsByCustomerId = (customerId: string) => `
   `;
   // return client.fetch(query, { customerId });
 // };
+export const getAllReviews = `
+  *[_type == "review"]{
+    _id,
+    score,
+    review,
+    order->{
+      customer->{
+        customer
+      }
+    }
+  }
+`;

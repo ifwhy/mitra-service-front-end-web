@@ -1,5 +1,7 @@
 "use client";
-
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/client"; // pastikan ini mengarah ke konfigurasi sanity
+import { getAllReviews } from "@/lib/queries";
 import { StarIcon } from "lucide-react";
 import {
   Carousel,
@@ -44,6 +46,14 @@ const reviewData = [
 ];
 
 const Ulasan = () => {
+  const [reviews, setReviews] = useState<any[]>([]);
+
+  useEffect(() => {
+    client.fetch(getAllReviews).then((data) => {
+      setReviews(data);
+    });
+  }, []);
+
   return (
     <section id="ulasan" className="bg-slate-300 dark:bg-neutral-900 py-[3rem] lg:py-[5rem] lg:scroll-mt-[10rem]">
       <div className="px-12 mb-4">
@@ -61,16 +71,16 @@ const Ulasan = () => {
       <Carousel className="flex justify-center items-center w-[65%] lg:w-[90%] mx-auto mt-[18px] lg:mt-[24px]">
         <CarouselPrevious />
         <CarouselContent>
-          {reviewData.map((reviewData, i) => (
-            <CarouselItem key={reviewData.id} className="basis-full lg:basis-1/4">
+          {reviews.map((rev, index) => (
+            <CarouselItem key={index} className="basis-full lg:basis-1/4">
               <div className="p-6 bg-gray-100 dark:bg-gradient-to-b dark:from-cyan-400/60 dark:to-slate-900 dark:bg-slate-900 rounded-xl shadow space-y-2 flex flex-col justify-between h-[200px] hover:shadow-md hover:shadow-amber-500/50 dark:hover:shadow-cyan-400 hover:-translate-y-2 transition duration-500 my-[16px]">
-                <p className="text-sm text-gray-600 dark:text-white h-[150px] overflow-auto">{reviewData.review}</p>
+                <p className="text-sm text-gray-600 dark:text-white h-[150px] overflow-auto">{rev.review}</p>
                 <div className="flex items-center justify-between gap-1">
-                  <h2 className="text-base font-semibold dark:text-amber-400">{reviewData.user}</h2>
+                  <h2 className="text-base font-semibold dark:text-amber-400">{rev.order.customer.customer}</h2>
                   <div className="flex items-center gap-1">
                     <StarIcon className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
-                      {reviewData.rating}
+                      {rev.score}
                     </span>
                   </div>
                 </div>
