@@ -61,7 +61,8 @@ export const getRepairOrderById = (orderId: string) => `
       phone,
       specialization
     },
-    customer
+    customer,
+    deliveryOption
   }
 `;
 
