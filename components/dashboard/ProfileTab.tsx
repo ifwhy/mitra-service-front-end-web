@@ -105,7 +105,7 @@ export const ProfileTab = ({ user, orders }: ProfileTabProps) => {
                   Menunggu:
                 </span>
                 <span className="font-bold text-lg text-yellow-600">
-                  {(orders || []).filter(order=>order.status==='received').length}
+                  {(orders || []).filter(order=>order.status==='received'||order.status=='diagnosed').length}
                 </span>
               </div>
             </CardContent>

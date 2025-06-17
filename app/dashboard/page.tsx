@@ -189,8 +189,8 @@ useEffect(() => {
     },
     {
       title: "Sedang Dikerjakan",
-      value: `${(orders || []).filter(order=>order.status!=='completed').length}`,
-      description: `dari ${orders.length} pesanan`,
+      value: `${(orders || []).filter(order=>order.status==='in-progress').length}`,
+      description: `${(orders || []).filter(order=>order.status==='received'||order.status==='diagnosed').length} menunggu`,
       icon: WrenchIcon,
       // trend: "+15.2%",
       color: "text-orange-600",
@@ -205,7 +205,7 @@ useEffect(() => {
     },
     {
       title: "Rating Layanan",
-      value: `${reviews.reduce((acc, review) => acc + (review.score || 0), 0) / reviews.length} / 5`,
+      value: `${(reviews.reduce((acc, review) => acc + (review.score || 0), 0) / reviews.length).toFixed(1)} / 5`,
       description: `Dari ${reviews.length} ulasan`,
       icon: StarIcon,
       // trend: "+0.2",

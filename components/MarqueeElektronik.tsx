@@ -42,7 +42,7 @@ const RepairItem = ({ icon, label }: RepairItemProps) => {
       </h1>
 
       {/* Slide-up order button */}
-      <Link
+      {/* <Link
         href=""
         className={cn(
           "absolute bottom-0 w-full h-8 text-sm text-center font-medium flex items-center justify-center",
@@ -51,7 +51,7 @@ const RepairItem = ({ icon, label }: RepairItemProps) => {
         )}
       >
         Order
-      </Link>
+      </Link> */}
     </div>
   );
 };

@@ -176,14 +176,14 @@ export const getReviewsByCustomerId = (customerId: string) => `
   // return client.fetch(query, { customerId });
 // };
 export const getAllReviews = `
-  *[_type == "review"]{
+  *[_type == "review" && score >2]{
     _id,
     score,
     review,
     order->{
-      customer->{
-        customer
-      }
+      _id,
+      customer,
+      "customerName": *[_type == "customer" && clerkId == ^.customer][0].name
     }
   }
 `;

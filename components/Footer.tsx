@@ -17,16 +17,16 @@ const Footer = () => {
         <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-12">
           {/* Company */}
           <div>
-            <p className="text-base text-gray-500">Company</p>
+            <p className="text-base text-gray-500">Perusahaan</p>
             <ul className="mt-8 space-y-4">
               {[
-                { href: "/about", text: "About" },
-                { href: "/features", text: "Features" },
-                { href: "/works", text: "Works" },
-                { href: "/career", text: "Career" },
+                { href: "", text: "Tentang Kami" },
+                { href: "", text: "Layanan" },
+                { href: "", text: "Ulasan" },
+                { href: "", text: "Karir" },
               ].map((item, index) => (
                 <li key={index}>
-                  <Link href={item.href}>
+                  <Link href={item.href} className="hover:underline">
                     <span className={linkClasses}>{item.text}</span>
                   </Link>
                 </li>
@@ -36,16 +36,16 @@ const Footer = () => {
 
           {/* Help */}
           <div>
-            <p className="text-base text-gray-500">Help</p>
+            <p className="text-base text-gray-500">Bantuan</p>
             <ul className="mt-8 space-y-4">
               {[
-                { href: "/support", text: "Customer Support" },
-                { href: "/delivery", text: "Delivery Details" },
-                { href: "/terms", text: "Terms & Conditions" },
-                { href: "/privacy", text: "Privacy Policy" },
+                { href: "", text: "Hubungi Dukungan" },
+                { href: "", text: "Status Servis" },
+                { href: "", text: "Ketentuan & Layanan" },
+                { href: "", text: "Kebijakan Polisi" },
               ].map((item, index) => (
                 <li key={index}>
-                  <Link href={item.href}>
+                  <Link href={item.href} className="hover:underline">
                     <span className={linkClasses}>{item.text}</span>
                   </Link>
                 </li>
@@ -55,16 +55,16 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <p className="text-base text-gray-500">Resources</p>
+            <p className="text-base text-gray-500">Panduan & Tips</p>
             <ul className="mt-8 space-y-4">
               {[
-                { href: "/ebooks", text: "Free eBooks" },
-                { href: "/tutorial", text: "Development Tutorial" },
-                { href: "/blog", text: "How to - Blog" },
-                { href: "/youtube", text: "YouTube Playlist" },
+                { href: "", text: "Tips Merawat Elektronik" },
+                { href: "", text: "Tutorial & Artikel" },
+                { href: "", text: "FAQ" },
+                { href: "", text: "Video Perbaikan" },
               ].map((item, index) => (
                 <li key={index}>
-                  <Link href={item.href}>
+                  <Link href={item.href} className="hover:underline">
                     <span className={linkClasses}>{item.text}</span>
                   </Link>
                 </li>
@@ -74,16 +74,16 @@ const Footer = () => {
 
           {/* Extra Links */}
           <div>
-            <p className="text-base text-gray-500">Extra Links</p>
+            <p className="text-base text-gray-500">Lainnya</p>
             <ul className="mt-8 space-y-4">
               {[
-                { href: "/support", text: "Customer Support" },
-                { href: "/delivery", text: "Delivery Details" },
-                { href: "/terms", text: "Terms & Conditions" },
-                { href: "/privacy", text: "Privacy Policy" },
+                { href: "", text: "Customer Support" },
+                { href: "", text: "Layanan Jemput" },
+                { href: "", text: "Lokasi" },
+                { href: "", text: "Jam Operasional" },
               ].map((item, index) => (
                 <li key={index}>
-                  <Link href={item.href}>
+                  <Link href={item.href} className="hover:underline">
                     <span className={linkClasses}>{item.text}</span>
                   </Link>
                 </li>
