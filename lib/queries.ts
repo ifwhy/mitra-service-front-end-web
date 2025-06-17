@@ -166,3 +166,12 @@ export const getOrderWithReviewById = async (orderId: string) => {
   return await client.fetch(query, { orderId });
 };
 
+export const getReviewsByCustomerId = (customerId: string) => `
+    *[_type == "review" && order->customer == "${customerId}"] | order(date desc) {
+      _id,
+      score,
+      review,
+    }
+  `;
+  // return client.fetch(query, { customerId });
+// };
