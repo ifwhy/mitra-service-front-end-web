@@ -24,11 +24,12 @@ import {
 } from "@/components/dashboard";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/client";
-import { getRepairOrdersByCustomer, getOrderWithReviewById } from "@/lib/queries";
+import { getRepairOrdersByCustomer, getOrderWithReviewById, getReviewsByCustomerId } from "@/lib/queries";
 
 const DashboardPage = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("orders");
+  const [reviews, setReviews] = useState<any[]>([]);
 
   const { isSignedIn } = useAuth();
   const { user } = useUser();
@@ -37,32 +38,48 @@ const DashboardPage = () => {
   console.log(userId);
 
   const fetchOrders = () => {
-    if (!user?.id) return;
-    const customerId = user.id;
+  if (!user?.id) return;
+  const customerId = user.id;
+  client
+    .fetch(getRepairOrdersByCustomer(customerId))
+    .then((data) => {
+      const mappedOrders = (data || []).map((order: any) => ({
+        id: order.orderId || order._id,
+        sanityId: order._id, //id dari sanity
+        device: [order.device, order.brand].filter(Boolean).join(" - ") || [order.brand, order.model].filter(Boolean).join(" "),
+        issue: order.issue,
+        status: order.status,
+        date: order.dateCreated,
+        estimatedCompletion: order.estimatedCompletion,
+        technician: order.technician?.name || "",
+        price: order.pricing?.total || 0,
+        paid: order.pricing?.paid || 0,
+        remaining: order.pricing?.remaining || 0,
+        rating: order.rating || 0,
+        timeline: order.timeline || [],
+      }));
+      setOrders(mappedOrders);
+
+    })
+    .catch((error) => {
+      console.error("Error fetching repair order:", error);
+    });
+
     client
-      .fetch(getRepairOrdersByCustomer(customerId))
-      .then((data) => {
-        const mappedOrders = (data || []).map((order: any) => ({
-          id: order.orderId || order._id,
-          sanityId: order._id, //id dari sanity
-          device: [order.device, order.brand].filter(Boolean).join(" - ") || [order.brand, order.model].filter(Boolean).join(" "),
-          issue: order.issue,
-          status: order.status,
-          date: order.dateCreated,
-          estimatedCompletion: order.estimatedCompletion,
-          technician: order.technician?.name || "",
-          price: order.pricing?.total || 0,
-          paid: order.pricing?.paid || 0,
-          remaining: order.pricing?.remaining || 0,
-          rating: order.rating || 0,
-          timeline: order.timeline || [],
+      .fetch(getReviewsByCustomerId(customerId))
+      .then((reviewData) => {
+        const mappedReviews = (reviewData || []).map((review: any) => ({
+          id: review._id,
+          score: review.score || 0,
+          review: review.review || "",
         }));
-        setOrders(mappedOrders);
+        setReviews(mappedReviews);
       })
       .catch((error) => {
-        console.error("Error fetching repair order:", error);
+        console.error("Error fetching reviews:", error);
       });
-  };
+
+};
 
 
 useEffect(() => {
@@ -188,8 +205,8 @@ useEffect(() => {
     },
     {
       title: "Rating Layanan",
-      value: "4.8/5.0",
-      description: "Dari 15 ulasan",
+      value: `${reviews.reduce((acc, review) => acc + (review.score || 0), 0) / reviews.length} / 5`,
+      description: `Dari ${reviews.length} ulasan`,
       icon: StarIcon,
       // trend: "+0.2",
       color: "text-yellow-600",
