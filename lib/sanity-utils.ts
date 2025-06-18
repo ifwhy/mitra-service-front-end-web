@@ -98,25 +98,8 @@ export const createOrGetCustomer = async (userData: {
   }
 };
 
-// Function to create repair order
-// ...existing code...
-import addMonths from "date-fns/addMonths"; // Add this import at the top if using date-fns
+import addMonths from "date-fns/addMonths";
 import { getAllTechnicians } from "./queries";
-
-// ...existing code...
-
-const TECHNICIAN_IDS = [
-  "TECH-001",
-  "TECH-002",
-  "TECH-003",
-];
-
-// Helper to pick a random technician id
-const getRandomTechnicianId = () => {
-  const idx = Math.floor(Math.random() * TECHNICIAN_IDS.length);
-  return TECHNICIAN_IDS[idx];
-};
-
 
 export const createRepairOrder = async (orderData: {
   customerId: string;
@@ -209,7 +192,8 @@ export const createRepairOrder = async (orderData: {
       // Fetch all technicians and pick a random one
       const technicians = await writeClient.fetch(getAllTechnicians());
       if (technicians && technicians.length > 0) {
-        const randomTech = technicians[Math.floor(Math.random() * technicians.length)];
+        const randomTech =
+          technicians[Math.floor(Math.random() * technicians.length)];
         technicianRef = {
           _type: "reference",
           _ref: randomTech._id,
@@ -264,12 +248,16 @@ export const createRepairOrder = async (orderData: {
 // ...existing code...
 
 // Fungsi untuk create review ke Sanity
-export const createReview = async (orderId: string, score: number, reviewText: string) => {
+export const createReview = async (
+  orderId: string,
+  score: number,
+  reviewText: string
+) => {
   const newReview = {
     _type: "review",
     order: {
       _type: "reference",
-      _ref: orderId
+      _ref: orderId,
     },
     score,
     review: reviewText,

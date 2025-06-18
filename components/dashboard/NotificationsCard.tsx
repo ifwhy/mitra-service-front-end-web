@@ -1,9 +1,5 @@
-import { Card, CardContent, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CalendarIcon, ClockIcon, UserIcon, StarIcon } from "lucide-react";
-import { StatusBadge } from "./StatusBadge";
-import { useRouter } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import { CalendarIcon } from "lucide-react";
 
 interface Notification {
   id: string;
@@ -17,12 +13,6 @@ interface NotificationCardProps {
 }
 
 export const NotificationCard = ({ notification }: NotificationCardProps) => {
-  const router = useRouter();
-
-  const handleDetailClick = () => {
-    router.push(`/dashboard/notifications/${notification.id}`);
-  };
-
   return (
     <Card className="relative overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-white to-amber-50/20 dark:from-slate-900 dark:to-amber-900/10">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-amber-600"></div>

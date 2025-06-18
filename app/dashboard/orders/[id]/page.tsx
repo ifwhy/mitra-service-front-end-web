@@ -25,9 +25,6 @@ import {
   WrenchIcon,
   MessageCircleIcon,
   StarIcon,
-  DownloadIcon,
-  PrinterIcon,
-  ShareIcon,
   ImageIcon,
   ZoomInIcon,
   ExternalLinkIcon,
@@ -234,7 +231,7 @@ const OrderDetailPage = () => {
                                 ? "Normal"
                                 : "Rendah"}
                           </Badge>
-                          <Badge 
+                          <Badge
                             variant={
                               orderDetails.deliveryOption === "pickup"
                                 ? "destructive"
@@ -284,7 +281,7 @@ const OrderDetailPage = () => {
                           <p className="text-slate-600 dark:text-slate-400 truncate">
                             {new Date(
                               orderDetails?.estimatedCompletion
-                            ).toLocaleDateString("id-ID")?? 'None'}
+                            ).toLocaleDateString("id-ID") ?? "None"}
                           </p>
                         </div>
                       </div>
@@ -587,16 +584,20 @@ const OrderDetailPage = () => {
                             {orderDetails.technician.phone}
                           </p>
                         </div>
-                        <a href={`https://wa.me/${orderDetails.technician.phone}`} target="_blank" rel="noopener noreferrer">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 dark:from-orange-900/20 dark:to-amber-900/20 dark:hover:from-orange-900/40 dark:hover:to-amber-900/40 border-orange-200 dark:border-orange-800 hover:shadow-md transition-all duration-200"
+                        <a
+                          href={`https://wa.me/${orderDetails.technician.phone}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 dark:from-orange-900/20 dark:to-amber-900/20 dark:hover:from-orange-900/40 dark:hover:to-amber-900/40 border-orange-200 dark:border-orange-800 hover:shadow-md transition-all duration-200"
                           >
-                          <MessageCircleIcon className="w-4 h-4 mr-2" />
-                          Hubungi Teknisi
-                        </Button>
-                            </a>
+                            <MessageCircleIcon className="w-4 h-4 mr-2" />
+                            Hubungi Teknisi
+                          </Button>
+                        </a>
                       </CardContent>
                     </Card>
                   </div>
@@ -619,9 +620,9 @@ const OrderDetailPage = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                      {orderDetails.images.map((image) => (
+                      {orderDetails.images.map((image, index) => (
                         <div
-                          key={image.id}
+                          key={index}
                           className="group relative bg-white dark:bg-slate-800 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-slate-200/50 dark:border-slate-700/50"
                           onClick={() =>
                             setSelectedImage(urlFor(image.url).url())
@@ -860,19 +861,28 @@ const OrderDetailPage = () => {
 
                       {orderDetails.pricing.remaining > 0 && (
                         <div className="pt-4">
-                          <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700"
-                          onClick={() => setShowPaymentInfo(!showPaymentInfo)}
+                          <Button
+                            className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700"
+                            onClick={() => setShowPaymentInfo(!showPaymentInfo)}
                           >
                             <DollarSignIcon className="w-4 h-4 mr-2" />
-                            {showPaymentInfo ? "Tutup Info Pembayaran" : "Bayar Sekarang"}
+                            {showPaymentInfo
+                              ? "Tutup Info Pembayaran"
+                              : "Bayar Sekarang"}
                           </Button>
 
                           {/* Info Pembayaran */}
                           {showPaymentInfo && (
                             <div className="mt-2 border p-4 rounded-lg bg-amber-50/50 dark:bg-amber-900/10 space-y-4 flex flex-col justify-center">
-                              <p><strong>Bank:</strong> BCA</p>
-                              <p><strong>No Rekening:</strong> 1234567890 a.n. Mitra Servis Elektronik</p>
-                              <p><strong>Konfirmasi Pembayaran:</strong> 
+                              <p>
+                                <strong>Bank:</strong> BCA
+                              </p>
+                              <p>
+                                <strong>No Rekening:</strong> 1234567890 a.n.
+                                Mitra Servis Elektronik
+                              </p>
+                              <p>
+                                <strong>Konfirmasi Pembayaran:</strong>
                                 <a
                                   href="https://wa.me/6285743840940?text=Halo,%20saya%20telah%20melakukan%20pembayaran"
                                   target="_blank"

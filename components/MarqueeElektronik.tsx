@@ -1,7 +1,6 @@
 import React from "react";
 import { Marquee } from "./magicui/marquee";
 import { repairItems } from "@/constants/constants";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { RepairItemProps } from "@/constants/types";
 

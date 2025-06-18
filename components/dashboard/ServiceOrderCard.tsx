@@ -1,15 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import RatingStar from "@/components/ui/RatingStar";
-import { CalendarIcon, ClockIcon, UserIcon, StarIcon, Star } from "lucide-react";
+import { CalendarIcon, ClockIcon, UserIcon } from "lucide-react";
 import { StatusBadge } from "./StatusBadge";
 import { useRouter } from "next/navigation";
-import { useEffect,useState } from "react";
-import { client } from "@/sanity/client";
-import { createReview } from "@/lib/sanity-utils";
-import  ReviewSection  from "./ReviewSection"
-import { getOrderWithReviewById } from '@/lib/queries';
+import { useEffect, useState } from "react";
+import ReviewSection from "./ReviewSection";
+import { getOrderWithReviewById } from "@/lib/queries";
 
 interface ServiceOrder {
   id: string;
@@ -41,7 +38,9 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
     router.push(`/dashboard/orders/${order.id}`);
   };
 
-  const [reviewData, setReviewData] = useState<ReviewData | undefined>(order.review);
+  const [reviewData, setReviewData] = useState<ReviewData | undefined>(
+    order.review
+  );
   const [loadingReview, setLoadingReview] = useState(false);
 
   useEffect(() => {
@@ -61,8 +60,7 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
     if (!order.review) {
       fetchReview();
     }
-  }, [order.sanityId, order.review]);
-
+  }, [order.sanityId, order.review, order.id]);
 
   return (
     <Card className="relative overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-r from-white to-amber-50/20 dark:from-slate-900 dark:to-amber-900/10">
@@ -129,36 +127,21 @@ export const ServiceOrderCard = ({ order }: ServiceOrderCardProps) => {
             >
               Detail Pesanan
             </Button>
-            <div className="flex flex-col gap-2">
-              {/* {(order.status!=='completed' && order.status!=='in-progress' && order.status!=='pending') && (
-                <Button className="w-full lg:w-auto bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300">Batalkan Pesanan</Button>
-              )
-              } */}
-            </div>
           </div>
         </div>
-        {/* {order.status==='completed' && (
-          <div className="grid grid-cols-[1fr_30%] lg:grid-cols-[1fr_10%] items-center gap-3 lg:gap-2 mt-5 lg:mt-4">
-            <RatingStar></RatingStar>
-            <Button>Kirim</Button>
-            <textarea
-              rows={2}
-              className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 dark:bg-slate-800 dark:text-white resize-none transition-colors col-span-2 text-sm lg:text-base"
-              placeholder="Berikan ulasan Anda untuk pelayanan kami"
-            />
-          </div>
-          )} */}
 
-        {order.status === 'completed' && (
+        {order.status === "completed" && (
           <div className="mt-5">
             {loadingReview ? (
               <p>Memuat review...</p>
             ) : (
-              <ReviewSection orderId={order.sanityId} existingReview={reviewData} />
+              <ReviewSection
+                orderId={order.sanityId}
+                existingReview={reviewData}
+              />
             )}
           </div>
         )}
-
       </CardContent>
     </Card>
   );

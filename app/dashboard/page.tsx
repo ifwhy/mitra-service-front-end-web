@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useAuth, useUser } from "@clerk/nextjs";
@@ -24,11 +25,16 @@ import {
 } from "@/components/dashboard";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/client";
-import { getRepairOrdersByCustomer, getOrderWithReviewById, getReviewsByCustomerId } from "@/lib/queries";
+import {
+  getRepairOrdersByCustomer,
+  getReviewsByCustomerId,
+} from "@/lib/queries";
 
 const DashboardPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [orders, setOrders] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("orders");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [reviews, setReviews] = useState<any[]>([]);
 
   const { isSignedIn } = useAuth();
@@ -37,160 +43,70 @@ const DashboardPage = () => {
 
   console.log(userId);
 
-  const fetchOrders = () => {
-  if (!user?.id) return;
-  const customerId = user.id;
-  client
-    .fetch(getRepairOrdersByCustomer(customerId))
-    .then((data) => {
-      const mappedOrders = (data || []).map((order: any) => ({
-        id: order.orderId || order._id,
-        sanityId: order._id, //id dari sanity
-        device: [order.device, order.brand].filter(Boolean).join(" - ") || [order.brand, order.model].filter(Boolean).join(" "),
-        issue: order.issue,
-        status: order.status,
-        date: order.dateCreated,
-        estimatedCompletion: order.estimatedCompletion,
-        technician: order.technician?.name || "",
-        price: order.pricing?.total || 0,
-        paid: order.pricing?.paid || 0,
-        remaining: order.pricing?.remaining || 0,
-        rating: order.rating || 0,
-        timeline: order.timeline || [],
-      }));
-      setOrders(mappedOrders);
-
-    })
-    .catch((error) => {
-      console.error("Error fetching repair order:", error);
-    });
-
-    client
-      .fetch(getReviewsByCustomerId(customerId))
-      .then((reviewData) => {
-        const mappedReviews = (reviewData || []).map((review: any) => ({
-          id: review._id,
-          score: review.score || 0,
-          review: review.review || "",
-        }));
-        setReviews(mappedReviews);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
-      });
-
-};
-
-
-useEffect(() => {
+  useEffect(() => {
     if (activeTab === "orders") {
+      const fetchOrders = () => {
+        if (!user?.id) return;
+        const customerId = user.id;
+        client
+          .fetch(getRepairOrdersByCustomer(customerId))
+          .then((data) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const mappedOrders = (data || []).map((order: any) => ({
+              id: order.orderId || order._id,
+              sanityId: order._id, //id dari sanity
+              device:
+                [order.device, order.brand].filter(Boolean).join(" - ") ||
+                [order.brand, order.model].filter(Boolean).join(" "),
+              issue: order.issue,
+              status: order.status,
+              date: order.dateCreated,
+              estimatedCompletion: order.estimatedCompletion,
+              technician: order.technician?.name || "",
+              price: order.pricing?.total || 0,
+              paid: order.pricing?.paid || 0,
+              remaining: order.pricing?.remaining || 0,
+              rating: order.rating || 0,
+              timeline: order.timeline || [],
+            }));
+            setOrders(mappedOrders);
+          })
+          .catch((error) => {
+            console.error("Error fetching repair order:", error);
+          });
+
+        client
+          .fetch(getReviewsByCustomerId(customerId))
+          .then((reviewData) => {
+            const mappedReviews = (reviewData || []).map((review: any) => ({
+              id: review._id,
+              score: review.score || 0,
+              review: review.review || "",
+            }));
+            setReviews(mappedReviews);
+          })
+          .catch((error) => {
+            console.error("Error fetching reviews:", error);
+          });
+      };
+
       fetchOrders();
     }
-}, [user?.id, activeTab]);
-
-  // Sample data for dashboard
-  // const serviceOrders = [
-  //   {
-  //     id: "SRV-001",
-  //     device: "Laptop ASUS ROG Strix G15",
-  //     issue: "Layar berkedip dan tidak stabil, kadang blank screen",
-  //     status: "in-progress",
-  //     date: "2024-12-10",
-  //     estimatedCompletion: "2024-12-12",
-  //     technician: "Ahmad Fauzi",
-  //     price: 450000,
-  //     rating: 4.8,
-  //   },
-  //   {
-  //     id: "SRV-002",
-  //     device: "iPhone 13 Pro Max",
-  //     issue: "Kamera belakang tidak berfungsi, hasil foto blur dan tidak fokus",
-  //     status: "completed",
-  //     date: "2024-12-08",
-  //     estimatedCompletion: "2024-12-10",
-  //     technician: "Sari Dewi",
-  //     price: 875000,
-  //     rating: 4.9,
-  //   },
-  //   {
-  //     id: "SRV-003",
-  //     device: "Samsung Galaxy Tab S8",
-  //     issue:
-  //       "Baterai cepat habis dan tablet sering hang, performa menurun drastis",
-  //     status: "pending",
-  //     date: "2024-12-12",
-  //     estimatedCompletion: "2024-12-15",
-  //     technician: "Budi Santoso",
-  //     price: 440000,
-  //     rating: 4.7,
-  //   },
-  // ];
-
-  // const notifications = [
-  //   {
-  //     id: "NOT-001",
-  //     title: "🚚 Jadwal Penjemputan",
-  //     description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
-  //     date: "2025-06-13",
-  //   },
-  //   {
-  //     id: "NOT-002",
-  //     title: "✅ Pemesanan Berhasil",
-  //     description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
-  //     date: "2025-06-12",
-  //   },
-  //   {
-  //     id: "NOT-003",
-  //     title: "💳 Pembayaran",
-  //     description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
-  //     date: "2025-06-12",
-  //   },
-  // ];
-
-  const [reviewData, setReviewData] = useState(null);
-  // const fetchReviews = async () => {
-  //     if (!orderId) return;
-
-  //     try {
-  //       const order = await getOrderWithReviewById(orderId);
-
-  //       if (!order) {
-  //         setReviewData(null);
-  //         return;
-  //       }
-
-  //       const mappedReview = {
-  //         id: order.orderId || order._id,
-  //         sanityId: order._id,
-  //         rating: order.review?.score || 0,
-  //         reviewText: order.review?.review || "",
-  //       };
-
-  //       setReviewData(mappedReview);
-  //     } catch (error) {
-  //       console.error("Error fetching review order:", error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchReviews();
-  //   }, [orderId]);
-  
-
+  }, [user.id, activeTab]);
 
   const stats = [
     {
       title: "Total Pesanan",
       value: `${orders.length}`,
-      description: `${(orders || []).filter(order=>order.status==='completed').length} pesanan selesai`,
+      description: `${(orders || []).filter((order) => order.status === "completed").length} pesanan selesai`,
       icon: SettingsIcon,
       // trend: "+20.1%",
       color: "text-blue-600",
     },
     {
       title: "Sedang Dikerjakan",
-      value: `${(orders || []).filter(order=>order.status==='in-progress').length}`,
-      description: `${(orders || []).filter(order=>order.status==='received'||order.status==='diagnosed').length} menunggu`,
+      value: `${(orders || []).filter((order) => order.status === "in-progress").length}`,
+      description: `${(orders || []).filter((order) => order.status === "received" || order.status === "diagnosed").length} menunggu`,
       icon: WrenchIcon,
       // trend: "+15.2%",
       color: "text-orange-600",
@@ -233,7 +149,12 @@ useEffect(() => {
             <DashboardStats stats={stats} />
 
             {/* Main Dashboard Content */}
-            <Tabs defaultValue="orders" value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+            <Tabs
+              defaultValue="orders"
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="space-y-6"
+            >
               <TabsList className="grid w-full grid-cols-4 lg:w-[550px] bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-amber-200/50 dark:border-slate-700">
                 <TabsTrigger
                   value="orders"
@@ -266,7 +187,7 @@ useEffect(() => {
               </TabsList>
 
               {/* Orders Tab */}
-              <TabsContent value="orders" className="space-y-6" >
+              <TabsContent value="orders" className="space-y-6">
                 <OrdersTab serviceOrders={orders} />
               </TabsContent>
 

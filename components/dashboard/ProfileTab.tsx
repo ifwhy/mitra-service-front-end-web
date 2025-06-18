@@ -19,6 +19,7 @@ import {
 interface ProfileTabProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   orders: any[];
 }
 
@@ -89,7 +90,11 @@ export const ProfileTab = ({ user, orders }: ProfileTabProps) => {
                   Selesai:
                 </span>
                 <span className="font-bold text-lg text-green-600">
-                  {(orders || []).filter(order=>order.status==='completed').length}
+                  {
+                    (orders || []).filter(
+                      (order) => order.status === "completed"
+                    ).length
+                  }
                 </span>
               </div>
               <div className="flex justify-between items-center p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
@@ -97,7 +102,11 @@ export const ProfileTab = ({ user, orders }: ProfileTabProps) => {
                   Sedang Proses:
                 </span>
                 <span className="font-bold text-lg text-blue-600">
-                  {(orders || []).filter(order=>order.status==='in-progress').length}
+                  {
+                    (orders || []).filter(
+                      (order) => order.status === "in-progress"
+                    ).length
+                  }
                 </span>
               </div>
               <div className="flex justify-between items-center p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
@@ -105,7 +114,13 @@ export const ProfileTab = ({ user, orders }: ProfileTabProps) => {
                   Menunggu:
                 </span>
                 <span className="font-bold text-lg text-yellow-600">
-                  {(orders || []).filter(order=>order.status==='received'||order.status=='diagnosed').length}
+                  {
+                    (orders || []).filter(
+                      (order) =>
+                        order.status === "received" ||
+                        order.status == "diagnosed"
+                    ).length
+                  }
                 </span>
               </div>
             </CardContent>

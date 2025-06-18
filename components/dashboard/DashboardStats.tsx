@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUpIcon } from "lucide-react";
 
 interface StatCard {
   title: string;
