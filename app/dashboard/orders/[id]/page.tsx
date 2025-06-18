@@ -514,7 +514,7 @@ const OrderDetailPage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                {/* <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                   <Button
                     variant="outline"
                     size="sm"
@@ -543,7 +543,7 @@ const OrderDetailPage = () => {
                     <span className="hidden sm:inline">Bagikan</span>
                     <span className="sm:hidden">Share</span>
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
