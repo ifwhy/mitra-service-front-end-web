@@ -24,11 +24,12 @@ import {
 } from "@/components/dashboard";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/client";
-import { getRepairOrdersByCustomer } from "@/lib/queries";
+import { getRepairOrdersByCustomer, getOrderWithReviewById, getReviewsByCustomerId } from "@/lib/queries";
 
 const DashboardPage = () => {
   const [orders, setOrders] = useState<any[]>([]);
-const [activeTab, setActiveTab] = useState("orders");
+  const [activeTab, setActiveTab] = useState("orders");
+  const [reviews, setReviews] = useState<any[]>([]);
 
   const { isSignedIn } = useAuth();
   const { user } = useUser();
@@ -37,28 +38,48 @@ const [activeTab, setActiveTab] = useState("orders");
   console.log(userId);
 
   const fetchOrders = () => {
-    if (!user?.id) return;
-    const customerId = user.id;
+  if (!user?.id) return;
+  const customerId = user.id;
+  client
+    .fetch(getRepairOrdersByCustomer(customerId))
+    .then((data) => {
+      const mappedOrders = (data || []).map((order: any) => ({
+        id: order.orderId || order._id,
+        sanityId: order._id, //id dari sanity
+        device: [order.device, order.brand].filter(Boolean).join(" - ") || [order.brand, order.model].filter(Boolean).join(" "),
+        issue: order.issue,
+        status: order.status,
+        date: order.dateCreated,
+        estimatedCompletion: order.estimatedCompletion,
+        technician: order.technician?.name || "",
+        price: order.pricing?.total || 0,
+        paid: order.pricing?.paid || 0,
+        remaining: order.pricing?.remaining || 0,
+        rating: order.rating || 0,
+        timeline: order.timeline || [],
+      }));
+      setOrders(mappedOrders);
+
+    })
+    .catch((error) => {
+      console.error("Error fetching repair order:", error);
+    });
+
     client
-      .fetch(getRepairOrdersByCustomer(customerId))
-      .then((data) => {
-        const mappedOrders = (data || []).map((order: any) => ({
-          id: order.orderId || order._id,
-          device: [order.brand, order.model].filter(Boolean).join(" ") || order.device,
-          issue: order.issue,
-          status: order.status,
-          date: order.dateCreated,
-          estimatedCompletion: order.estimatedCompletion,
-          technician: order.technician?.name || "",
-          price: order.pricing?.total || 0,
-          rating: order.rating || 0,
+      .fetch(getReviewsByCustomerId(customerId))
+      .then((reviewData) => {
+        const mappedReviews = (reviewData || []).map((review: any) => ({
+          id: review._id,
+          score: review.score || 0,
+          review: review.review || "",
         }));
-        setOrders(mappedOrders);
+        setReviews(mappedReviews);
       })
       .catch((error) => {
-        console.error("Error fetching repair order:", error);
+        console.error("Error fetching reviews:", error);
       });
-  };
+
+};
 
 
 useEffect(() => {
@@ -105,58 +126,89 @@ useEffect(() => {
   //   },
   // ];
 
-  const notifications = [
-    {
-      id: "NOT-001",
-      title: "🚚 Jadwal Penjemputan",
-      description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
-      date: "2025-06-13",
-    },
-    {
-      id: "NOT-002",
-      title: "✅ Pemesanan Berhasil",
-      description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
-      date: "2025-06-12",
-    },
-    {
-      id: "NOT-003",
-      title: "💳 Pembayaran",
-      description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
-      date: "2025-06-12",
-    },
-  ];
+  // const notifications = [
+  //   {
+  //     id: "NOT-001",
+  //     title: "🚚 Jadwal Penjemputan",
+  //     description: "Penjemputan perangkat Anda dengan Nomor Pesanan SRV-001 dijadwalkan pada: Senin, 17 Juni 2025 pukul 10.00 WIB. Pastikan perangkat sudah siap.",
+  //     date: "2025-06-13",
+  //   },
+  //   {
+  //     id: "NOT-002",
+  //     title: "✅ Pemesanan Berhasil",
+  //     description: "Pemesanan layanan servis dengan Nomor Pesanan SRV-002 telah kami terima. Tim kami akan segera menghubungi Anda untuk penanganan lebih lanjut",
+  //     date: "2025-06-12",
+  //   },
+  //   {
+  //     id: "NOT-003",
+  //     title: "💳 Pembayaran",
+  //     description: "Pelunasan pembayaran Nomor Pesanan SRV-003 telah kami terima. Terima kasih atas kepercayaannya.",
+  //     date: "2025-06-12",
+  //   },
+  // ];
+
+  const [reviewData, setReviewData] = useState(null);
+  // const fetchReviews = async () => {
+  //     if (!orderId) return;
+
+  //     try {
+  //       const order = await getOrderWithReviewById(orderId);
+
+  //       if (!order) {
+  //         setReviewData(null);
+  //         return;
+  //       }
+
+  //       const mappedReview = {
+  //         id: order.orderId || order._id,
+  //         sanityId: order._id,
+  //         rating: order.review?.score || 0,
+  //         reviewText: order.review?.review || "",
+  //       };
+
+  //       setReviewData(mappedReview);
+  //     } catch (error) {
+  //       console.error("Error fetching review order:", error);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     fetchReviews();
+  //   }, [orderId]);
+  
+
 
   const stats = [
     {
       title: "Total Pesanan",
-      value: "12",
-      description: "3 selesai bulan ini",
+      value: `${orders.length}`,
+      description: `${(orders || []).filter(order=>order.status==='completed').length} pesanan selesai`,
       icon: SettingsIcon,
-      trend: "+20.1%",
+      // trend: "+20.1%",
       color: "text-blue-600",
     },
     {
       title: "Sedang Dikerjakan",
-      value: "3",
-      description: "2 akan selesai minggu ini",
+      value: `${(orders || []).filter(order=>order.status==='in-progress').length}`,
+      description: `${(orders || []).filter(order=>order.status==='received'||order.status==='diagnosed').length} menunggu`,
       icon: WrenchIcon,
-      trend: "+15.2%",
+      // trend: "+15.2%",
       color: "text-orange-600",
     },
     {
       title: "Total Pembayaran",
-      value: "Rp 2.450.000",
-      description: "Bulan ini",
+      value: `${orders.reduce((acc, order) => acc + (order.paid || 0), 0)}`,
+      description: `${orders.reduce((acc, order) => acc + (order.remaining || 0), 0)} belum terbayar`,
       icon: DollarSignIcon,
-      trend: "+12.5%",
-      color: "text-green-600",
+      // trend: "+12.5%",
+      color: "text-red-600",
     },
     {
       title: "Rating Layanan",
-      value: "4.8/5.0",
-      description: "Dari 15 ulasan",
+      value: `${(reviews.reduce((acc, review) => acc + (review.score || 0), 0) / reviews.length).toFixed(1)} / 5`,
+      description: `Dari ${reviews.length} ulasan`,
       icon: StarIcon,
-      trend: "+0.2",
+      // trend: "+0.2",
       color: "text-yellow-600",
     },
   ];
@@ -175,7 +227,7 @@ useEffect(() => {
           {/* Main Content */}
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Welcome Section */}
-            <DashboardWelcome />
+            <DashboardWelcome user={user} />
 
             {/* Stats Grid */}
             <DashboardStats stats={stats} />
@@ -225,12 +277,12 @@ useEffect(() => {
 
               {/* Notification Tab */}
               <TabsContent value="notification" className="space-y-6">
-                <NotificationsTab notifications={notifications} />
+                <NotificationsTab orders={orders} />
               </TabsContent>
 
               {/* Profile Tab */}
               <TabsContent value="profile" className="space-y-6">
-                <ProfileTab user={user} />
+                <ProfileTab user={user} orders={orders} />
               </TabsContent>
             </Tabs>
           </main>

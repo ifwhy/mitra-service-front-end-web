@@ -7,7 +7,7 @@ interface StatCard {
   description: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
-  trend: string;
+  // trend: string;
   color: string;
 }
 
@@ -37,8 +37,8 @@ export const DashboardStats = ({ stats }: DashboardStatsProps) => {
               {stat.value}
             </div>
             <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1 mt-2">
-              <TrendingUpIcon className="w-3 h-3 text-green-500" />
-              <span className="text-green-500 font-medium">{stat.trend}</span>
+              {/* <TrendingUpIcon className="w-3 h-3 text-green-500" /> */}
+              {/* <span className="text-green-500 font-medium">{stat.trend}</span> */}
               <span>{stat.description}</span>
             </p>
           </CardContent>

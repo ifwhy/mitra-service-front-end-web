@@ -21,7 +21,7 @@ export const StatusBadge = ({ status }: StatusBadgeProps) => {
           Dikerjakan
         </Badge>
       );
-    case "pending":
+    case "diagnosed":
       return (
         <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200 dark:bg-yellow-900 dark:text-yellow-200">
           <ClockIcon className="w-3 h-3 mr-1" />

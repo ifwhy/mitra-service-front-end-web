@@ -1,3 +1,4 @@
+import { client } from "@/sanity/client";
 export const getCustomerIdByClerkId = (clerkId: string) => `
   *[_type == "customer" && clerkId == "${clerkId}"][0] {
     _id,
@@ -29,7 +30,8 @@ export const getRepairOrdersByCustomer = (customerId: string) => `
       total,
       paid,
       remaining
-    }
+    },
+    timeline[]
   }
 `;
 
@@ -55,11 +57,13 @@ export const getRepairOrderById = (orderId: string) => `
     services[],
     technician->{
       _id,
+      id,
       name,
       phone,
       specialization
     },
-    customer
+    customer,
+    deliveryOption
   }
 `;
 
@@ -141,3 +145,47 @@ export const createPickupOrderMutation = (pickupData: any) => ({
   status: "scheduled",
   createdAt: new Date().toISOString(),
 });
+
+export const getOrderWithReviewById = async (orderId: string) => {
+  const query = `
+    *[_type == "repair" && orderId == $orderId][0]{
+      _id,
+      orderId,
+      device,
+      issue,
+      status,
+      date,
+      estimatedCompletion,
+      technician,
+      price,
+      "review": *[_type == "review" && order._ref == ^._id][0]{
+        score,
+        review
+      }
+    }
+  `;
+
+  return await client.fetch(query, { orderId });
+};
+
+export const getReviewsByCustomerId = (customerId: string) => `
+    *[_type == "review" && order->customer == "${customerId}"] | order(date desc) {
+      _id,
+      score,
+      review,
+    }
+  `;
+  // return client.fetch(query, { customerId });
+// };
+export const getAllReviews = `
+  *[_type == "review" && score >2]{
+    _id,
+    score,
+    review,
+    order->{
+      _id,
+      customer,
+      "customerName": *[_type == "customer" && clerkId == ^.customer][0].name
+    }
+  }
+`;

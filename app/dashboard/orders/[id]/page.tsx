@@ -55,6 +55,7 @@ const OrderDetailPage = () => {
   const [orderDetails, setRepairOrder] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [customer, setCustomer] = useState<any>(null);
+  const [showPaymentInfo, setShowPaymentInfo] = useState(false);
 
   const orderId = params.id as string;
 
@@ -111,7 +112,7 @@ const OrderDetailPage = () => {
         return <CheckCircleIcon className="w-5 h-5 text-green-600" />;
       case "in-progress":
         return <AlertCircleIcon className="w-5 h-5 text-blue-600" />;
-      case "pending":
+      case "diagnosed":
         return <ClockIcon className="w-5 h-5 text-yellow-600" />;
       default:
         return <XCircleIcon className="w-5 h-5 text-red-600" />;
@@ -166,7 +167,7 @@ const OrderDetailPage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                {/* <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                   <Button
                     variant="outline"
                     size="sm"
@@ -195,7 +196,7 @@ const OrderDetailPage = () => {
                     <span className="hidden sm:inline">Bagikan</span>
                     <span className="sm:hidden">Share</span>
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -215,7 +216,7 @@ const OrderDetailPage = () => {
                             variant="outline"
                             className="font-mono text-xs sm:text-sm"
                           >
-                            {orderDetails.id}
+                            {params.id}
                           </Badge>
                           <Badge
                             variant={
@@ -232,6 +233,18 @@ const OrderDetailPage = () => {
                               : orderDetails.priority === "normal"
                                 ? "Normal"
                                 : "Rendah"}
+                          </Badge>
+                          <Badge 
+                            variant={
+                              orderDetails.deliveryOption === "pickup"
+                                ? "destructive"
+                                : "outline"
+                            }
+                            className="text-xs"
+                          >
+                            {orderDetails.deliveryOption === "pickup"
+                              ? "Pick Up"
+                              : "Delivery"}
                           </Badge>
                         </div>
                         <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2 break-words">
@@ -270,8 +283,8 @@ const OrderDetailPage = () => {
                           </p>
                           <p className="text-slate-600 dark:text-slate-400 truncate">
                             {new Date(
-                              orderDetails.estimatedCompletion
-                            ).toLocaleDateString("id-ID")}
+                              orderDetails?.estimatedCompletion
+                            ).toLocaleDateString("id-ID")?? 'None'}
                           </p>
                         </div>
                       </div>
@@ -343,10 +356,25 @@ const OrderDetailPage = () => {
                           </span>
                         </div>
                         {orderDetails.pricing.remaining > 0 && (
-                          <Button className="w-full mt-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
-                            <CreditCardIcon className="w-4 h-4 mr-2" />
-                            Bayar Sekarang
-                          </Button>
+                          // <Button className="w-full mt-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                          //   <CreditCardIcon className="w-4 h-4 mr-2" />
+                          //   Bayar Sekarang
+                          // </Button>
+                          <Tabs
+                            value={activeTab}
+                            onValueChange={setActiveTab}
+                            className="w-full"
+                          >
+                            <TabsList className="w-full">
+                              <TabsTrigger
+                                value="payment"
+                                className="bg-gradient-to-r from-amber-500 to-amber-600 text-white data-[state=active]:text-white transition-all duration-200 text-xs sm:text-base py-2 sm:py-3 w-full mt-3 hover:from-amber-600 hover:to-orange-600"
+                              >
+                                <CreditCardIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                                <span className="inline">Pembayaran</span>
+                              </TabsTrigger>
+                            </TabsList>
+                          </Tabs>
                         )}
                       </div>
                     </div>
@@ -500,21 +528,26 @@ const OrderDetailPage = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-800/60">
+                        {/* <div className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-800/60">
                           <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
                             <PhoneIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
                           </div>
                           <p className="text-slate-700 dark:text-slate-300">
-                            {customer.phone}
+                            {customer?.phone ?? 'None'}
                           </p>
-                        </div>
+                        </div> */}
                         <div className="flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-800/60">
                           <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mt-0.5">
                             <MapPinIcon className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                           </div>
-                          <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                            {customer.address}
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-slate-900 dark:text-white">
+                              Alamat
+                            </p>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 truncate">
+                              {customer.address}
+                            </p>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
@@ -554,14 +587,16 @@ const OrderDetailPage = () => {
                             {orderDetails.technician.phone}
                           </p>
                         </div>
+                        <a href={`https://wa.me/${orderDetails.technician.phone}`} target="_blank" rel="noopener noreferrer">
                         <Button
                           variant="outline"
                           size="sm"
                           className="w-full bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 dark:from-orange-900/20 dark:to-amber-900/20 dark:hover:from-orange-900/40 dark:hover:to-amber-900/40 border-orange-200 dark:border-orange-800 hover:shadow-md transition-all duration-200"
-                        >
+                          >
                           <MessageCircleIcon className="w-4 h-4 mr-2" />
                           Hubungi Teknisi
                         </Button>
+                            </a>
                       </CardContent>
                     </Card>
                   </div>
@@ -825,10 +860,37 @@ const OrderDetailPage = () => {
 
                       {orderDetails.pricing.remaining > 0 && (
                         <div className="pt-4">
-                          <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700">
+                          <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700"
+                          onClick={() => setShowPaymentInfo(!showPaymentInfo)}
+                          >
                             <DollarSignIcon className="w-4 h-4 mr-2" />
-                            Bayar Sekarang
+                            {showPaymentInfo ? "Tutup Info Pembayaran" : "Bayar Sekarang"}
                           </Button>
+
+                          {/* Info Pembayaran */}
+                          {showPaymentInfo && (
+                            <div className="mt-2 border p-4 rounded-lg bg-amber-50/50 dark:bg-amber-900/10 space-y-4 flex flex-col justify-center">
+                              <p><strong>Bank:</strong> BCA</p>
+                              <p><strong>No Rekening:</strong> 1234567890 a.n. Mitra Servis Elektronik</p>
+                              <p><strong>Konfirmasi Pembayaran:</strong> 
+                                <a
+                                  href="https://wa.me/6285743840940?text=Halo,%20saya%20telah%20melakukan%20pembayaran"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 underline ml-1"
+                                >
+                                  WhatsApp Admin
+                                </a>
+                              </p>
+
+                              <Button
+                                className="mt-2 bg-green-500 hover:bg-green-600 text-white mx-auto transition duration-200"
+                                onClick={() => setShowPaymentInfo(false)}
+                              >
+                                Saya Sudah Konfirmasi
+                              </Button>
+                            </div>
+                          )}
                         </div>
                       )}
                     </CardContent>
