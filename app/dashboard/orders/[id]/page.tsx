@@ -887,9 +887,14 @@ const OrderDetailPage = () => {
                           <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mt-0.5">
                             <MapPinIcon className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                           </div>
-                          <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                            {customer.address}
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-slate-900 dark:text-white">
+                              Alamat
+                            </p>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 truncate">
+                              {customer.address}
+                            </p>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
@@ -929,14 +934,16 @@ const OrderDetailPage = () => {
                             {orderDetails.technician.phone}
                           </p>
                         </div>
+                        <a href={`https://wa.me/${orderDetails.technician.phone}`} target="_blank" rel="noopener noreferrer">
                         <Button
                           variant="outline"
                           size="sm"
                           className="w-full bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 dark:from-orange-900/20 dark:to-amber-900/20 dark:hover:from-orange-900/40 dark:hover:to-amber-900/40 border-orange-200 dark:border-orange-800 hover:shadow-md transition-all duration-200"
-                        >
+                          >
                           <MessageCircleIcon className="w-4 h-4 mr-2" />
                           Hubungi Teknisi
                         </Button>
+                            </a>
                       </CardContent>
                     </Card>
                   </div>

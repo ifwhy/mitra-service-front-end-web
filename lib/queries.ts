@@ -57,6 +57,7 @@ export const getRepairOrderById = (orderId: string) => `
     services[],
     technician->{
       _id,
+      id,
       name,
       phone,
       specialization
