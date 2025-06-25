@@ -306,7 +306,7 @@ SANITY_STUDIO_API_VERSION=2024-01-01
 | :--------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------: |
 | 🎨 **Frontend**  | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ifwhy/mitra-service-front-end-web) | Next.js Application |
 |  🗄️ **Backend**  | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/williamu04/mitra-service-backend)  |     Sanity CMS      |
-| 🚀 **Live Demo** |           [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://your-demo-url.vercel.app)           |   Production App    |
+| 🚀 **Live Demo** |           [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mitra-servis.vercel.app)            |   Production App    |
 
 </div>
 
